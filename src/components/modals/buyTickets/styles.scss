@@ -1,15 +1,31 @@
-@import "../../../assets/scss/variables.scss";
+@import '../../../assets/scss/variables.scss';
+
+.containerErrorInputs {
+  background: #ffbaba;
+  width: 90%;
+  border-radius: 15px;
+  padding: 3%;
+  box-sizing: border-box;
+  margin: 15px 0px;
+  .error-input {
+    font-size: 95%;
+    margin-top: 0px;
+    /* margin-left: 5%; */
+    /* margin-bottom: 2%; */
+  }
+}
 
 .modalBuyTicketsModal {
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1vw 1vw 1vw 1vw;
+    margin: 15px auto;
     width: 90% !important;
 
     .left {
-      font-size: 1.1vw;
+      font-size: 90%;
+      color: $primary;
       font-weight: 600;
     }
 
@@ -17,19 +33,22 @@
       color: $primary;
       text-decoration: underline;
       font-weight: 500;
-      font-size: 1vw;
+      font-size: 90%;
     }
   }
 
   .gridPoints {
-    width: 80%;
-    margin: auto;
+    /* width: 85%; */
     margin-top: 1vw;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
 
     .containerRafflePoint {
-      margin-bottom: 1vw;
+      /* margin-bottom: 1vw;
+      width: 40%; */
+      display: flex;
+      justify-content: center;
+      margin: 5px;
     }
 
     .block-false {
@@ -43,10 +62,80 @@
       color: #c5c5c5;
     }
   }
+  .containerSuccessMsg {
+    background: #d7e5d1;
+    /* width: 90%; */
+    border-radius: 15px;
+    padding: 20px;
+    .successMsg-input {
+      font-size: 95%;
+      /* margin-left: 5%; */
+      /* margin-bottom: 2%; */
+      text-align: center;
+    }
+  }
+  .containerErrorInputs {
+    background: #ffbaba;
+    width: 90%;
+    border-radius: 15px;
+    padding: 3%;
+    box-sizing: border-box;
+    .error-input {
+      font-size: 95%;
+      margin-top: 0px;
+      /* margin-left: 5%; */
+      /* margin-bottom: 2%; */
+    }
+  }
+
+  .container-row-select {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    padding: 3% 5% 0;
+
+    h5 {
+      color: $primary;
+      font-weight: 500;
+      font-size: 100%;
+      margin-bottom: 20px;
+    }
+
+    div {
+      /* margin-right: 10%;
+      width: 50%; */
+      margin: 0px 6px;
+      position: relative;
+    }
+
+    .container-row-select-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      width: 100%;
+      justify-content: start;
+
+      .containerRafflePoint {
+        margin-bottom: 10%;
+      }
+      img {
+        width: 20px;
+        position: absolute;
+        /* margin-left: 5%; */
+        /* margin-top: -1%; */
+        right: -10px;
+        top: -10px;
+      }
+    }
+  }
+  .not-selected-yet {
+    color: #d5d5ea;
+    font-size: 80%;
+    font-family: 'MonumentExtended';
+  }
 
   .dataContainer {
-    padding: 2vw 2vw;
-    margin-bottom: 5vw;
+    padding: 3% 5%;
+    /* margin-bottom: 5vw; */
     .subitem {
       align-items: center;
       display: flex;
@@ -63,21 +152,189 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 1vw;
+      /* margin-top: 1vw; */
+      margin: 15px auto;
 
       h3 {
-        font-size: 1.2vw;
+        font-size: 100%;
+        margin-right: 1%;
         color: #3c613280;
         margin-bottom: 0.8vw;
       }
 
       .strong {
         color: $primaryDark;
+
+        span {
+          font-size: 125%;
+          margin-right: 6%;
+        }
       }
+    }
+  }
+
+  .grid-points-buttons {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin: auto;
+    /* justify-content: space-between; */
+    justify-content: center;
+
+    .left {
+      margin-right: 9%;
+    }
+
+    .buttonArrow {
+      /* width: 175%;
+      height: unset;
+      padding: 50% 0;
+      margin: 2%; */
+      width: 50px;
+      height: 50px;
     }
   }
 }
 
 .buttonModalBuyTickets {
-  width: 86% !important;
+  width: 90%!important;
+  box-sizing: border-box;
+  padding: 20px !important;
+
+  .basicSpinner {
+    width: 5% !important;
+  }
+}
+
+.container-loading-buying-ticket {
+  min-height: 74vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h5 {
+    font-size: 113%;
+    font-weight: 500;
+    text-align: center;
+    width: 59%;
+    margin-top: 5%;
+    color: $primary;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .basicSpinner {
+    width: 13% !important;
+  }
+
+  div {
+    width: 100%;
+    justify-content: center;
+
+    img {
+      width: 6vw;
+    }
+  }
+}
+.container-success-buying-ticket {
+  min-height: 53vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h5 {
+    color: $primary;
+    font-size: 140%;
+    margin-top: -1%;
+    width: 80%;
+    margin-left: 10%;
+  }
+
+  img {
+    margin-bottom: 5%;
+  }
+
+  .container-buttons-successfully {
+    margin: 8% 3% 0;
+    span {
+      font-weight: 700;
+    }
+
+    .button {
+      margin-bottom: 3%;
+      padding: 0.2vw 1vw;
+    }
+  }
+}
+
+.success-buy-tickets-form-email {
+  padding: 0 4%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-top: 4%;
+  margin-bottom: 12vh;
+
+  h5 {
+    color: $primary;
+    font-size: 100%;
+    margin-bottom: 4%;
+  }
+
+  input::placeholder {
+    font-size: 130%;
+  }
+}
+
+.container-error-buying-ticket {
+  min-height: 58vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h5 {
+    color: $primary;
+    font-size: 100%;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -1%;
+  }
+
+  img {
+    margin-bottom: 5%;
+  }
+}
+
+/* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */
+/* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */
+/* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */
+/* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */
+/* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */
+
+@media screen and (max-width: 950px) {
+  .modalBuyTicketsModal {
+    .header {
+      .left {
+        font-size: 0.8rem;
+        white-space: nowrap;
+      }
+      .right {
+        font-size: 0.8rem;
+      }
+    }
+    .gridPoints {
+      grid-template-columns: repeat(4, 1fr);
+      width: 75%;
+      .containerRafflePoint {
+        width: 55%;
+      }
+    }
+    .container-row-select {
+      .container-row-select-row {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  }
 }

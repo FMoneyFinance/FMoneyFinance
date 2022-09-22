@@ -1,120 +1,104 @@
-import React, { useContext, useState } from "react";
-import FullModal from "../../components/modals/base/full";
-import BuyTicketsModal from "../../components/modals/buyTickets";
-import ModalConnectWallet from "../../components/modals/connectWallet";
-import RafflePoints from "../../components/raffle/points";
-import AppContext from "../../context/AppContext";
-import MainLayout from "../../layouts/main";
-import GraphTicketDetails from "./parts/graph";
-import HeaderTicketDetailsScreen from "./parts/header";
-import MiniPools from "./parts/minipools/minipools";
-import RaffleSpots from "./parts/raffleSpots";
-import "./styles.scss";
+import React, { useContext, useState, useEffect, Suspense } from 'react'
+import { useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { utils } from 'ethers'
+
+import './styles.scss'
+import MainLayout from '../../layouts/main'
+import RaffleSpots from './parts/raffleSpots'
+import GraphTicketDetails from './parts/graph'
+import AppContext from '../../context/AppContext'
+import SplashScreen from '../../components/Splash'
+import AllRights from '../../components/allRights'
+import MiniPools from './parts/minipools/minipools'
+import HeaderTicketDetailsScreen from './parts/header'
+import { getRaffleOfSocket } from '../../utils/raffles'
+import ModalBuyTicket from '../../components/modals/buyTicket'
+import ModalSeeMyRaffles from '../../components/modals/seeMyRaffles'
 
 function BannerAdd() {
+  const { t } = useTranslation(['ticket-details'])
   return (
-    <div className="adBannerContainer">
-      <h3>Banner ad</h3>
+    <div className="maxWidth adBannerContainer">
+      <h3>{t('bannerAd')}</h3>
     </div>
-  );
+  )
 }
 
 function TicketDetailsScreen() {
-  const [showRaffleSpots, setShowRaffleSpots] = useState(false);
-  const [showButTicketModal, setShowButTicketModal] = useState(false);
-  const [showModalConnectWallet, setShowModalConnectWallet] = useState(false);
-  const context: any = useContext(AppContext);
-
-  const configModalSeeMyRaffles = {
-    title: "Your raffle spots",
-    buttonTxt: "Buy more spots",
-    setShowModal: setShowRaffleSpots,
-    offset: {
-      top: "3.7vh",
-      right: "12vw"
-    },
-    styles: {
-      minWidth: "28vw"
-    }
-  };
-  const configModalBuyTicket = {
-    title: "Buy tickets",
-    buttonTxt: "Buy now",
-    classButton: "buttonModalBuyTickets",
-    styles: {
-      width: "40vw",
-      minHeight: "77vh"
-    },
-    setShowModal: setShowButTicketModal
-  };
+  const context: any = useContext(AppContext)
+  const [raffleSelected, setRaffleSelected] = useState<any>({})
+  const params = useParams()
 
   const handleSeeMyRaffleSpots = () => {
-    setShowRaffleSpots(true);
-  };
+    context.changeContext({
+      showModal: (
+        <Suspense fallback="">
+          <ModalSeeMyRaffles raffleSelected={raffleSelected} />
+        </Suspense>
+      )
+    })
+  }
 
-  const handleBuyTicket = () => {
-    if (!context?.walletAddress) {
-      setShowModalConnectWallet(true);
+  const handleOpenModalTicket = (listSpotsToBuy: any, allSpots: any) => {
+    if (!context.state?.walletAddress || (context.state?.walletAddress && !utils.isAddress(context.state?.walletAddress))) {
+      context.changeContext({ showModalConnectWallet: true, buyingATicket: true, listSpotsToBuy })
     } else {
-      setShowButTicketModal(true);
+      context.changeContext(
+        {
+          showModal: (
+            <Suspense fallback="">
+              <ModalBuyTicket {...{ listSpotsToBuy, raffleSelected, allSpots }} />
+            </Suspense>
+          )
+        },
+        true
+      )
     }
-  };
+  }
 
-  const SeeMyRaffles = () => {
-    return (
-      <>
-        <div className="containerRafflePointsModal">
-          <RafflePoints number="01" />
-          <RafflePoints number="34" />
-          <RafflePoints number="45" />
-          <RafflePoints number="88" />
-          <RafflePoints number="101" />
-        </div>
-
-        <h3 className="titleRafflePointsModal">
-          <span>Draw:</span> June 06, 2022. 03:55 PM (CET)
-        </h3>
-      </>
-    );
-  };
+  useEffect(() => {
+    if (context?.state?.rafflesInfo && params?.raffleSmartContractAddress) {
+      setRaffleSelected(getRaffleOfSocket(context?.state?.rafflesInfo, params?.raffleSmartContractAddress || ''))
+    }
+  }, [params.raffleSmartContractAddress, context?.state?.rafflesInfo])
 
   return (
-    <MainLayout>
-      <div className="TicketDetailsScreen">
-        <BannerAdd />
-        <HeaderTicketDetailsScreen
-          {...{ handleSeeMyRaffleSpots, handleBuyTicket }}
-        />
-        <GraphTicketDetails />
-        <RaffleSpots {...{ handleBuyTicket }} />
-        <MiniPools {...{ handleBuyTicket }} />
-        <BannerAdd />
-        {showRaffleSpots && (
-          <FullModal
-            showModal={showRaffleSpots}
-            config={configModalSeeMyRaffles}
-          >
-            <SeeMyRaffles />
-          </FullModal>
-        )}
-        <ModalConnectWallet
-          {...{
-            showModal: showModalConnectWallet,
-            setShowModal: setShowModalConnectWallet
-          }}
-        />
-
-        {showButTicketModal && (
-          <FullModal
-            showModal={showButTicketModal}
-            config={configModalBuyTicket}
-          >
-            <BuyTicketsModal />
-          </FullModal>
-        )}
-      </div>
-    </MainLayout>
-  );
+    <Suspense fallback={<SplashScreen />}>
+      <MainLayout tikcketDetails>
+        <div className="TicketDetailsScreen">
+          <BannerAdd />
+          <HeaderTicketDetailsScreen
+            {...{
+              handleSeeMyRaffleSpots,
+              handleBuyTicket: handleOpenModalTicket,
+              raffleSelected: raffleSelected || {}
+            }}
+          />
+          <GraphTicketDetails {...{ raffleSelected: raffleSelected || {} }} />
+          {raffleSelected && raffleSelected?.raffleStatus !== 'closed' && (
+            <RaffleSpots
+              {...{
+                params,
+                handleBuyTicket: handleOpenModalTicket,
+                raffleSelected: raffleSelected || {}
+              }}
+            />
+          )}
+          <MiniPools
+            {...{
+              params,
+              handleBuyTicket: handleOpenModalTicket,
+              raffleSmartContractAddress: raffleSelected?.raffleSmartContractAddress
+            }}
+          />
+          <BannerAdd />
+          <div className="dividerBottom" />
+          <AllRights />
+        </div>
+      </MainLayout>
+    </Suspense>
+  )
 }
 
-export default TicketDetailsScreen;
+export default TicketDetailsScreen

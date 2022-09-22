@@ -1,4 +1,4 @@
-@import "../../../assets/scss/variables.scss";
+@import '../../../assets/scss/variables.scss';
 
 .footer {
   h5 {
@@ -10,10 +10,12 @@
 }
 
 .modalConnectWallet {
+  margin-bottom: 120px;
+
   .walletContainer {
     > img {
       margin-top: 1vw !important;
-      width: 4vw !important;
+      width: 25% !important;
     }
 
     > h5 {
@@ -25,6 +27,7 @@
   }
 }
 .walletAddressTxt {
+  cursor: pointer;
   display: flex;
   align-items: center;
   background: $primaryDark;
@@ -34,7 +37,100 @@
   padding: 0.3vw;
   padding-left: 1vw;
   padding-right: 0.8vw;
+  border-radius: 25px;
   img {
     margin-left: 0.5vw;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .footer {
+    h5 {
+      font-weight: 500 !important;
+      color: $primary !important;
+      position: initial !important;
+      margin-bottom: 4vw !important;
+    }
+  }
+  .walletAddressTxt {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: #3c6132;
+    border-radius: 25px;
+    color: white;
+    width: 80%;
+    position: absolute;
+    top: 16vh;
+    left: 7.5vw;
+    justify-content: center;
+    font-size: 0.9rem;
+    padding: 1% 3%;
+    font-weight: 500;
+
+    img {
+      width: auto !important;
+      margin-left: 10%;
+    }
+  }
+
+  .walletAddressTxt.ticketDetails-true {
+    /* padding: 5% 3%; */
+    padding: 10px;
+  }
+
+  .modalConnectWallet {
+    .walletContainer {
+      > img {
+        margin-top: 2vw !important;
+        width: 15vw !important;
+      }
+
+      #imgWalletConnect {
+        width: 30vw !important;
+      }
+
+      > h5 {
+        position: initial !important;
+        color: $primaryDark !important;
+        font-weight: 500 !important;
+        margin-top: 1vw !important;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .button-connect-wallet {
+    padding: 2% 6%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .walletAddressTxt {
+    top: 18vh;
+    padding: 10px;
+    img {
+      width: auto !important;
+      margin-left: 5%;
+    }
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .walletAddressTxt {
+    top: 18vh;
+    font-size: 80%;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-width: 950px) {
+  .walletAddressTxt {
+    padding: 1% 3%;
+    top: 45vh;
+  }
+
+  .walletAddressTxt.ticketDetails-true {
+    padding: 1% 3%;
+    top: 45vh;
   }
 }

@@ -1,0 +1,70 @@
+@import "../../../assets/scss/variables.scss";
+
+.container-input {
+  background-color: $primaryLight;
+  padding: 0% 1%;
+  border-radius: 18px;
+  width: 96.1%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 4%;
+
+  .input {
+    color: $primary;
+    font-weight: 500;
+    background-color: transparent;
+    padding: 4% 4% 4% 4%;
+    border: none;
+    width: 100%;
+  }
+
+  .input::placeholder {
+    color: #8aa17f85;
+  }
+
+  .suffixTxt {
+    color: $primary;
+    font-weight: 600;
+    font-size: 70%;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  input::placeholder {
+    color: $primary;
+  }
+}
+
+.error-input {
+  color: red;
+  text-align: left;
+  font-size: 65%;
+  font-weight: 500;
+  margin-top: 3%;
+}
+
+@media screen and (max-width: 950px) {
+  .container-input {
+    .input {
+      font-size: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .container-input {
+    .input {
+      font-size: 60%;
+    }
+  }
+
+  .success-buy-tickets-form-email {
+    h5 {
+      margin: 10px 0px 20px;
+      font-size: 13px;
+    }
+  }
+}

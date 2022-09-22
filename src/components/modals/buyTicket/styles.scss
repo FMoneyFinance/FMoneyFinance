@@ -1,0 +1,54 @@
+.containerSelectToken {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 25px;
+  .containerSelectDropDown {
+    margin-bottom: 60px;
+    h4 {
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 150%;
+      margin: 6% 0px 20px 0px;
+      font-feature-settings: 'salt' on;
+      text-align: start;
+      color: #3c6132;
+    }
+    .select-token {
+      background: rgba(98, 154, 72, 0.25);
+      border-radius: 71px;
+      width: 100%;
+      display: flex;
+      min-height: 56px;
+      margin: auto;
+      align-items: center;
+      justify-content: space-around;
+      h5 {
+        line-height: 23px;
+        display: flex;
+        align-items: center;
+        font-feature-settings: 'salt' on;
+        font-size: 1rem;
+        padding-left: 5%;
+        color: #629a48;
+        width: 70%;
+      }
+    }
+  }
+
+  .arrowUp-true {
+    transform: scaleY(-1);
+  }
+}
+
+.container-ApproveLoadingBuy {
+  width: 240px;
+  display: inline-block;
+  img {
+    margin-top: 20%;
+    width: 30%;
+  }
+}
+
+.container-modal-wallet-info.modalBuy {
+  margin-bottom: 12%;
+}

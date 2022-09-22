@@ -1,76 +1,130 @@
-import React from "react";
-import Button from "../../../../components/Buttons";
+import { useState, useContext, useEffect } from 'react'
+import socketIo from 'socket.io-client'
+import { Contract } from 'ethers'
 
-function RaffleSpots({ handleBuyTicket }: any) {
-  const Table = () => {
-    const Header = () => {
-      return (
-        <div className="headerTable">
-          <div>
-            <h3 className="left"># Spot</h3>
-          </div>
-          <div>
-            <h3 className="center">Player address</h3>
-          </div>
-          <div>
-            <h3 className="right">Select spots to buy a bulk</h3>
-          </div>
-        </div>
-      );
-    };
+import TableRaffleSpots from './table'
+import { useTranslation } from 'react-i18next'
+import AppContext from '../../../../context/AppContext'
+import { useInterval } from '../../../../hooks/useInterval'
+import { handleGetAvailableSpots } from '../../../../web3/functions/ticket & spots'
+import { get_current_raffles_tickets_info_hash } from '../../../../api/tickets-management'
+import { getProvider, getWalletConnectProvider } from '../../../../web3/functions/providers'
+import fmoneyRaffleOperatorContract from '../../../../web3/contracts/interfaces/IFmoneyRaffleOperator.json'
 
-    const Row = ({ active }: any) => {
-      return (
-        <div className="row">
-          <div className={`left active-${active}`}>
-            <h4>01</h4>
-          </div>
-          <div className="center">
-            <h4>
-              {active
-                ? "0x59406ad8326d539c2d9f39e1d37f2434b4c364bf"
-                : "Available"}
-            </h4>
-          </div>
-          <div className="right">
-            <Button
-              text="Buy spot"
-              className={"active-" + active}
-              onPress={handleBuyTicket}
-              rounded
-            />
-            <div className={`square active-square-${active}`}></div>
-          </div>
-        </div>
-      );
-    };
+const io: any = socketIo
+const contextWin: any = window
 
-    return (
-      <div className="table">
-        <Header />
-        <Row />
-        <Row active />
-        <Row />
-        <Row active />
-        <Row />
-        <Row />
-        <Row active />
-        <Row />
-        <Row active />
-      </div>
-    );
-  };
+function RaffleSpots({ params, handleBuyTicket, raffleSelected }: any) {
+  const [spots, setSpots] = useState([])
+  const [error, setError] = useState('')
+  const context: any = useContext(AppContext)
+  const [loading, setLoading] = useState(true)
+  const { t } = useTranslation(['ticket-details'])
+  const [selectedRaffleSmartContract, setSelectedRaffleSmartContract] = useState('')
+
+  useInterval(() => {
+    handleGetCurrentRafflesTicketsInfoHash()
+  }, 60000)
+
+  useEffect(() => {
+    const currentLocalRafflesTicketsInfoHash = sessionStorage.getItem(`currentRafflesTicketsInfoHash-${raffleSelected.raffleSmartContractAddress}`)
+
+    if (!currentLocalRafflesTicketsInfoHash) {
+      const handleGetInitialRafflesInfoHash = async () => {
+        const response: any = await get_current_raffles_tickets_info_hash(raffleSelected.raffleSmartContractAddress)
+        const rafflesTicketsInfoHashUpdated = response.currentRafflesTicketsInfoHash
+        sessionStorage.setItem(`currentRafflesTicketsInfoHash-${raffleSelected.raffleSmartContractAddress}`, rafflesTicketsInfoHashUpdated)
+      }
+    }
+
+    context.socketConnection.on('current-raffles-spots-info', (raffleTicketsInfo: any) => {
+      setSelectedRaffleSmartContract((currentSelectedRaffleSmartContract) => {
+        if (String(raffleTicketsInfo.raffleSmartContractAddress).toLowerCase() === String(currentSelectedRaffleSmartContract).toLowerCase()) {
+          sessionStorage.setItem(`currentRafflesTicketsInfoHash-${currentSelectedRaffleSmartContract}`, raffleTicketsInfo.rafflesTicketsInfoHashUpdated)
+          handleUpdateSpotsInfo(raffleTicketsInfo.ticketsCurrentFullInfo)
+        }
+
+        return currentSelectedRaffleSmartContract
+      })
+    })
+
+    return () => {
+      context.socketConnection.off('current-raffles-spots-info')
+    }
+  }, [])
+
+  useEffect(() => {
+    setLoading(true)
+    if (raffleSelected.raffleSmartContractAddress) {
+      getraffleSpots()
+      setSelectedRaffleSmartContract(raffleSelected.raffleSmartContractAddress)
+    }
+  }, [raffleSelected.raffleSmartContractAddress])
+
+  const getraffleSpots = async () => {
+    setLoading(true)
+    const { success, spots: spotList, message }: any = await handleGetAvailableSpots(raffleSelected.raffleSmartContractAddress)
+
+    if (success) {
+      // await context.changeContext({ spotList: [...spotList] });
+      setSpots(spotList)
+      setLoading(false)
+    }
+
+    if (!success && message === 'wrong-chain') {
+      setError('wrong-chain')
+      setLoading(false)
+    }
+
+    setLoading(false)
+  }
+
+  const handleGetCurrentRafflesTicketsInfoHash = async () => {
+    const response: any = await get_current_raffles_tickets_info_hash(selectedRaffleSmartContract)
+    const rafflesTicketsInfoHashUpdated = response.currentRafflesTicketsInfoHash
+    const currentLocalRafflesTicketsInfoHash = sessionStorage.getItem(`currentRafflesTicketsInfoHash-${selectedRaffleSmartContract}`)
+
+    if (currentLocalRafflesTicketsInfoHash && String(currentLocalRafflesTicketsInfoHash) !== String(rafflesTicketsInfoHashUpdated)) {
+      console.log('entro a cambiar tickets info hash', 'selectedRaffleSmartContract', selectedRaffleSmartContract)
+      sessionStorage.setItem(`currentRafflesTicketsInfoHash-${selectedRaffleSmartContract}`, rafflesTicketsInfoHashUpdated)
+
+      const provider = contextWin.ethereum ? getProvider() : await getWalletConnectProvider()
+      const fmoneyRaffleOperatorContractInstance = new Contract(selectedRaffleSmartContract, fmoneyRaffleOperatorContract.abi, provider)
+      const maxNumberOfPlayers = await fmoneyRaffleOperatorContractInstance.maxNumberOfPlayers()
+      const raffleTicketOwners = await fmoneyRaffleOperatorContractInstance.getRaffleTicketOwners()
+      const rafflePlayerNumbers = raffleTicketOwners[1].map((numberData: any) => Number(numberData))
+      const ticketOwnersAddresses = raffleTicketOwners[0]
+      const ticketsCurrentFullInfo = { maxNumberOfPlayers: Number(maxNumberOfPlayers), rafflePlayerNumbers, ticketOwnersAddresses }
+      handleUpdateSpotsInfo(ticketsCurrentFullInfo)
+    }
+  }
+
+  const handleUpdateSpotsInfo = async (updatedSpotsInfo: any) => {
+    const raffleSpotsDataUpdated: any = []
+    const maxNumberOfPlayers = updatedSpotsInfo.maxNumberOfPlayers
+    const rafflePlayerNumbers = updatedSpotsInfo.rafflePlayerNumbers
+    const ticketOwnersAddresses = updatedSpotsInfo.ticketOwnersAddresses
+    let ticketOwnersAddressesCounter = 0
+
+    for (let i = 1; i <= maxNumberOfPlayers; i++) {
+      if (rafflePlayerNumbers.includes(i)) {
+        raffleSpotsDataUpdated.push({ position: i, owner: ticketOwnersAddresses[ticketOwnersAddressesCounter] })
+        ticketOwnersAddressesCounter++
+      } else {
+        raffleSpotsDataUpdated.push({ position: i, owner: '' })
+      }
+    }
+
+    setSpots(raffleSpotsDataUpdated)
+  }
 
   return (
-    <div className="RaffleSpots">
-      <h2>Raffle spots</h2>
-      <h4>
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium
-      </h4>
-      <Table />
+    <div className="maxWidth RaffleSpots">
+      <h2>{t('raffleSpots.title')}</h2>
+      <h4>{t('raffleSpots.text')}</h4>
+      <TableRaffleSpots {...{ handleBuyTicket, spots, loading, raffleSelected, setLoading, error }} />
     </div>
-  );
+  )
 }
 
-export default RaffleSpots;
+export default RaffleSpots

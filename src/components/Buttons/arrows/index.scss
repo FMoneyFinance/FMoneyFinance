@@ -1,0 +1,32 @@
+@import "../../../assets/scss/variables.scss";
+
+.buttonArrow {
+  border: 2px solid $primary;
+  width: 3vw;
+  height: 3vw;
+  border-radius: 1.5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .buttonArrow {
+    border: 2px solid $primary;
+    width: 11vw;
+    height: 11vw;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4%;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

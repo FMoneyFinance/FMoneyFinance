@@ -1,0 +1,48 @@
+.containerAlertToast {
+  z-index: 5;
+  position: fixed;
+  width: 20vw;
+  height: 5vw;
+  background: #cfddd1;
+  box-shadow: 5px 13px 50px rgba(75, 78, 252, 0.15);
+  border-radius: 24px;
+  font-weight: 500;
+  font-size: 20px;
+  color: #629a48;
+  right: 5%;
+  top: 10%;
+  animation: 0.5s ease 0s normal forwards 1 float6;
+
+  .divider {
+    background: #629a48;
+    height: 100%;
+    width: 7%;
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+    position: absolute;
+    left: 0;
+  }
+
+  .text {
+    width: 90%;
+  }
+
+  span {
+    margin: auto;
+    width: 90%;
+    font-size: 90%;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .containerAlertToast {
+    width: 70%;
+    height: 15%;
+    top: 17%;
+
+    .divider {
+      margin-left: 0%;
+      width: 12%;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "draw": "Sorteo: ",
+  "buttonText": "Descargar boletos",
+  "buyOneNow": "¡Compra uno ahora!",
+  "title": "Tus posiciones en la rifa",
+  "buyMoreNow": "¡Compra más boletos ahora!",
+  "loading": "Cargando información de tus posiciones",
+  "dontHave": "No tienes boletos comprados en esta rifa.",
+  "errorOwnership": "No eres dueño de todos los boletos, no puedes descargarlos."
+}

@@ -1,31 +1,16 @@
 .containerIconsSocialMedia {
   display: flex;
   margin-top: 1vw;
-  z-index: 3;
-  justify-content: center;
-  div {
-    margin: 0px 2vw;
-    img {
-      width: 140%;
-      &:hover {
-        cursor: pointer;
-      }
+
+  img {
+    margin: 0 3vw;
+
+    &:hover {
+      cursor: pointer;
     }
   }
-}
 
-@media screen and (max-width: 900px) {
-  .containerIconsSocialMedia {
-    margin-right: 5%;
-    justify-content: center;
-    div {
-      margin: 0px 4.5vw;
-      img {
-        width: 160%;
-        &:hover {
-          cursor: pointer;
-        }
-      }
-    }
+  img:first-child {
+    margin-left: 0;
   }
 }

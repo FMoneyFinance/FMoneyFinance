@@ -1,0 +1,42 @@
+{
+  "title": "Manage the smart contract and admins",
+  "subTitle": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.",
+
+  "newAddress": {
+    "smartContract": {
+      "title": "Raffles smart contract",
+      "placeholder": "Insert smart contract here",
+      "buttonChange": "Change",
+      "buttonCancel": "Cancel",
+      "loading": "Adding administrator, please confirm in your metamask wallet."
+    },
+
+    "newAdministrator": {
+      "title": "Add new administrator",
+      "placeholder": "Insert admin address here",
+      "buttonAdd": "Add admin",
+      "loading": "Adding administrator, please confirm in your metamask wallet."
+    }
+  },
+  "adminList": {
+    "titles": {
+      "adminAddress": "Administrators' addresses",
+      "added": "Added"
+    },
+    "deleteAdmin": "Delete admin address",
+    "owner": "Owner"
+  },
+  "popper": {
+    "text": "Copied!"
+  },
+
+  "alertsToast": {
+    "alertAdmin": {
+      "text": "The administrator",
+      "text2": "has been successfully added."
+    },
+    "alertSmartContract": {
+      "text": "The the raffles’ smart contract has been successfully added."
+    }
+  }
+}

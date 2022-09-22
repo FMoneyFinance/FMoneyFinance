@@ -1,0 +1,107 @@
+{
+  "allRightsReserved": { "text": "All rights reserved " },
+  "navbar": {
+    "whitepaper": "Whitepaper"
+  },
+
+  "untilTheDraw": "until the draw",
+  "buttonCreateNewRaffle": "Create new raffle",
+
+  "welcomeText": {
+    "title": "The fmoney raffle is here!",
+    "subTitle": "BE THE NEXT WINNER",
+    "connectYourWallet": "Connect your wallet to start",
+    "textSocialMedia": "Follow us to find out the latest news.",
+    "nextDraw": "Next draw:"
+  },
+
+  "slider": {
+    "title": "Loading raffles...",
+    "text": "Please wait a moment",
+    "empty": "There is not raffles yet...",
+    "createOne": "Create one now!",
+    "wait": "Please wait. we are going to create one soon!"
+  },
+
+  "tickets": {
+    "title": "Get your tickets now!",
+    "buyTicket": "Buy ticket",
+    "playRaffle": "Play raffle",
+    "subtitles": {
+      "raffling": "Raffling...",
+      "creating": "Waiting for transaction confirmations..."
+    }
+  },
+
+  "tableWelcome": {
+    "title": "Finished rounds",
+    "titleSection": "My raffles history",
+    "noTicketsYet": "You have not purchased any tickets yet.",
+    "noTicketsRecommendation": "We recommend you this raffle that will be drawn soon:",
+    "text": "In this section you can see all the results of the raffles that were already drawn",
+    "textSection": "In this section you can find all the raffles in which you are participating or have already participated before.",
+    "switches": {
+      "allHistory": "All history",
+      "yourHistory": "Your history"
+    },
+    "table": {
+      "connectYourWallet": "Connect your wallet to check your history",
+      "errorRaffleHistoryButtonText": "Reload data",
+      "errorWarningRaffleHistory": "There was an error getting your tickets purchase data. Please refresh the app and try again.",
+      "headerAllHistory": {
+        "spot": "Winner spot position",
+        "raffle": "Raffle winner address",
+        "date": "Date of draw",
+        "price": "Prize won",
+        "noRafflesText": {
+          "text1": "There is no drawn raffles yet...",
+          "text2": "Please wait, we are going to draw a raffle soon!"
+        }
+      },
+      "headerMyHistory": {
+        "raffle": "Raffle",
+        "date": "Date",
+        "tickets": "No. of purchased tickets",
+        "connectYourWallet": "Connect your wallet to check your history",
+        "loading": "Loading your history",
+        "noRafflesText": {
+          "text1": "There is not raffles yet...",
+          "text2": "Go and create one!",
+          "text3": "Please wait, we are going to create one soon!"
+        }
+      },
+      "pages": {
+        "page": "Page",
+        "pageOf": "of"
+      }
+    }
+  },
+  "threeSimpleSteps": {
+    "title": "HOW TO PLAY",
+    "subtitle": "Three simple steps",
+    "1": {
+      "title": "Buy tickets",
+      "description": "Select the raffle that you see is the best for you, the one where you see your lucky will be exploited, and then buy the number of spots that you want"
+    },
+    "2": {
+      "title": "Wait for the draw",
+      "description": "When you have your tickets bought the only thing that you have to do is to wait for the draw. The raffle is going to be trigger if the date of the draw is reached or if the maximum number of allowed players go in it before that date."
+    },
+    "3": {
+      "title": "Check for prizes",
+      "description": "Once the round is over, come back to the page and check to see if you’ve won!"
+    }
+  },
+  "partners": {
+    "title": "PARTNERS",
+    "description": "Here are some of the companies that trust us. Come and join our adventure."
+  },
+  "modalWinnerRaffle": {
+    "configModalSeeMyRaffles": {
+      "title": "Your raffle spots"
+    },
+    "titleRafflePointsModal": "Winner spot:",
+    "buttonText": "Go to the raffle"
+  },
+  "buttonConnectWallet": "Connect wallet"
+}

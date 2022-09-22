@@ -1,0 +1,9 @@
+{
+  "title": "Delete admin",
+
+  "text1": "You are going to delete admin address:",
+  "text2": "Are you sure you want to continue?",
+
+  "buttonDelete": "Delete admin",
+  "buttonCancel": "Cancel"
+}

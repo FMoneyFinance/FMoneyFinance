@@ -1,0 +1,34 @@
+{
+  "title": "Your wallet",
+  "yourAddresText": "Your address",
+  "buttonDisconnect": "Disconnect wallet",
+  "popper": "Copied!",
+  "yourAddress": "Your address",
+  "buttonText": "Approve",
+  "hasToBeApproved": "The selected token has not yet been approved.",
+  "approvingWarning": "It is necessary to approve the transfer transaction.",
+
+  "buttons": {
+    "disconnect": "Disconect wallet",
+    "cancel": "Cancel",
+    "buttonSelectDefault": "Select default token"
+  },
+
+  "containerItemsBalance": {
+    "ETH": "ETH balance:",
+    "USDC": "USDC balance:",
+    "FMON": "FMON balance:"
+  },
+
+  "defaultTokenModal": {
+    "selectToken": "Select token",
+    "approveSucces": "Your request was approved with success.",
+    "buttonSelect": "Select default token"
+  },
+
+  "approveTokenModal": {
+    "alert": "It is necessary to approve the transfer transaction.",
+    "noApproveToken": "The selected token has not yet been approved.",
+    "buttonApprove": "Approve"
+  }
+}

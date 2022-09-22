@@ -1,0 +1,43 @@
+.loading-container-expanded {
+  background-color: #e9eff0;
+  border-radius: 18px;
+  background-color: #e9eff0;
+  border-radius: 18px;
+  height: 100%;
+  min-height: 25vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 69%;
+  margin-left: auto;
+  margin-right: auto;
+  h3 {
+    color: white;
+    font-family: 'MonumentExtended';
+    font-size: 210%;
+    margin-bottom: 1%;
+  }
+
+  h5 {
+    color: white;
+    font-size: 100%;
+  }
+}
+
+.basicSpinner {
+  width: 17% !important;
+  margin-top: -6%;
+}
+
+.LoaderComponent.logo {
+  width: 35%;
+}
+
+.LoaderComponent.small-true {
+  width: 15%;
+}
+
+.LoaderComponent.xSmall-true {
+  width: 10%;
+}

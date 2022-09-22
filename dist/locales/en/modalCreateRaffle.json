@@ -1,0 +1,36 @@
+{
+  "title": "Create new raffle",
+
+  "buttonTexts": {
+    "done": "Done",
+    "createRaffle": "Create raffle"
+  },
+
+  "inputs": {
+    "raffleName": "Name of raffle",
+    "dateOfDraw": "Date of the draw",
+    "hourOfDraw": "Hour of the draw",
+    "PriceTicket": "Price of the ticket",
+    "raffleNamePlaceholder": "My new raffle",
+    "maxPlayers": "Maximum number of players",
+    "percentageOfPrice": "Percentage of the prize to operator"
+  },
+
+  "loader": "Creating raffle, please wait",
+
+  "success": "The raffle has been successfully created!",
+
+  "errors": {
+    "selectedRaffleName": "You have to insert a valid name of the raffle",
+    "selectedDateOfDraw": "The date of the draw has to be 1  or more days away from current time",
+    "selectedPriceOfTheRaffleTicket": "Please set the price of the ticket.",
+    "selectedPriceOfTheRaffleTicketHasNumber": "This data has to be a number.",
+    "selectedPriceOfTheRaffleTicketPositiveNumber": "This data has to be a positive number.",
+    "selectedMaxNumberOfPlayers": "Please select the maximum number of players allowed.",
+    "selectedMaxNumberOfPlayersHasNumber": "This data has to be a number.",
+    "selectedMaxNumberOfPlayersPositiveNumber": "This data has to be a positive number.",
+    "selectedPercentageOfPrizeToOperator": "Please select the percetange that is going to go to the operator.",
+    "selectedPercentageOfPrizeToOperatorHasNumber": "This data has to be a number.",
+    "selectedPercentageOfPrizeToOperatorPositiveNumber": "This data has to be a number between 0 and 100."
+  }
+}

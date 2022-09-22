@@ -1,0 +1,43 @@
+<svg
+                      width="37"
+                      height="44"
+                      viewBox="0 0 37 44"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M32.2301 10.27C32.9901 12.08 33.4101 14.06 33.4101 16.15C33.4101 24.51 26.6301 31.3 18.2601 31.3C9.89012 31.3 3.12012 24.51 3.12012 16.15C3.12012 7.79 9.90012 1 18.2701 1"
+                        stroke="#D38500"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M28.0801 4.60999C28.4901 4.95999 28.8801 5.32999 29.2501 5.70999"
+                        stroke="#D38500"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M35.5498 37.84L28.8698 36.58L26.6398 42.99L19.8398 31.22C23.4698 30.84 26.7198 29.19 29.1198 26.71L35.5498 37.84V37.84Z"
+                        stroke="#D38500"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M7.41977 26.71C9.81977 29.19 13.0698 30.84 16.6998 31.22L9.89977 42.99L7.66977 36.58L1.00977 37.84L4.11977 32.45"
+                        stroke="#D38500"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M26.5298 14.46L22.7398 18.52L23.0898 24.08L18.0498 21.73L12.8798 23.78L13.5598 18.26L10.0098 13.98L15.4698 12.92L18.4398 8.21997L21.1398 13.08L26.5298 14.46Z"
+                        stroke="#D38500"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>

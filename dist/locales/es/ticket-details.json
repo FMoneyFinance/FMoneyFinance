@@ -1,0 +1,67 @@
+{
+  "bannerAd": "Anuncio publicitario",
+
+  "generalInfo": {
+    "contractAddres": "Dirección del contrato:",
+    "dateOfDraw": "Fecha de la rifa:",
+    "prizePot": "Premio",
+    "seeYourRaffleSpots": "Mis posiciones en la rifa"
+  },
+  "infoGraph": {
+    "acumulatedPrize": "Premio acumulado actual*:",
+    "priceTicket": "Precio del billete:",
+    "maximunPlayers": "Número máximo de jugadores:",
+    "currentPlayers": "Número actual de jugadores:",
+    "percentajePrice": "Porcentaje de premio al operador",
+    "warningPrize": "* Tener en cuenta que la cantidad de dinero enviada al ganador es: Premio acumulado - Porcentaje al operador"
+  },
+
+  "raffleSpots": {
+    "title": "Posiciones de la rifa",
+    "text": "En este listado puedes encontrar las posiciones que están disponibles en esta rifa. ¡Revísalo y selecciona el ganador!",
+
+    "table": {
+      "buttonBuy": "Comprar boleto",
+      "buttonBuyTickets": "Comprar boletos",
+      "spotText": "Boleto",
+      "playerText": "Dirección de jugador",
+      "buttonSelectSpots": "Seleccionar múltiples boletos",
+      "available": "Disponible"
+    },
+    "loading": {
+      "title": "Cargando posiciones de la rifa",
+      "text": "Por favor, espera un momento"
+    }
+  },
+
+  "otherMiniRaffles": {
+    "title": "Otras minirifas",
+    "text": "Nos dejes tu suerte solo por un lugar o una rifa, aquí puedes encontrar otras grandes oportunidades para ganar más dinero."
+  },
+
+  "closedRaffle": {
+    "raffleWinnerAddress": "Dirección del ganador",
+    "txHashPrize": "Hash de la transferencia del premio:",
+    "txHashDraw": "Hash de la transacción del sorteo:",
+    "winnerSpotPosition": "Posición ganadora:",
+    "prizeWon": "Premio ganado:"
+  },
+
+  "winnerAlert": {
+    "winner": "¡Felicidades, eres el ganador!",
+    "connect": "Conecta la billetera para comprobar si eres el ganador",
+    "noWinner": "No hay premios para coleccionar... ¡Mejor suerte la próxima vez!",
+    "nextDrawTitle": "El próximo sorteo comienza en",
+    "nextDrawSubtitleWinner": "¡Mantén tu racha ganadora!",
+    "nextDrawSubtitleNotWinner": "¡Compra entradas en el siguiente sorteo y cambia tu suerte!"
+  },
+
+  "popper": {
+    "text": "¡Copiado!"
+  },
+
+  "loadingGraphData": "Cargando datos de la gráfica",
+  "loadingGraph": "Cargando gráfica",
+  "rafflingStatus": "Sorteando",
+  "warningWrongChain": "No estás en la cadena correcta para usar la rifa FMoney. Por favor, cámbiala en tu proveedor de billetera. (Metamask, Walletconnect)"
+}
