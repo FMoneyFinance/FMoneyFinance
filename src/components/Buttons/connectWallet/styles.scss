@@ -1,0 +1,40 @@
+@import "../../../assets/scss/variables.scss";
+
+.footer {
+  h5 {
+    font-weight: 500 !important;
+    color: $primary !important;
+    position: initial !important;
+    margin-bottom: 1vw !important;
+  }
+}
+
+.modalConnectWallet {
+  .walletContainer {
+    > img {
+      margin-top: 1vw !important;
+      width: 4vw !important;
+    }
+
+    > h5 {
+      position: initial !important;
+      color: $primaryDark !important;
+      font-weight: 500 !important;
+      margin-top: 1vw !important;
+    }
+  }
+}
+.walletAddressTxt {
+  display: flex;
+  align-items: center;
+  background: $primaryDark;
+  border-radius: 7px;
+  margin-left: 1vw;
+  color: white;
+  padding: 0.3vw;
+  padding-left: 1vw;
+  padding-right: 0.8vw;
+  img {
+    margin-left: 0.5vw;
+  }
+}

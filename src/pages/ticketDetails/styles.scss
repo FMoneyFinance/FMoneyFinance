@@ -1,0 +1,489 @@
+@import "../../assets/scss/variables.scss";
+.TicketDetailsScreen {
+  margin-bottom: 10vh;
+
+  .adBannerContainer {
+    width: 90vw;
+    margin: auto;
+    background-color: #f5f5ff;
+    margin-top: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+
+    h3 {
+      color: #d9d9f0;
+      font-family: "MonumentExtended";
+      font-size: 2vw;
+      margin: 3vw;
+    }
+  }
+
+  .header {
+    width: 90vw;
+    margin: auto;
+    margin-top: 2vw;
+
+    .top {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: center;
+
+      .left {
+        h3 {
+          font-size: 1.7vw;
+          color: $primaryDark;
+        }
+
+        h4 {
+          font-weight: 500;
+          color: $primary;
+          font-size: 1vw;
+          margin-top: 0.3vw;
+        }
+      }
+      .center {
+        width: 60%;
+        h3 {
+          font-size: 1.7vw;
+          text-align: end;
+          color: $primaryDark;
+        }
+
+        h4 {
+          font-weight: 500;
+          color: $primary;
+          font-size: 1vw;
+          margin-top: 0.3vw;
+          text-align: end;
+        }
+      }
+
+      .right {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        .buttonHeader {
+          margin-right: 20%;
+        }
+
+        .subright {
+          text-align: right;
+
+          h3 {
+            font-size: 1.7vw;
+            text-align: end;
+            color: $primaryDark;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            .circleTitle {
+              background: $primary;
+              height: 0.8vw;
+              width: 0.8vw;
+              margin-right: 0.5vw;
+              border-radius: 0.65vw;
+            }
+          }
+
+          h4 {
+            font-weight: 500;
+            color: $primary;
+            font-size: 1vw;
+            margin-top: 0.3vw;
+          }
+        }
+      }
+    }
+    .bottom {
+      display: grid;
+      grid-template-columns: 66.7% auto;
+      align-items: center;
+      margin-top: 1vw;
+
+      .left {
+        h3 {
+          display: flex;
+          align-items: center;
+          font-weight: 500;
+          color: $primaryDark;
+          font-size: 1.3vw;
+
+          .bold {
+            font-weight: 600;
+            margin-left: 0.8vw;
+            margin-right: 1.6vw;
+          }
+        }
+      }
+
+      .right {
+        .buttonSeeYourSpots {
+          background-color: $primaryLight;
+          padding: 0.3vw;
+
+          &:hover {
+            cursor: pointer;
+            background-color: $primary;
+
+            span {
+              color: white;
+            }
+          }
+          span {
+            color: $primaryDark;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  .graphContainer {
+    width: 100vw;
+    background-image: url(/src/assets/ilustrations/landingpage/trazo.svg);
+    text-align: center;
+    padding-bottom: 5vh;
+    padding-top: 14vh;
+    background-size: 101vw;
+    background-repeat: no-repeat;
+    background-position: left;
+    position: relative;
+    min-height: 71vh;
+    display: grid;
+    grid-template-columns: 64% auto;
+
+    .dateToExpire {
+      display: flex;
+      justify-content: end;
+      align-items: end;
+      height: 35vw;
+
+      h4 {
+        color: white;
+        margin-bottom: 2vw;
+        display: flex;
+        align-items: center;
+        margin-right: 10vw;
+
+        img {
+          margin-right: 1vw;
+        }
+      }
+    }
+    .graph {
+      width: 50vw !important;
+      box-shadow: 0px 0px 4.3px rgba(0, 0, 0, 0.022),
+        0px 0px 10.9px rgba(0, 0, 0, 0.031), 0px 0px 22.3px rgba(0, 0, 0, 0.039),
+        0px 0px 46px rgba(0, 0, 0, 0.048), 0px 0px 126px rgba(0, 0, 0, 0.07);
+      margin-left: 4vw;
+      margin-right: auto;
+      margin-top: 20vh;
+      background: #f5f5ff;
+      border-radius: 23px;
+      overflow: hidden;
+      position: absolute;
+      z-index: 3;
+      left: 0;
+      right: 0;
+
+      canvas {
+        width: 100%;
+      }
+    }
+
+    .containerTable {
+      background-color: #f5f5ff;
+      width: 80%;
+      margin-left: auto;
+      margin-right: 6vw;
+      padding: 3.4vw 1.6vw;
+      margin-top: 6vh;
+      border-radius: 16px;
+      height: 44vh;
+      box-shadow: 0px 0px 4.3px rgba(0, 0, 0, 0.022),
+        0px 0px 10.9px rgba(0, 0, 0, 0.031), 0px 0px 22.3px rgba(0, 0, 0, 0.039),
+        0px 0px 46px rgba(0, 0, 0, 0.048), 0px 0px 126px rgba(0, 0, 0, 0.07);
+
+      .itemTable {
+        text-align: left;
+
+        h4 {
+          color: grey;
+          font-size: 1vw;
+          margin-bottom: 0.3vw;
+        }
+
+        h3 {
+          color: $primary;
+          margin-bottom: 1.7vw;
+        }
+      }
+    }
+
+    .Money5 {
+      position: absolute;
+      left: -3vw;
+      animation: float2 6s ease-in-out infinite;
+      top: 28vw;
+      height: 33vh;
+      z-index: 0;
+    }
+  }
+
+  .RaffleSpots {
+    text-align: center;
+    margin-bottom: 10vh;
+    margin-top: 2vw;
+
+    h2 {
+      color: $primaryDark;
+      margin-top: 0.5vw;
+      font-size: 2.4vw;
+      margin-left: 4vw;
+      margin-bottom: 0.6vw;
+    }
+    h4 {
+      color: $primaryDark;
+      font-size: 1vw;
+      font-weight: 500;
+    }
+
+    .table {
+      background: #f5f5ff;
+      width: 65vw;
+      margin: auto;
+      box-shadow: 0px 0px 4.3px rgba(0, 0, 0, 0.022),
+        0px 0px 10.9px rgba(0, 0, 0, 0.031), 0px 0px 22.3px rgba(0, 0, 0, 0.039),
+        0px 0px 46px rgba(0, 0, 0, 0.048), 0px 0px 126px rgba(0, 0, 0, 0.07);
+      margin-top: 2vw;
+      padding: 1vw 1.2vw;
+      border-radius: 14px;
+
+      .headerTable {
+        display: grid;
+        grid-template-columns: 10% 60% auto;
+        align-items: center;
+        margin-bottom: 3.5vw;
+        margin-top: 1vw;
+
+        div {
+          text-align: left;
+          color: $primaryDark;
+        }
+
+        .left,
+        .center {
+          font-family: "MonumentExtended";
+          font-size: 1vw;
+        }
+
+        .left {
+          text-align: center;
+        }
+
+        .center {
+          padding-left: 5vw;
+        }
+
+        .right {
+          font-size: 1vw;
+          font-weight: 500;
+          color: $primary;
+          text-align: right;
+          padding-right: 1vw;
+        }
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 10% 70% auto;
+        align-items: center;
+        margin-bottom: 0.8vw;
+        border-bottom: 1px solid #e3e3e3;
+        padding-bottom: 0.8vw;
+
+        .left {
+          text-align: center;
+
+          h4 {
+            background: #d7e5d1;
+            width: fit-content;
+            margin: auto;
+            padding: 1vw;
+            border-radius: 14px;
+            font-weight: 600;
+            font-family: "MonumentExtended";
+          }
+        }
+
+        .active-true {
+          h4 {
+            background: #e9e9f9;
+            color: #c5c5c5;
+          }
+        }
+
+        .center {
+          text-align: left;
+          padding-left: 5vw;
+        }
+
+        .right {
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+
+          .button {
+            width: fit-content;
+            padding: 0 1.5vw;
+          }
+
+          .active-true {
+            background: #e9e9f9;
+            span {
+              color: #c5c5c5;
+            }
+          }
+
+          .square {
+            background: #e9e9f9;
+            width: 2vw;
+            height: 2vw;
+            border-radius: 5px;
+          }
+
+          .active-square-true {
+            background-color: #d9d9f0;
+          }
+        }
+      }
+    }
+  }
+
+  .minipoolScreen {
+    text-align: center;
+    margin-bottom: 4vw;
+    .rowTitle {
+      display: flex;
+      justify-content: space-between;
+      margin: center;
+      margin: 0 4vw;
+      align-items: center;
+
+      .containerbuttonSlider {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        .buttonSlider {
+          font-size: 1vw;
+          font-weight: initial;
+          font-family: "MonumentExtended";
+          border: 1px solid #3c6132;
+          padding: 0.6vw 1.3vw;
+          border-radius: 9px;
+          margin-right: 1vw;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .sliderContainer {
+      margin-left: 4vw;
+      margin-top: 3vw;
+
+      .swiper {
+        overflow: visible;
+      }
+    }
+
+    h2 {
+      color: $primaryDark;
+      margin-top: 0.5vw;
+      font-size: 2.4vw;
+      margin-left: 4vw;
+      text-align: left;
+      margin-bottom: 0.6vw;
+    }
+    h4 {
+      color: $primaryDark;
+      font-size: 1vw;
+
+      font-weight: 500;
+    }
+
+    .containerCard {
+      position: relative;
+      width: 15vw;
+
+      img {
+        width: 100%;
+      }
+      h5 {
+        position: absolute;
+        width: 100%;
+        font-size: 0.9vw;
+        top: 54%;
+        text-align: center;
+        color: white;
+        font-weight: 500;
+      }
+      h3 {
+        position: absolute;
+        top: 29.5%;
+        font-family: "MonumentExtended";
+        color: white;
+        font-size: 195%;
+        width: 100%;
+        text-align: center;
+      }
+
+      h4 {
+        position: absolute;
+        top: 10%;
+        font-size: 0.8vw;
+        font-weight: 700;
+        color: white;
+        width: 100%;
+        text-align: center;
+      }
+
+      .containerButtonBuyTicket {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        top: 79%;
+      }
+      .buttonImgContainer {
+        display: flex;
+        justify-content: center;
+        width: 8vw;
+        text-align: center;
+        background-color: $orange;
+      }
+    }
+  }
+}
+
+.containerRafflePointsModal {
+  display: flex;
+  padding: 1vw;
+  justify-content: space-between;
+}
+
+.titleRafflePointsModal {
+  font-weight: 500;
+  padding: 1vw;
+  font-size: 1vw;
+
+  span {
+    font-weight: 700;
+  }
+}

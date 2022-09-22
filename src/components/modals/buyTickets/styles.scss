@@ -1,0 +1,83 @@
+@import "../../../assets/scss/variables.scss";
+
+.modalBuyTicketsModal {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vw 1vw 1vw 1vw;
+    width: 90% !important;
+
+    .left {
+      font-size: 1.1vw;
+      font-weight: 600;
+    }
+
+    .right {
+      color: $primary;
+      text-decoration: underline;
+      font-weight: 500;
+      font-size: 1vw;
+    }
+  }
+
+  .gridPoints {
+    width: 80%;
+    margin: auto;
+    margin-top: 1vw;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    .containerRafflePoint {
+      margin-bottom: 1vw;
+    }
+
+    .block-false {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .block-true {
+      background: #e9e9f9;
+      color: #c5c5c5;
+    }
+  }
+
+  .dataContainer {
+    padding: 2vw 2vw;
+    margin-bottom: 5vw;
+    .subitem {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+
+      h3 {
+        font-size: 1.2vw;
+        color: #3c613280;
+        margin-bottom: 0.8vw;
+      }
+    }
+
+    .MainItem {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1vw;
+
+      h3 {
+        font-size: 1.2vw;
+        color: #3c613280;
+        margin-bottom: 0.8vw;
+      }
+
+      .strong {
+        color: $primaryDark;
+      }
+    }
+  }
+}
+
+.buttonModalBuyTickets {
+  width: 86% !important;
+}

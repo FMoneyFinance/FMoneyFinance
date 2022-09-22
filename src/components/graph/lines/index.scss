@@ -1,0 +1,69 @@
+@import "../../../assets/scss/variables.scss";
+
+.graphComponent {
+  position: relative;
+  .indicators {
+    position: absolute;
+    top: 0%;
+    width: 96%;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+
+    .left {
+      margin: 1vw 2vw;
+      text-align: left;
+
+      h2 {
+        font-size: 1.8vw;
+        font-family: "MonumentExtended";
+      }
+
+      h5 {
+        font-weight: 500;
+      }
+    }
+
+    .right {
+      background: #629a4840;
+      height: 3vw;
+      border-radius: 13px;
+      color: $primaryDark;
+      font-weight: 600;
+
+      div {
+        height: 3vw;
+        line-height: 3vw;
+        padding: 1.1vw 0.7vw;
+        font-size: 0.9vw;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .active {
+        background: #53744b;
+        height: 1vw;
+        border-radius: 13px;
+        line-height: 1vw;
+        color: white;
+      }
+    }
+  }
+
+  .dividor {
+    height: 5vw;
+  }
+
+  .containerLabels {
+    position: absolute;
+    width: 100%;
+    bottom: 5%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.8vw;
+    font-weight: 500;
+    color: $primaryDark;
+  }
+}

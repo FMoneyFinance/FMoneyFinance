@@ -1,0 +1,128 @@
+@import "../../assets/scss/variables.scss";
+
+.containerDropDown {
+  z-index: 20;
+  width: 10%;
+
+  background: $primaryLight;
+  border-radius: 12px;
+  position: absolute;
+  top: 10vh;
+  right: 1%;
+  p {
+    padding: 5%;
+
+    strong {
+      font-weight: 800 !important;
+      font-family: Raleway;
+    }
+  }
+
+  div {
+    cursor: pointer;
+  }
+}
+.containerDropDown::after {
+  content: "";
+  display: block;
+  background: transparent;
+  position: absolute;
+  top: -50%;
+  right: 28%;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid $primaryLight;
+  border-right: 20px solid transparent;
+  border-left: 20px solid transparent;
+}
+
+/*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */
+/*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */
+/*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */
+
+@media screen and (max-width: 920px) {
+  .containerDropDown {
+    top: 12%;
+    right: 12%;
+    width: 30%;
+    font-size: 1.3rem;
+  }
+  .containerDropDown::after {
+    content: "";
+    display: block;
+    background: transparent;
+    position: absolute;
+    bottom: 90%;
+    right: 0%;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid $primaryLight;
+    border-right: 20px solid transparent;
+    border-left: 20px solid transparent;
+  }
+}
+@media screen and (max-width: 500px) {
+  .containerDropDown {
+    z-index: 2;
+    width: 45vw;
+    font-size: 1rem;
+    background: $primaryLight;
+    border-radius: 12px;
+    position: absolute;
+    top: 15vh;
+    right: 11.5vw;
+    p {
+      padding: 5%;
+      cursor: pointer;
+    }
+
+    div {
+      cursor: pointer;
+    }
+  }
+  .containerDropDown::after {
+    z-index: -1;
+    content: "";
+    display: block;
+    background: transparent;
+    position: absolute;
+    top: -45%;
+    right: 0%;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid $primaryLight;
+    border-right: 20px solid transparent;
+    border-left: 20px solid transparent;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-width: 950px) {
+  .containerDropDown {
+    z-index: 2;
+    width: 29vw;
+    font-size: 1rem;
+    background: #d0ded1;
+    border-radius: 12px;
+    position: absolute;
+    top: 30vh;
+    right: 13vw;
+    p {
+      padding: 5%;
+      cursor: pointer;
+    }
+
+    div {
+      cursor: pointer;
+    }
+  }
+  .containerDropDown::after {
+    z-index: -1;
+    content: "";
+    display: block;
+    background: transparent;
+    position: absolute;
+    top: -45%;
+    right: 0%;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid $primaryLight;
+    border-right: 20px solid transparent;
+    border-left: 20px solid transparent;
+  }
+}

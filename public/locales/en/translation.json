@@ -1,0 +1,34 @@
+{
+  "comingSoon": {
+    "title": "The FMoney Platform Coming Soon!",
+    "titleMobile": "Coming soon!",
+    "text": "We are bringing you the tools for a chance at financial freedom through the power of the blockchain. Our app will offer ",
+    "text2": "transparency, instant traceability, security, greater speed, and efficiency.",
+    "textSocialMedia": "Follow us to find out the latest news."
+  },
+
+  "tokenomics": {
+    "totalSupply": "Total FMON supply",
+    "buttonWhitepaper": "Read the whitepaper here",
+    "text": "FMoney's native token is called FMON and the token has a maximum supply of 10,000,000,000. The circulating supply will be 100% of the total supply."
+  },
+
+  "developers": {
+    "title": "Developers",
+    "text": "The xPresidents have been building the core and developing the fundamental idea behind FMONEY since 2021.", 
+    "text2":  "The goal is to start with the Ethereum ecosystem and provide the community  with high-quality service, for a more profitable trading and raffle environment in the long term.",
+    "text3":  "The team is choosing to stay anonymous but, can be identified as \"xPresidents\" by serial numbers ranging from one (1) to six (6) deriving inspirations from seven prominent figures from leaders, current/past in the world."
+  },
+
+  "comunity": {
+    "title": "Community",
+    "buttonGithub": "Github repository",
+    "text": "Do you want to see FMoney in your language? Help us translate our platform.",
+    "text2": "Open an merge request, download the translations.json in English, and translate it!"
+  },
+
+  "allRightsReserved": { "text": "All rights reserved"},
+  "navbar": {
+    "whitepaper": "Whitepaper"
+  }
+}

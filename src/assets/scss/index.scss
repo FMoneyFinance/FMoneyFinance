@@ -1,0 +1,193 @@
+@font-face {
+  font-family: MonumentExtended;
+  font-weight: 600;
+  src: url("../fonts/MonumentExtended-Ultrabold.otf") format("opentype");
+}
+@font-face {
+  font-family: MonumentExtended;
+  font-weight: 600;
+  src: url("../fonts/MonumentExtended-Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: TTNorms;
+  font-weight: 500;
+  src: url("../fonts/TTNorms-Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: TTNorms;
+  font-weight: 900;
+  src: url("../fonts/TTNorms-Black.otf") format("opentype");
+}
+@font-face {
+  font-family: TTNorms;
+  font-weight: 700;
+  src: url("../fonts/TTNorms-Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: TTNorms;
+  font-weight: lighter;
+  src: url("../fonts/TTNorms-Light.otf") format("opentype");
+}
+@font-face {
+  font-family: TTNorms;
+  font-weight: normal;
+  src: url("../fonts/TTNorms-Medium.otf") format("opentype");
+}
+@font-face {
+  font-family: TTNorms;
+  font-weight: thin;
+  src: url("../fonts/TTNorms-Thin.otf") format("opentype");
+}
+@font-face {
+  font-family: Raleway;
+  font-weight: 500;
+  src: url("../fonts/Raleway-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: Raleway;
+  font-weight: 800;
+  src: url("../fonts/Raleway-ExtraBold.ttf") format("truetype");
+}
+
+* {
+  font-family: Raleway;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes floatBottom {
+  0% {
+    transform: translatey(0px) translatex(0px);
+  }
+  50% {
+    transform: translatey(20px);
+  }
+  100% {
+    transform: translatey(0px) translatex(0px);
+  }
+}
+@keyframes float {
+  0% {
+    transform: translatey(0px) translatex(0px);
+  }
+  50% {
+    transform: translatey(20px);
+  }
+  100% {
+    transform: translatey(0px) translatex(0px);
+  }
+}
+
+@keyframes float2 {
+  0% {
+    transform: translatey(0px) translatex(0px);
+  }
+  50% {
+    transform: translatey(10px);
+  }
+  100% {
+    transform: translatey(0px) translatex(0px);
+  }
+}
+
+@keyframes float3 {
+  0% {
+    transform: translatey(0px) translatex(0px);
+  }
+  50% {
+    transform: translatey(25px);
+  }
+  100% {
+    transform: translatey(0px) translatex(0px);
+  }
+}
+
+@keyframes float4 {
+  0% {
+    transform: translatey(0px) translatex(0px);
+  }
+  50% {
+    transform: translatey(7px);
+  }
+  100% {
+    transform: translatey(0px) translatex(0px);
+  }
+}
+
+@keyframes float5 {
+  0% {
+    transform: translatey(0px) translatex(0px);
+  }
+  50% {
+    transform: translatey(54px);
+  }
+  100% {
+    transform: translatey(0px) translatex(0px);
+  }
+}
+
+@keyframes float6 {
+  0% {
+    transform: translatey(0px) translatex(0px);
+  }
+  50% {
+    transform: translatey(10px);
+  }
+  100% {
+    transform: translatey(0px) translatex(0px);
+  }
+}
+
+@keyframes float7 {
+  0% {
+    transform: translatex(0px);
+  }
+  50% {
+    transform: translatex(10px);
+  }
+  100% {
+    transform: translatex(0px);
+  }
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.pointer {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .flex {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

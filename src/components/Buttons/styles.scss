@@ -1,0 +1,44 @@
+@import "../../assets/scss/variables.scss";
+
+.button {
+  background-color: $primary;
+  display: flex;
+  align-items: center;
+  height: 5vh;
+  border: none;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 0 1vw;
+  transition: all 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $primaryDark;
+  }
+
+  .text {
+    width: 100%;
+    margin-right: 0%;
+    white-space: nowrap;
+
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .icon {
+    margin-top: 3%;
+  }
+}
+
+.secondary-button-true {
+  background-color: $orange;
+
+  &:hover {
+    background-color: $orangeDark;
+  }
+}
+
+.rounder-true {
+  border-radius: 25px;
+}
