@@ -1,0 +1,52 @@
+name: fmoney-deploy
+
+on:
+  push:
+    branches:
+      - action-deploy-test
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        env:
+          VITE_CHAIN_ID_METAMASK: ${{ secrets.VITE_CHAIN_ID_METAMASK }} 
+          VITE_SECRET_KEY: ${{ secrets.VITE_SECRET_KEY }}
+          VITE_CHAIN_NAME_TO_USE: ${{ secrets.VITE_CHAIN_NAME_TO_USE }}
+          VITE_CHAIN_ID_WALLETCONNECT: ${{ secrets.VITE_CHAIN_ID_WALLETCONNECT }}
+          VITE_URL_SOCKET: ${{ secrets.VITE_URL_SOCKET }}
+          VITE_ETHERSCAN_PREFIX: ${{ secrets.VITE_ETHERSCAN_PREFIX }}
+          VITE_INFURA_API_KEY: ${{ secrets.VITE_INFURA_API_KEY }} 
+          VITE_route_to_animation_phone_and_coins: ${{ secrets.VITE_route_to_animation_phone_and_coins }}
+          VITE_URL_USERS_MNG_API: ${{ secrets.VITE_URL_USERS_MNG_API }}
+          VITE_UNISWAP_FACTORY_ADDRESS: ${{ secrets.VITE_UNISWAP_FACTORY_ADDRESS }}
+          VITE_URL_TICKETS_MNG_API: ${{ secrets.VITE_URL_TICKETS_MNG_API }}
+          VITE_FMONEY_RAFFLE_OWNER: ${{ secrets.VITE_FMONEY_RAFFLE_OWNER }}
+          VITE_MSG_TO_SIGN: ${{ secrets.VITE_MSG_TO_SIGN }}
+          VITE_USDC_CONTRACT_ADDRESS: ${{ secrets.VITE_USDC_CONTRACT_ADDRESS }}
+          VITE_FMON_CONTRACT_ADDRESS: ${{ secrets.VITE_FMON_CONTRACT_ADDRESS }} 
+          VITE_WETH_CONTRACT_ADDRESS: ${{ secrets.VITE_WETH_CONTRACT_ADDRESS }} 
+          VITE_ETH_USD_PRICE_FEED_ORACLE_ADDRESS: ${{ secrets.VITE_ETH_USD_PRICE_FEED_ORACLE_ADDRESS }} 
+          VITE_FMONEY_RAFFLE_MANAGER_GOERLI: ${{ secrets.VITE_FMONEY_RAFFLE_MANAGER_GOERLI }} 
+          VITE_FMONEY_VRF_COORDINATOR_GOERLI: ${{ secrets.VITE_FMONEY_VRF_COORDINATOR_GOERLI }} 
+          VITE_FMONEY_LOTTERY_TICKETS_ADDRESS: ${{ secrets.VITE_FMONEY_LOTTERY_TICKETS_ADDRESS }} 
+          VITE_URL_GENERATE_TICKETS_API: ${{ secrets.VITE_URL_GENERATE_TICKETS_API }}
+      - run: npm install --force
+      - run: npm run build-linux
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'us-east-2'
+          SOURCE_DIR: 'dist'
+      - uses: chetan/invalidate-cloudfront-action@master
+        env:
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+          PATHS: '/index.html'
+          AWS_REGION: 'us-east-2'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
