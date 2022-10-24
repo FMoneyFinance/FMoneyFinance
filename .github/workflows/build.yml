@@ -3,7 +3,7 @@ name: fmoney-deploy
 on:
   push:
     branches:
-      - v.1.1.1
+      - v1.1.1
 
 jobs:
   deploy:
