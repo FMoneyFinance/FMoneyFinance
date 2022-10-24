@@ -32,8 +32,8 @@ jobs:
           VITE_FMONEY_VRF_COORDINATOR_GOERLI: ${{ secrets.VITE_FMONEY_VRF_COORDINATOR_GOERLI }} 
           VITE_FMONEY_LOTTERY_TICKETS_ADDRESS: ${{ secrets.VITE_FMONEY_LOTTERY_TICKETS_ADDRESS }} 
           VITE_URL_GENERATE_TICKETS_API: ${{ secrets.VITE_URL_GENERATE_TICKETS_API }}
-      - run: npm install --force
-      - run: npm run build-linux
+      - run: npm install
+      - run: npm run build
       - uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete
