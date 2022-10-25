@@ -33,8 +33,8 @@ jobs:
           echo VITE_FMONEY_VRF_COORDINATOR_GOERLI: ${{ secrets.VITE_FMONEY_VRF_COORDINATOR_GOERLI }} >> .env 
           echo VITE_FMONEY_LOTTERY_TICKETS_ADDRESS: ${{ secrets.VITE_FMONEY_LOTTERY_TICKETS_ADDRESS }} >> .env 
           echo VITE_URL_GENERATE_TICKETS_API: ${{ secrets.VITE_URL_GENERATE_TICKETS_API }} >> .env
-      - run: npm install --force
-      - run: npm run build
+          npm install --force
+          npm run build
 
       - name:  Upload in S3
         uses: jakejarvis/s3-sync-action@master
