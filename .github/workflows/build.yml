@@ -9,9 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Project build
-        uses: actions/checkout@master
-        run: |
+      - uses: actions/checkout@master
+      - run: |
           touch .env
           echo VITE_CHAIN_ID_METAMASK: ${{ secrets.VITE_CHAIN_ID_METAMASK }} >> .env
           echo VITE_SECRET_KEY: ${{ secrets.VITE_SECRET_KEY }} >> .env
@@ -34,8 +33,8 @@ jobs:
           echo VITE_FMONEY_VRF_COORDINATOR_GOERLI: ${{ secrets.VITE_FMONEY_VRF_COORDINATOR_GOERLI }} >> .env 
           echo VITE_FMONEY_LOTTERY_TICKETS_ADDRESS: ${{ secrets.VITE_FMONEY_LOTTERY_TICKETS_ADDRESS }} >> .env 
           echo VITE_URL_GENERATE_TICKETS_API: ${{ secrets.VITE_URL_GENERATE_TICKETS_API }} >> .env
-        run: npm install --force
-        run: npm run build
+      - run: npm install --force
+      - run: npm run build
 
       - name:  Upload in S3
         uses: jakejarvis/s3-sync-action@master
