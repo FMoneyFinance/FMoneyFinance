@@ -1,7 +1,7 @@
 {
   "name": "fmoney",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && NODE_OPTIONS=--max-old-space-size=4096 vite build",
