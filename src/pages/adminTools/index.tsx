@@ -1,7 +1,7 @@
 import React, { Suspense, useContext, useEffect, useState } from 'react'
 import SplashScreen from '../../components/Splash'
 import MainLayout from '../../layouts/main'
-import TableWelcome from '../Home/parts/graph'
+import TableWelcome from '../home/parts/graph'
 import './styles.scss'
 import TicketLanding from '../../assets/ilustrations/TicketLanding.svg'
 import background from '../../assets/ilustrations/backgroundRafflesHystory.svg'
