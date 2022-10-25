@@ -1,74 +1,28 @@
-import React, { useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import ItemTicket from "../../../../components/tickets/item";
+import React, { useRef, useState } from 'react'
+import 'swiper/css'
+import SliderRaffles from '../../../../components/tickets/slider/slider'
+import { useTranslation } from 'react-i18next'
 
 function MiniPools(props: any) {
-  const [swiper, setSwiper] = useState(null);
-
-  const backSlider = () => {
-    if (swiper) {
-      const controller: any = swiper;
-      controller.slidePrev();
-    }
-  };
-  const nextSlider = () => {
-    if (swiper) {
-      const controller: any = swiper;
-      controller.slideNext();
-    }
-  };
+  const { t } = useTranslation(['ticket-details'])
+  const deleteTheActualTicket = (listOfTickets: Array<any>): Array<any> => {
+    listOfTickets = listOfTickets?.filter((ticket: any) => ticket.raffleSmartContractAddress != props.raffleSmartContractAddress)
+    return listOfTickets
+  }
 
   return (
     <div className="minipoolScreen">
-      <h2>Other minipools</h2>
-      <div className="rowTitle">
-        <h4>
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium
-        </h4>
-        <div className="containerbuttonSlider">
-          <div className="buttonSlider" onClick={backSlider}>
-            &lt;
-          </div>
-          <div className="buttonSlider" onClick={nextSlider}>
-            &gt;
-          </div>
+      <div className="maxWidth containerMiniPoolText">
+        <h2>{t('otherMiniRaffles.title')}</h2>
+        <div className="rowTitle">
+          <h4>{t('otherMiniRaffles.text')}</h4>
         </div>
       </div>
-      <div className="sliderContainer">
-        <Swiper
-          onSwiper={(s: any) => {
-            setSwiper(s);
-          }}
-          className="mySwiper"
-          slidesPerView={window.screen.width > 500 ? 4.5 : 2}
-        >
-          <SwiperSlide>
-            <ItemTicket {...props} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ItemTicket {...props} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ItemTicket {...props} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ItemTicket {...props} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ItemTicket {...props} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ItemTicket {...props} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ItemTicket {...props} />
-          </SwiperSlide>
-        </Swiper>
+      <div style={{ marginTop: '40px' }}>
+        <SliderRaffles params={props.params} raffleSmartContractAddress={props.raffleSmartContractAddress} setList={deleteTheActualTicket} />
       </div>
     </div>
-  );
+  )
 }
 
-export default MiniPools;
+export default MiniPools

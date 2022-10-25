@@ -1,33 +1,64 @@
-@import "../../assets/scss/variables.scss";
+@import '../../assets/scss/variables.scss';
 
 .button {
   background-color: $primary;
   display: flex;
   align-items: center;
-  height: 5vh;
+  height: 4vh;
   border: none;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: 15px;
   padding: 0 1vw;
   transition: all 0.3s;
 
   &:hover {
     cursor: pointer;
     background-color: $primaryDark;
+
+    span {
+      color: white;
+    }
   }
 
-  .text {
-    width: 100%;
-    margin-right: 0%;
-    white-space: nowrap;
-
+  span {
     color: white;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 14px;
   }
+}
 
-  .icon {
-    margin-top: 3%;
+.hidden-true {
+  display: none;
+}
+
+.button-loading-true {
+  &:hover {
+    cursor: default;
+  }
+
+  img {
+    margin-top: unset;
+  }
+}
+
+.button-disabled-true {
+  background-color: #e9e9f9;
+
+  &:hover {
+    cursor: default;
+    background-color: #e9e9f9;
+
+    span {
+      color: #d5d5ea;
+    }
+  }
+
+  span {
+    color: #d5d5ea;
+  }
+
+  .basicSpinner {
+    margin-top: unset !important;
   }
 }
 
@@ -41,4 +72,29 @@
 
 .rounder-true {
   border-radius: 25px;
+}
+
+@media screen and (max-width: 950px) {
+  .button {
+    font-size: 1.5rem;
+  }
+}
+
+.button-outlined-true {
+  background-color: transparent;
+  border: 2px solid $primary;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $primary;
+  }
+
+  span {
+    font-weight: 600;
+    color: $primary;
+
+    &:hover {
+      color: white;
+    }
+  }
 }

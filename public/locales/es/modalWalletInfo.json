@@ -1,0 +1,35 @@
+{
+  "title": "Tu billetera",
+  "yourAddresText": "Tu dirección",
+  "buttonDisconnect": "Desconectar billetera",
+  "popper": "¡Copiado!",
+  "yourAddress": "Tu dirección",
+  "buttonSelectDefault": "Seleccionar token predeterminado",
+  "buttonText": "Aprobar token",
+  "hasToBeApproved": "El token seleccionado aún no ha sido aprobado.",
+  "approvingWarning": "Es necesario aprobar las transacciones con este token.",
+
+  "buttons": {
+    "disconnect": "Desconectar billetera",
+    "cancel": "Cancelar",
+    "buttonSelectDefault": "Seleccionar token predeterminado"
+  },
+
+  "containerItemsBalance": {
+    "ETH": "Saldo ETH:",
+    "USDC": "Saldo USDC:",
+    "FMON": "Saldo FMON:"
+  },
+
+  "defaultTokenModal": {
+    "selectToken": "Seleccionar token",
+    "approveSucces": "Su solicitud fue aprobada con éxito.",
+    "buttonSelect": "Seleccionar token predeterminado"
+  },
+
+  "approveTokenModal": {
+    "alert": "Es necesario aprobar la transacción de transferencia.",
+    "noApproveToken": "El token seleccionado aún no ha sido aprobado.",
+    "buttonApprove": "Aprobar"
+  }
+}

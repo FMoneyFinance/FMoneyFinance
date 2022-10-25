@@ -1,0 +1,30 @@
+{
+  "title": "Connect wallet",
+  "buttonSend": "Send request",
+  "buttonLearnHowConnect": "Learn how to connect",
+  "haventGot": "Haven’t got a crypto wallet yet?",
+  "requestCancelled": "The request was cancelled",
+  "warningNotAllowed": "You have to be connected to the right chain in order to play.",
+  "warningNotAllowedWalletConnect": "You have to be connected to the right chain in order to play. Please check the wallet you are using (eg: Metamask) and that it is on the same network that FMoney uses.",
+
+  "step2": {
+    "advicestep2": "You will receive two signature requests. Signing is free and will not send a transaction.",
+
+    "items": {
+      "VerifyOwnership": {
+        "title": "Verify ownership",
+        "text": "Confirm you are the owner of this wallet"
+      },
+
+      "EnableTrading": {
+        "title": "Enable trading",
+        "text": "Enable secure access to our API for lightning quick trading"
+      }
+    },
+
+    "rememberMe": {
+      "title": "Remember me",
+      "rememberMeText": "Only use “remember me” if you are using a secure device that you own. Selecting this option can expose your keys and information to others if you are on a public or non-secured device."
+    }
+  }
+}

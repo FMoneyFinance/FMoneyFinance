@@ -1,19 +1,14 @@
-import React from "react";
-import Mainlogo from "../../assets/logos/main.svg";
-import "./styles.scss";
+import React from 'react'
+import Logo from '../logo/index'
+import './styles.scss'
+import { isMobile } from 'react-device-detect'
 
 function SplashScreen() {
   return (
     <div className="splash-container">
-      <img src={Mainlogo} />
-      <div className="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      <Logo hideLabel={isMobile} />
     </div>
-  );
+  )
 }
 
-export default SplashScreen;
+export default SplashScreen

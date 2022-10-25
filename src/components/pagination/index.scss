@@ -1,0 +1,42 @@
+@import '../../assets/scss/variables.scss';
+
+.containerPagination {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 4%;
+  margin-top: 3%;
+  margin-bottom: 2%;
+  width: 50%;
+
+  h5 {
+    color: $primary;
+    font-size: 110%;
+    font-weight: 500;
+    margin-right: 5%;
+  }
+
+  div {
+    margin-left: 1%;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .containerPagination.hidden {
+    display: none;
+  }
+
+  .containerPagination {
+    justify-content: center;
+    width: 100%;
+  }
+  .containerPaginationFlex {
+    position: absolute;
+    background: #f5f5ff;
+    width: 100%;
+    padding-top: 10% !important;
+    padding: 1vw 0;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+  }
+}

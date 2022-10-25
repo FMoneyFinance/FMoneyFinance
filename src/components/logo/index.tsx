@@ -1,17 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import LogoMin from "../../assets/logos/main.gif";
-import "./styles.scss";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import LogoMin from '../../assets/logos/main.webp'
+import './styles.scss'
 
-function Logo() {
-  return (
-    <Link to="/">
+function Logo({ hideLabel, hideLink }: any) {
+  const Content = () => {
+    return (
       <div className="ContainerLogo">
         <img src={LogoMin} />
-        <span>Money</span>
+        {!hideLabel && <span>Money</span>}
       </div>
+    )
+  }
+
+  return hideLink ? (
+    <Content />
+  ) : (
+    <Link to="/">
+      <Content />
     </Link>
-  );
+  )
 }
 
-export default Logo;
+export default Logo

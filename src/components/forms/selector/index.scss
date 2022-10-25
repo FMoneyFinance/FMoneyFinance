@@ -1,0 +1,18 @@
+@import "../../../assets/scss/variables.scss";
+.square {
+  background: #e9e9f9;
+  width: 2vw;
+  height: 2vw;
+  border-radius: 5px;
+}
+
+.square-active-true {
+  background-color: $primary;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 65%;
+  }
+}

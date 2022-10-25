@@ -1,0 +1,171 @@
+.containerItemTicket {
+  &:hover {
+    cursor: pointer;
+  }
+
+  .dotline-ticket {
+    position: absolute;
+    z-index: 14;
+    width: 86%;
+    top: 20%;
+    margin: 0 7%;
+  }
+}
+
+.grid-button-ticket {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > span {
+    color: white;
+    text-decoration: underline;
+    font-size: 70%;
+    padding-left: 5%;
+  }
+}
+
+.loading-container-slider {
+  background-color: #e9eff0;
+  border-radius: 18px;
+  background-color: #e9eff0;
+  border-radius: 18px;
+  height: 22vh;
+  display: flex;
+  align-items: center;
+  width: 69%;
+  margin-left: auto;
+  margin-right: auto;
+
+  justify-content: center;
+  flex-direction: column;
+
+  box-shadow: 1.9px 1.9px 13.8px rgba(0, 0, 0, 0.011), 4.6px 4.7px 33.3px rgba(0, 0, 0, 0.016), 8.6px 8.8px 62.6px rgba(0, 0, 0, 0.02), 15.4px 15.6px 111.7px rgba(0, 0, 0, 0.024), 28.8px 29.2px 208.9px rgba(0, 0, 0, 0.029), 69px 70px 500px rgba(0, 0, 0, 0.04);
+
+  h3 {
+    color: white;
+    font-family: 'MonumentExtended';
+    font-size: 2rem;
+    margin-bottom: 1%;
+  }
+
+  h5 {
+    color: white;
+    font-size: 100%;
+  }
+
+  a {
+    width: 12%;
+  }
+
+  h5 {
+    font-size: 1.1vw;
+  }
+
+  .ContainerLogo {
+    width: unset;
+  }
+}
+.empty-container-slider {
+  border-radius: 18px;
+  background-color: #f5f5ff;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  width: 69%;
+  padding-top: 3%;
+  margin-left: auto;
+  margin-right: auto;
+
+  justify-content: center;
+  flex-direction: column;
+
+  box-shadow: 1.9px 1.9px 13.8px rgba(0, 0, 0, 0.011), 4.6px 4.7px 33.3px rgba(0, 0, 0, 0.016), 8.6px 8.8px 62.6px rgba(0, 0, 0, 0.02), 15.4px 15.6px 111.7px rgba(0, 0, 0, 0.024), 28.8px 29.2px 208.9px rgba(0, 0, 0, 0.029), 69px 70px 500px rgba(0, 0, 0, 0.04);
+
+  h3 {
+    color: #c6c7e8;
+    font-family: 'MonumentExtended';
+    font-size: 160%;
+    margin-bottom: 1%;
+  }
+
+  h5 {
+    color: #c6c7e8;
+    font-size: 100%;
+    font-weight: 300;
+  }
+
+  a {
+    width: 12%;
+  }
+
+  .ContainerLogo {
+    width: unset;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .empty-container-slider {
+    width: 90%;
+    text-align: center;
+    h3 {
+      font-size: 100%;
+      padding-top: 5%;
+      width: 90%;
+    }
+    h5 {
+      padding-top: 5%;
+    }
+  }
+  .mySwiper {
+    width: 100vw !important;
+    height: 100%;
+  }
+
+  .loading-container-slider {
+    background-color: #e9eff0;
+    border-radius: 18px;
+    background-color: #e9eff0;
+    border-radius: 18px;
+    height: 22vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 69%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 1.9px 1.9px 13.8px rgba(0, 0, 0, 0.011), 4.6px 4.7px 33.3px rgba(0, 0, 0, 0.016), 8.6px 8.8px 62.6px rgba(0, 0, 0, 0.02), 15.4px 15.6px 111.7px rgba(0, 0, 0, 0.024), 28.8px 29.2px 208.9px rgba(0, 0, 0, 0.029), 69px 70px 500px rgba(0, 0, 0, 0.04);
+
+    h3 {
+      color: white;
+      font-family: 'MonumentExtended';
+      font-size: 1.5rem;
+      margin-bottom: 1%;
+      text-align: center;
+    }
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+}
+
+.containerButtonsSlider {
+  margin-top: 2%;
+  img {
+    margin: 0% 1.5% 0% 1.5%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  h5 {
+    font-size: 0.8rem;
+  }
+
+  .grid-button-ticket {
+    > span {
+      padding-left: 0%;
+    }
+  }
+}

@@ -1,19 +1,42 @@
-import React from "react";
-import TicketFull from "../../../assets/ilustrations/landingpage/TicketFull.svg";
-import Countdown from "react-countdown";
-import Money1 from "../../../assets/ilustrations/landingpage/moneys/money1.svg";
-import Money2 from "../../../assets/ilustrations/landingpage/moneys/money2.svg";
-import Money3 from "../../../assets/ilustrations/landingpage/moneys/money3.svg";
-import Money3b from "../../../assets/ilustrations/landingpage/moneys/money3b.svg";
-import Money4 from "../../../assets/ilustrations/landingpage/moneys/money4.svg";
-import BuyTicketButton from "../../../components/Buttons/buyTicket";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useMemo, useEffect, Suspense } from 'react'
 
-function WelcomeText() {
-  const navigate = useNavigate();
+import Countdown from 'react-countdown'
+import Money1 from '../../../assets/ilustrations/landingpage/moneys/money1.svg'
+import Money2 from '../../../assets/ilustrations/landingpage/moneys/money2.svg'
+import Money3 from '../../../assets/ilustrations/landingpage/moneys/money3.svg'
+import Money3b from '../../../assets/ilustrations/landingpage/moneys/money3b.svg'
+import Money4 from '../../../assets/ilustrations/landingpage/moneys/money4.svg'
+
+import AppContext from '../../../context/AppContext'
+import Button from '../../../components/Buttons'
+import { useState } from 'react'
+import ModalCreateRaffle from '../../../components/modals/createRaffle'
+import SliderRaffles from '../../../components/tickets/slider/slider'
+import { useTranslation } from 'react-i18next'
+import { getNextDraw } from '../../../utils/raffles'
+import { getTimeToDate } from '../../../utils/maths'
+import { ThereAWallet } from '../../../utils/wallet'
+
+function WelcomeText(props: any) {
+  const { t } = useTranslation(['home'])
+  const context: any = useContext(AppContext)
+  const [raffles, setRaffles] = useState([])
+
+  const openModalCreateRaffle = () => {
+    context.changeContext({ showModal: ModalCreateRaffleFunct })
+  }
+
+  const ModalCreateRaffleFunct = () => {
+    return (
+      <Suspense fallback="">
+        <ModalCreateRaffle />
+      </Suspense>
+    )
+  }
+
   const ItemNextDraw = ({ number }: any) => {
-    return <div>{number}</div>;
-  };
+    return <div>{number}</div>
+  }
 
   const Moneys = () => {
     return (
@@ -21,54 +44,57 @@ function WelcomeText() {
         <img src={Money1} className="Money1" />
         <img src={Money2} className="Money2" />
         <img src={Money3} className="Money3" />
-        <img src={Money3b} className="money3b" />
         <img src={Money4} className="Money4" />
       </div>
-    );
-  };
+    )
+  }
 
-  const renderer: any = ({ hours, minutes, seconds, completed }: any) => {
+  const handleClickConnectWallet = () => {
+    context.changeContext({ showModalConnectWallet: true })
+  }
+
+  const MoneysMemo = useMemo(Moneys, [])
+
+  const CountDownNextDraw = () => {
+    const [nextDrawTimeStamp, setNextDraw] = useState(getNextDraw(context))
+
+    return (
+      <div className="nextDraw">
+        <h4>{t('welcomeText.nextDraw')}</h4>
+        <Countdown date={Date.now() + getTimeToDate(new Date(nextDrawTimeStamp * 1000))} renderer={renderer} />
+      </div>
+    )
+  }
+
+  const renderer: any = ({ hours, minutes, days, completed }: any) => {
     return (
       <div className="containerItemNextDraw">
-        <ItemNextDraw number={hours > 10 ? hours : "0" + hours.toString()} />
-        <span>:</span>
-        <ItemNextDraw
-          number={minutes > 10 ? minutes : "0" + minutes.toString()}
-        />
-        <span>:</span>
-        <ItemNextDraw number={seconds < 10 ? "0" + seconds : seconds} />
+        <ItemNextDraw number={days.toString() + 'd'} />
+        <ItemNextDraw number={hours.toString() + 'h'} />
+        <ItemNextDraw number={minutes.toString() + 'm'} />
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <div className="welcomeText">
-      <h4>BE THE NEXT WINNER</h4>
-      <h1 className="">The f•money raffle is here!</h1>
-      <h3>Connect your wallet to start</h3>
-      <div className="imgContainer">
-        <div className="animationFloat">
-          <div
-            className="pointer"
-            onClick={() => navigate("/TicketDetailsScreen")}
-          >
-            <img src={TicketFull} />
-            <h4>Get your tickets now!</h4>
-            <h3>$97.254</h3>
-            <h5>Megapool prize!</h5>
-          </div>
-          <div className="containerButtonBuyTicket">
-            <BuyTicketButton className="buttonImgContainer" />
-          </div>
-        </div>
+      <h4>{t('welcomeText.subTitle')}</h4>
+      <h1 className="">{t('welcomeText.title')}</h1>
+
+      {ThereAWallet(context) ? (
+        <>{context.state?.isAdminUser && <Button outlined onPress={openModalCreateRaffle} text={t('buttonCreateNewRaffle')} className="create-new-raffle" />}</>
+      ) : (
+        <h3 onClick={handleClickConnectWallet} className="pointer">
+          {t('welcomeText.connectYourWallet')}
+        </h3>
+      )}
+      <div className="sliderContainer">
+        <SliderRaffles setRaffles={setRaffles} />
       </div>
-      <div className="nextDraw">
-        <h4>Next draw starts in</h4>
-        <Countdown date={Date.now() + 5000000} renderer={renderer} />
-      </div>
-      <Moneys />
+      {context?.state?.rafflesInfo && context?.state?.rafflesInfo.length > 0 && <CountDownNextDraw />}
+      {MoneysMemo}
     </div>
-  );
+  )
 }
 
-export default WelcomeText;
+export default WelcomeText

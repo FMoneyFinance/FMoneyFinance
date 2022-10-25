@@ -1,0 +1,85 @@
+.ContainerCheckBoxGreen {
+  .cont {
+    display: flex;
+    align-items: center;
+    transform: scale(1);
+    justify-content: center;
+  }
+
+  input[type='checkbox'] {
+    height: 1.7rem;
+    width: 1.7rem;
+    margin: 5px;
+    display: inline-block;
+    appearance: none;
+    position: relative;
+    background-color: #f2ecff;
+    border-radius: 15%;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  input[type='checkbox']::after {
+    content: '';
+    display: block;
+    height: 0.9rem;
+    width: 0.4rem;
+    border-bottom: 0.31rem solid #a0ffe7;
+    border-right: 0.31rem solid #a0ffe7;
+    opacity: 0;
+    transform: rotate(45deg) translate(-50%, -50%);
+    position: absolute;
+    top: 45%;
+    left: 21%;
+    transition: 0.25s ease;
+  }
+
+  input[type='checkbox']::before {
+    content: '';
+    display: block;
+    height: 0;
+    width: 0;
+    background: #629a48;
+    border-radius: 50%;
+    opacity: 0.5;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: 0.3s ease;
+  }
+
+  input[type='checkbox']:checked::before {
+    height: 130%;
+    width: 130%;
+    opacity: 100%;
+  }
+
+  input[type='checkbox']:checked::after {
+    opacity: 100%;
+  }
+
+  span {
+    margin-left: 3%;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    font-feature-settings: 'salt' on;
+    color: #629a48;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+
+  div {
+    div {
+      margin-left: 15px;
+      color: #629a48;
+      text-align: left;
+    }
+  }
+}

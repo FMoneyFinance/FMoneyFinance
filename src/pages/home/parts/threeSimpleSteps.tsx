@@ -1,8 +1,12 @@
-import React from "react";
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
-import Ilustration from "../../../assets/ilustrations/landingpage/ticketanddivider.svg";
+import { isMobile } from 'react-device-detect'
+import Ilustration from '../../../assets/ilustrations/landingpage/ticketanddivider.svg'
+import IlustrationMobile from '../../../assets/ilustrations/landingpage/ticketanddividerMobile.svg'
 
 function ThreeSimpleSteps() {
+  const { t, i18n } = useTranslation(['home'])
   const Item = ({ title, description, icon }: any) => {
     return (
       <div className="containerItem">
@@ -10,34 +14,22 @@ function ThreeSimpleSteps() {
         <div className="title">{title}</div>
         <div className="description">{description}</div>
       </div>
-    );
-  };
+    )
+  }
 
   return (
-    <div className="ThreeSimpleSteps">
-      <h4>HOW TO PLAY</h4>
-      <h2>Three simple steps</h2>
+    <div className="maxWidth ThreeSimpleSteps">
+      <h4>{t('threeSimpleSteps.title')}</h4>
+      <h2>{t('threeSimpleSteps.subtitle')}</h2>
       <div className="containerItems">
-        <Item
-          title="Buy tickets"
-          description="Once the round’s over, come back to the page and check to see if you’ve won!"
-          icon="1"
-        />
-        <Item
-          title="Wait for the draw"
-          description="Once the round’s over, come back to the page and check to see if you’ve won!"
-          icon="2"
-        />
-        <Item
-          title="Check for prizes"
-          description="Once the round’s over, come back to the page and check to see if you’ve won!"
-          icon="3"
-        />
+        <Item title={t('threeSimpleSteps.1.title')} description={t('threeSimpleSteps.1.description')} icon="1" />
+        <Item title={t('threeSimpleSteps.2.title')} description={t('threeSimpleSteps.2.description')} icon="2" />
+        <Item title={t('threeSimpleSteps.3.title')} description={t('threeSimpleSteps.3.description')} icon="3" />
       </div>
 
-      <img src={Ilustration} />
+      <img src={isMobile ? IlustrationMobile : Ilustration} />
     </div>
-  );
+  )
 }
 
-export default ThreeSimpleSteps;
+export default ThreeSimpleSteps

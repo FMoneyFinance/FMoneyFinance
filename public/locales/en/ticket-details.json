@@ -1,0 +1,67 @@
+{
+  "bannerAd": "Banner Ad",
+
+  "generalInfo": {
+    "contractAddres": "Contract Address:",
+    "dateOfDraw": "Date of draw:",
+    "prizePot": "Prize pot",
+    "seeYourRaffleSpots": "See your raffle spots"
+  },
+  "infoGraph": {
+    "acumulatedPrize": "Current accumulated prize*:",
+    "priceTicket": "Price of the ticket:",
+    "maximunPlayers": "Maximum numbers of players:",
+    "currentPlayers": "Current numbers of players:",
+    "percentajePrice": "Percentage of prize to operator",
+    "warningPrize": "* Keep in mind that the amount of money sent to the winner is: Accumulated prize - Percentage to the operator"
+  },
+
+  "raffleSpots": {
+    "title": "Raffle spots",
+    "text": "In this list you can find the spots that are available in this raffle. Review it and select the winner one!",
+
+    "table": {
+      "buttonBuy": "Buy spot",
+      "buttonBuyTickets": "Buy tickets",
+      "spotText": "Spot",
+      "playerText": "Player address",
+      "buttonSelectSpots": "Select spots to buy a bulk",
+      "available": "Available"
+    },
+    "loading": {
+      "title": "Loading raffle spots",
+      "text": "Please wait a moment"
+    }
+  },
+
+  "otherMiniRaffles": {
+    "title": "Other miniraffles",
+    "text": "Don’t left your lucky only for one spot ore one raffle, here you can find other great chances to win more money."
+  },
+
+  "closedRaffle": {
+    "raffleWinnerAddress": "Raffle winner address",
+    "txHashPrize": "Tx hash of the prize transfer:",
+    "txHashDraw": "Tx hash of the draw:",
+    "winnerSpotPosition": "Winner spot position:",
+    "prizeWon": "Prize won:"
+  },
+
+  "winnerAlert": {
+    "winner": "Congratulations, you are the winner!",
+    "connect": "Connect wallet to check if you are the winner",
+    "noWinner": "No prizes to collect... Better luck next time!",
+    "nextDrawTitle": "Next raffle draw starts in",
+    "nextDrawSubtitleWinner": "Keep your winning streak going!",
+    "nextDrawSubtitleNotWinner": "Buy tickets in the next draw and change your luck!"
+  },
+
+  "popper": {
+    "text": "Copied!"
+  },
+
+  "loadingGraphData": "Loading graph data",
+  "loadingGraph": "Loading graph",
+  "rafflingStatus": "Raffling",
+  "warningWrongChain": "You are not in the correct chain to use the FMoney raffle, please switch it in your wallet provider. (Metamask, Walletconnect)"
+}

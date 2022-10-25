@@ -15,27 +15,28 @@
       text-align: left;
 
       h2 {
-        font-size: 1.8vw;
+        font-size: 161%;
         font-family: "MonumentExtended";
       }
 
       h5 {
+        font-size: 91%;
         font-weight: 500;
       }
     }
 
     .right {
       background: #629a4840;
-      height: 3vw;
       border-radius: 13px;
       color: $primaryDark;
       font-weight: 600;
+      width: 28%;
 
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       div {
-        height: 3vw;
-        line-height: 3vw;
-        padding: 1.1vw 0.7vw;
-        font-size: 0.9vw;
+        padding: 20% 0;
+        font-size: 80%;
 
         &:hover {
           cursor: pointer;
@@ -44,7 +45,6 @@
 
       .active {
         background: #53744b;
-        height: 1vw;
         border-radius: 13px;
         line-height: 1vw;
         color: white;
@@ -56,14 +56,57 @@
     height: 5vw;
   }
 
+  .graphLoader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 5vw;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgba(245, 245, 255, 0.8);
+    z-index: 1;
+    border-bottom-left-radius: 23px;
+    border-bottom-right-radius: 23px;
+    flex-direction: column;
+  }
+
   .containerLabels {
     position: absolute;
-    width: 100%;
+    width: 94%;
     bottom: 5%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     font-size: 0.8vw;
     font-weight: 500;
-    color: $primaryDark;
+    color: #3c6132;
+    padding: 0 3%;
   }
+}
+
+.AllEqualsGraphLine {
+  width: 100%;
+  position: absolute;
+  height: 50%;
+  z-index: 20;
+  top: 50%;
+  border-top: rgba(98, 154, 72, 0.14) 5px solid;
+  background: rgba(98, 154, 72, 0.14);
+  background: linear-gradient(
+    180deg,
+    rgba(98, 154, 72, 0.14) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.AllEqualsGraphLineNumbers {
+  color: #8080804d;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  left: 1.4%;
+  top: 0;
+  justify-content: space-around;
 }

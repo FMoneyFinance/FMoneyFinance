@@ -1,0 +1,79 @@
+{
+  "title": "Buy tickets",
+
+  "modalBuyTicket": {
+    "sendingEmail": "Sending email.",
+    "ticketsSuccesfulySent": "Tickets successfully sent!",
+    "succesfulyPurchased": "You have successfully purchased the",
+    "goodLuck": "Good Luck",
+    "setSuccesMsg": "Your transfer was approved with success. Now you can buy your tickets!",
+    "buttonBuyNow": "Buy now",
+    "buttonSendTickets": "Send tickets to email",
+    "buttonDownload": "Download tickets",
+    "buttonDone": "Done",
+    "buyingTickets": {
+      "title": "Buying Tickets.",
+      "approvingTransfer": "Approving transfer",
+      "dontReload": {
+        "text1": "Please don’t reload this",
+        "text2": "page until the process is finished."
+      },
+      "noTakeMore": {
+        "text1": "Is not going to take more than",
+        "text2": "seconds."
+      },
+      "timeoutWarning": {
+        "text1": "It seems that your internet connection is not good.",
+        "text2": "Please review it and reload this page."
+      },
+      "loadingSpots": "Loading spots."
+    }
+  },
+
+  "modalBuyTickets": {
+    "selectSpots": "Select spots to buy:",
+    "showSpots": {
+      "text1": "Show available spots",
+      "text2": "Show all spots"
+    },
+    "selectedSposts": {
+      "title": "Selected spots:",
+      "noSelectedText": " You have not selected a spot yet.",
+      "youPay": "You pay:"
+    }
+  },
+
+  "errors": {
+    "noBalance": "You don't have balance to do this transaction"
+  },
+
+  "selectToken": {
+    "title": "First of all, select token to buy your tickets.",
+    "checkbox": "Set token as a default.",
+    "buttonText": "Select token",
+    "selectOption": "Select an option",
+    "errorMessage": "Please, select the token that you want to use to buy your tickets."
+  },
+
+  "approveToken": {
+    "buttonText": "Approve token"
+  },
+
+  "buyNow": {
+    "buttonText": "Buy now"
+  },
+
+  "buttonStateTexts": {
+    "loading": "Loading",
+    "approve": "Approve",
+    "done": "Done",
+    "send": "Send",
+    "selectToken": "Select token"
+  },
+
+  "sendEmail": {
+    "buttonText": "Send the tickets",
+    "subheader": "Insert your email to send tickets:",
+    "errorMessage": "There was an error sending the email, review your internet connection and please try later."
+  }
+}

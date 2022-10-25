@@ -1,0 +1,51 @@
+@import "../../../assets/scss/variables.scss";
+
+.modalCretaeRaffle {
+  padding: 3% 5% 50px 5%;
+
+  .title {
+    text-align: left;
+    margin-bottom: 3%;
+    margin-top: 3%;
+  }
+
+  .gridInputs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3%;
+  }
+}
+
+.loaderCreateRaffle {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0px;
+  box-sizing: border-box;
+
+  h4 {
+    color: $primary;
+    margin-top: 30px;
+    font-weight: 500;
+  }
+}
+
+.successCreateRaffle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 31vh;
+  img {
+    width: 100%;
+  }
+  h4 {
+    color: $primaryDark;
+    margin-top: 2%;
+  }
+}

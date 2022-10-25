@@ -1,52 +1,31 @@
-@import "../../assets/scss/variables.scss";
+@import '../../assets/scss/variables.scss';
 .TicketDetailsScreen {
-  margin-bottom: 10vh;
-
-  .adBannerContainer {
-    width: 90vw;
-    margin: auto;
-    background-color: #f5f5ff;
-    margin-top: 1vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-
-    h3 {
-      color: #d9d9f0;
-      font-family: "MonumentExtended";
-      font-size: 2vw;
-      margin: 3vw;
-    }
-  }
-
   .header {
-    width: 90vw;
     margin: auto;
     margin-top: 2vw;
 
     .top {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 33% 33% 33%;
       align-items: center;
 
       .left {
         h3 {
-          font-size: 1.7vw;
+          font-size: 165%;
           color: $primaryDark;
         }
 
         h4 {
           font-weight: 500;
           color: $primary;
-          font-size: 1vw;
+          font-size: 80%;
           margin-top: 0.3vw;
         }
       }
       .center {
-        width: 60%;
+        width: 80%;
         h3 {
-          font-size: 1.7vw;
+          font-size: 165%;
           text-align: end;
           color: $primaryDark;
         }
@@ -54,7 +33,7 @@
         h4 {
           font-weight: 500;
           color: $primary;
-          font-size: 1vw;
+          font-size: 80%;
           margin-top: 0.3vw;
           text-align: end;
         }
@@ -68,11 +47,12 @@
           margin-right: 20%;
         }
 
-        .subright {
+        .statusContainer {
           text-align: right;
+          text-transform: capitalize;
 
           h3 {
-            font-size: 1.7vw;
+            font-size: 151%;
             text-align: end;
             color: $primaryDark;
             display: flex;
@@ -90,7 +70,7 @@
           h4 {
             font-weight: 500;
             color: $primary;
-            font-size: 1vw;
+            font-size: 80%;
             margin-top: 0.3vw;
           }
         }
@@ -98,7 +78,7 @@
     }
     .bottom {
       display: grid;
-      grid-template-columns: 66.7% auto;
+      grid-template-columns: 66% auto;
       align-items: center;
       margin-top: 1vw;
 
@@ -108,12 +88,21 @@
           align-items: center;
           font-weight: 500;
           color: $primaryDark;
-          font-size: 1.3vw;
+          font-size: 80%;
+
+          div {
+            display: flex;
+            align-items: center;
+            width: 17%;
+            img {
+              margin-right: 3%;
+            }
+          }
 
           .bold {
             font-weight: 600;
-            margin-left: 0.8vw;
-            margin-right: 1.6vw;
+            margin-left: 1%;
+            margin-right: 1%;
           }
         }
       }
@@ -139,99 +128,447 @@
       }
     }
   }
+  .header.raffling {
+    margin: auto;
+    margin-top: 35px;
 
+    .top {
+      /* display: grid;
+      grid-template-columns: 33% 33% 33%;
+      align-items: center; */
+
+      .left {
+        h3 {
+          font-size: 165%;
+          color: #d5d5ea;
+        }
+
+        h4 {
+          font-weight: 500;
+          color: #d5d5ea;
+          font-size: 80%;
+          margin-top: 0.3vw;
+        }
+      }
+      .center {
+        /* width: 80%; */
+        h3 {
+          font-size: 165%;
+          text-align: end;
+          color: #d5d5ea;
+        }
+
+        h4 {
+          font-weight: 500;
+          color: #d5d5ea;
+          font-size: 80%;
+          margin-top: 0.3vw;
+          text-align: end;
+        }
+      }
+
+      .right {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        .buttonHeader {
+          margin-right: 20%;
+        }
+
+        .statusContainer {
+          text-align: right;
+          text-transform: capitalize;
+
+          h3 {
+            font-size: 151%;
+            text-align: end;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            .circleTitle {
+              background: #d5d5ea;
+              height: 0.8vw;
+              width: 0.8vw;
+              margin-right: 0.5vw;
+              border-radius: 0.65vw;
+            }
+          }
+
+          h4 {
+            font-weight: 500;
+            color: black;
+            font-size: 80%;
+            margin-top: 0.3vw;
+          }
+        }
+      }
+    }
+    .bottom {
+      display: grid;
+      grid-template-columns: 66% auto;
+      align-items: center;
+      margin-top: 1vw;
+
+      .left {
+        h3 {
+          display: flex;
+          align-items: center;
+          font-weight: 500;
+          color: #d5d5ea;
+          font-size: 80%;
+
+          div {
+            display: flex;
+            align-items: center;
+            width: 17%;
+            img {
+              margin-right: 3%;
+            }
+          }
+
+          .bold {
+            font-weight: 600;
+            margin-left: 1%;
+            margin-right: 1%;
+          }
+        }
+        img {
+          opacity: 0.5;
+        }
+      }
+
+      .right {
+        .buttonSeeYourSpots {
+          background-color: $primaryLight;
+          padding: 0.3vw;
+
+          &:hover {
+            cursor: pointer;
+            background-color: $primary;
+
+            span {
+              color: white;
+            }
+          }
+          span {
+            color: $primaryDark;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
   .graphContainer {
-    width: 100vw;
     background-image: url(/src/assets/ilustrations/landingpage/trazo.svg);
     text-align: center;
-    padding-bottom: 5vh;
-    padding-top: 14vh;
+    padding-top: 7vh;
     background-size: 101vw;
     background-repeat: no-repeat;
-    background-position: left;
-    position: relative;
-    min-height: 71vh;
-    display: grid;
-    grid-template-columns: 64% auto;
+    background-position: bottom;
+    min-height: 55vh;
+
+    .graphFather {
+      display: grid;
+      position: relative;
+      justify-content: unset;
+      grid-template-columns: 66% auto;
+      margin-right: auto;
+
+      z-index: 3;
+      left: 0;
+      right: 0;
+    }
+
+    .containerItemToDraw {
+      display: flex;
+      align-items: center;
+      padding-right: 2%;
+
+      div {
+        margin-right: 4%;
+      }
+    }
 
     .dateToExpire {
       display: flex;
-      justify-content: end;
-      align-items: end;
-      height: 35vw;
+      justify-content: center;
+      align-items: center;
+      max-width: 754px;
+
+      bottom: -8%;
+
+      width: 100%;
+      position: absolute;
 
       h4 {
         color: white;
-        margin-bottom: 2vw;
+        width: 100%;
+        justify-content: center;
         display: flex;
         align-items: center;
-        margin-right: 10vw;
+        margin-top: 1%;
 
         img {
-          margin-right: 1vw;
+          margin-right: 0.7vw;
         }
       }
     }
     .graph {
-      width: 50vw !important;
-      box-shadow: 0px 0px 4.3px rgba(0, 0, 0, 0.022),
-        0px 0px 10.9px rgba(0, 0, 0, 0.031), 0px 0px 22.3px rgba(0, 0, 0, 0.039),
-        0px 0px 46px rgba(0, 0, 0, 0.048), 0px 0px 126px rgba(0, 0, 0, 0.07);
-      margin-left: 4vw;
-      margin-right: auto;
-      margin-top: 20vh;
+      width: 91%;
+      max-width: 800px;
+
+      //margin-top: 20vh;
       background: #f5f5ff;
       border-radius: 23px;
-      overflow: hidden;
-      position: absolute;
-      z-index: 3;
-      left: 0;
-      right: 0;
+      .bizcharts {
+        width: 100% !important;
+      }
 
       canvas {
-        width: 100%;
+        width: 100% !important;
       }
     }
 
+    .containerWinnerAlert {
+      background: #e9e9f9;
+      border-radius: 50px;
+      position: absolute;
+      color: #20311f;
+      padding: 1% 2%;
+      top: -15%;
+      font-size: 0.8rem;
+      width: 30%;
+      font-family: Raleway;
+    }
+    .containerWinnerAlert.ConnectWallet {
+      background: #e9e9f9;
+      border-radius: 50px;
+      position: absolute;
+      color: #3c6132;
+      padding: 1% 2%;
+
+      font-size: 0.8rem;
+    }
+    .containerWinnerAlert.Winner {
+      background: #e7c126;
+      border-radius: 50px;
+      position: absolute;
+      color: white;
+      padding: 1% 2%;
+    }
+
+    .containerGraphLines {
+      width: 100%;
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      background: #f5f5ff;
+      box-shadow: 54px 80px 120px rgb(75 78 252 / 15%);
+      border-radius: 32px;
+      font-family: 'Raleway';
+      text-align: start;
+      height: 100%;
+
+      .containerTexts {
+        position: relative;
+        width: 80%;
+      }
+
+      .containerSectionGraph,
+      .containerInfoWinner {
+        width: 100%;
+        padding: 3% 5%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+        .containerIMGGraph {
+          width: 15%;
+        }
+        h2 {
+          width: 80%;
+          font-family: 'Raleway';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 1rem;
+          line-height: 28px;
+
+          display: flex;
+          align-items: center;
+
+          color: #20311f;
+
+          opacity: 0.5;
+        }
+        h5 {
+          span {
+            font-family: 'MonumentExtended';
+          }
+          font-style: normal;
+          font-weight: 400;
+
+          line-height: 28px;
+          font-size: 1rem;
+          display: flex;
+          align-items: center;
+          color: #629A48;
+        }
+
+        .noWinner-true {
+          color: #8a938f;
+        }
+      }
+
+      .containerInfoWinner {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 2% 1%;
+        h5 {
+          font-size: 2rem;
+        }
+      }
+    }
+
+    .containerGraphLines.Closed.Winner {
+      box-shadow: 0px 1px 91px 16px rgba(247, 219, 73, 1);
+      -webkit-box-shadow: 0px 1px 91px 16px rgba(247, 219, 73, 1);
+      -moz-box-shadow: 0px 1px 91px 16px rgba(247, 219, 73, 1);
+    }
     .containerTable {
       background-color: #f5f5ff;
-      width: 80%;
-      margin-left: auto;
-      margin-right: 6vw;
-      padding: 3.4vw 1.6vw;
-      margin-top: 6vh;
-      border-radius: 16px;
-      height: 44vh;
-      box-shadow: 0px 0px 4.3px rgba(0, 0, 0, 0.022),
-        0px 0px 10.9px rgba(0, 0, 0, 0.031), 0px 0px 22.3px rgba(0, 0, 0, 0.039),
-        0px 0px 46px rgba(0, 0, 0, 0.048), 0px 0px 126px rgba(0, 0, 0, 0.07);
+      width: 100%;
+      padding: 7% 0 0;
+      border-radius: 25px;
 
       .itemTable {
         text-align: left;
+        margin: 0px 6%;
 
         h4 {
           color: grey;
-          font-size: 1vw;
+          font-size: 70%;
           margin-bottom: 0.3vw;
+          font-weight: 500;
         }
 
         h3 {
           color: $primary;
-          margin-bottom: 1.7vw;
+          margin-bottom: 1.6vw;
+          font-family: 'MonumentExtended';
+          font-size: 90%;
         }
       }
+    }
+    .containerTable.Closed.Winner {
+      font-family: 'MonumentExtended';
+      box-shadow: 0px 1px 91px 16px rgba(247, 219, 73, 1);
+      -webkit-box-shadow: 0px 1px 91px 16px rgba(247, 219, 73, 1);
+      -moz-box-shadow: 0px 1px 91px 16px rgba(247, 219, 73, 1);
+    }
+    .containerTable.Closed {
+      font-family: 'MonumentExtended';
+
+      background: linear-gradient(180deg, #3c6132 -115.78%, #629a48 100%);
+      box-shadow: 54px 80px 120px rgba(75, 78, 252, 0.15);
+      border-radius: 32px;
+      width: 100%;
+      padding: 7% 0 0;
+      color: white;
+
+      .containerClosed {
+        width: 90%;
+        margin: auto;
+        font-family: 'MonumentExtended';
+        .Texts {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+        }
+        h4 {
+          font-family: 'Raleway';
+          font-style: normal;
+          font-weight: 400;
+
+          line-height: 28px;
+
+          align-items: center;
+          text-align: center;
+
+          color: #ffffff;
+        }
+
+        h2 {
+          font-family: 'MonumentExtended';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 2rem;
+          width: 90%;
+        }
+        .containerCountdown {
+          width: 100%;
+          display: flex;
+          justify-content: space-evenly;
+        }
+        img {
+          width: 28%;
+          margin: 10% 30% 15% 20%;
+        }
+
+        .containerButton {
+          padding: 12% 12%;
+        }
+      }
+    }
+    .containerTable.Raffling {
+      font-family: 'MonumentExtended';
+      .containerRaffling {
+        width: 100%;
+        height: 100%;
+        font-family: 'MonumentExtended';
+      }
+
+      background-color: #f5f5ff;
+      width: 100%;
+      padding: 7% 0 0;
+      border-radius: 25px;
+      color: white;
     }
 
     .Money5 {
       position: absolute;
       left: -3vw;
       animation: float2 6s ease-in-out infinite;
-      top: 28vw;
+      top: 45vw;
       height: 33vh;
       z-index: 0;
     }
   }
 
+  .graphContainer.raffling {
+    .graph {
+      background: #f5f5ff;
+      opacity: 1;
+    }
+    .indicators {
+      color: #d5d5ea;
+      .left {
+        color: #d5d5ea;
+      }
+      .right {
+        display: none;
+      }
+    }
+    .AllEqualsGraphLine {
+      border-top: rgba(213, 213, 234, 0.7) 5px solid;
+      background: linear-gradient(180deg, rgba(213, 213, 234, 0.7) 0%, rgba(213, 213, 234, 0) 100%);
+    }
+  }
   .RaffleSpots {
     text-align: center;
     margin-bottom: 10vh;
@@ -246,24 +583,24 @@
     }
     h4 {
       color: $primaryDark;
-      font-size: 1vw;
+      font-size: 100%;
       font-weight: 500;
     }
 
     .table {
       background: #f5f5ff;
-      width: 65vw;
-      margin: auto;
-      box-shadow: 0px 0px 4.3px rgba(0, 0, 0, 0.022),
-        0px 0px 10.9px rgba(0, 0, 0, 0.031), 0px 0px 22.3px rgba(0, 0, 0, 0.039),
-        0px 0px 46px rgba(0, 0, 0, 0.048), 0px 0px 126px rgba(0, 0, 0, 0.07);
+      width: 100%;
+      box-shadow: 0px 0px 4.3px rgba(0, 0, 0, 0.022), 0px 0px 10.9px rgba(0, 0, 0, 0.031), 0px 0px 22.3px rgba(0, 0, 0, 0.039), 0px 0px 46px rgba(0, 0, 0, 0.048), 0px 0px 126px rgba(0, 0, 0, 0.07);
       margin-top: 2vw;
-      padding: 1vw 1.2vw;
+      padding: 1vw 0;
       border-radius: 14px;
+      .loading-container-expanded {
+        width: 100%;
+      }
 
       .headerTable {
         display: grid;
-        grid-template-columns: 10% 60% auto;
+        grid-template-columns: 14% 60% auto;
         align-items: center;
         margin-bottom: 3.5vw;
         margin-top: 1vw;
@@ -275,7 +612,7 @@
 
         .left,
         .center {
-          font-family: "MonumentExtended";
+          font-family: 'MonumentExtended';
           font-size: 1vw;
         }
 
@@ -284,7 +621,7 @@
         }
 
         .center {
-          padding-left: 5vw;
+          padding-left: 3vw;
         }
 
         .right {
@@ -293,12 +630,13 @@
           color: $primary;
           text-align: right;
           padding-right: 1vw;
+          margin-right: 14%;
         }
       }
 
       .row {
         display: grid;
-        grid-template-columns: 10% 70% auto;
+        grid-template-columns: 14% 65% auto;
         align-items: center;
         margin-bottom: 0.8vw;
         border-bottom: 1px solid #e3e3e3;
@@ -314,7 +652,7 @@
             padding: 1vw;
             border-radius: 14px;
             font-weight: 600;
-            font-family: "MonumentExtended";
+            font-family: 'MonumentExtended';
           }
         }
 
@@ -327,13 +665,14 @@
 
         .center {
           text-align: left;
-          padding-left: 5vw;
+          padding-left: 3vw;
         }
 
         .right {
           display: flex;
           align-items: center;
           justify-content: space-evenly;
+          padding: 0 7%;
 
           .button {
             width: fit-content;
@@ -346,17 +685,16 @@
               color: #c5c5c5;
             }
           }
+        }
+      }
 
-          .square {
-            background: #e9e9f9;
-            width: 2vw;
-            height: 2vw;
-            border-radius: 5px;
-          }
+      .button-buy-multiple-tickets {
+        width: 20%;
+      }
 
-          .active-square-true {
-            background-color: #d9d9f0;
-          }
+      @media screen and (min-width: 1700px) {
+        .row {
+          grid-template-columns: 14% 60% auto;
         }
       }
     }
@@ -364,12 +702,16 @@
 
   .minipoolScreen {
     text-align: center;
-    margin-bottom: 4vw;
+    margin-bottom: 5vw;
+    margin-top: 3vw;
+
+    .swiper-margin-left {
+      margin-left: 0 !important;
+    }
+
     .rowTitle {
       display: flex;
       justify-content: space-between;
-      margin: center;
-      margin: 0 4vw;
       align-items: center;
 
       .containerbuttonSlider {
@@ -380,7 +722,7 @@
         .buttonSlider {
           font-size: 1vw;
           font-weight: initial;
-          font-family: "MonumentExtended";
+          font-family: 'MonumentExtended';
           border: 1px solid #3c6132;
           padding: 0.6vw 1.3vw;
           border-radius: 9px;
@@ -394,11 +736,26 @@
     }
 
     .sliderContainer {
-      margin-left: 4vw;
-      margin-top: 3vw;
+      width: 100vw;
+      overflow: hidden;
+      margin-top: 2%;
+
+      .SwiperContainer.margin-swiper-true.swiper.swiper-wrapper {
+        justify-content: center;
+      }
+
+      .SwiperContainer.margin-swiper-false {
+        margin-left: 0;
+      }
 
       .swiper {
+        /* max-width: 1032px; */
+        max-width: 100%;
         overflow: visible;
+      }
+
+      .container-90vw-width {
+        margin: auto;
       }
     }
 
@@ -406,7 +763,6 @@
       color: $primaryDark;
       margin-top: 0.5vw;
       font-size: 2.4vw;
-      margin-left: 4vw;
       text-align: left;
       margin-bottom: 0.6vw;
     }
@@ -419,26 +775,33 @@
 
     .containerCard {
       position: relative;
-      width: 15vw;
+      width: 90%;
+      margin: auto;
 
+      h3 {
+        font-size: 2rem;
+      }
       img {
         width: 100%;
+        border-radius: 10px;
       }
       h5 {
         position: absolute;
-        width: 100%;
-        font-size: 0.9vw;
-        top: 54%;
+        width: 90%;
+        font-size: 80%;
+        top: 53%;
+        margin: 0 5% 0 5%;
         text-align: center;
         color: white;
         font-weight: 500;
       }
       h3 {
         position: absolute;
-        top: 29.5%;
-        font-family: "MonumentExtended";
+        top: 31.5%;
+        font-family: 'MonumentExtended';
+        font-weight: 500;
         color: white;
-        font-size: 195%;
+        font-size: 229%;
         width: 100%;
         text-align: center;
       }
@@ -446,7 +809,7 @@
       h4 {
         position: absolute;
         top: 10%;
-        font-size: 0.8vw;
+        font-size: 87%;
         font-weight: 700;
         color: white;
         width: 100%;
@@ -455,35 +818,1432 @@
 
       .containerButtonBuyTicket {
         position: absolute;
-        width: 100%;
+        width: 85%;
         text-align: center;
         display: flex;
         justify-content: center;
-        top: 79%;
+        top: 68%;
+        left: 9%;
+
+        flex-direction: column-reverse;
       }
       .buttonImgContainer {
         display: flex;
         justify-content: center;
-        width: 8vw;
+        width: 44%;
+        height: unset;
         text-align: center;
         background-color: $orange;
+        padding: 3% 4%;
+        margin-top: 5%;
       }
     }
   }
 }
+.dividerBottom {
+  margin-bottom: 5%;
+}
+
+.textWinnerModal {
+  width: 80%;
+  margin: auto;
+  padding: 5% 0%;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 28px;
+  color: #3c6132;
+}
 
 .containerRafflePointsModal {
-  display: flex;
-  padding: 1vw;
   justify-content: space-between;
+  width: 100%;
+  margin-top: 1vw;
+  display: flex;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 1vw;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 5%;
+  justify-items: center;
+  box-sizing: border-box;
+  .empty-spots-purchased {
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    margin-top: 6%;
+    color: $primaryDark;
+  }
+}
+
+.containerRafflePointsModal.grid-true {
+  /* justify-content: space-between; */
+  width: 90%;
+  margin-top: 1vw;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 1vw 1vw;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  padding-bottom: 5%;
+  justify-items: center;
+
+  .containerRafflePoint {
+    /* width: 50%;
+    margin-right: 20%; */
+  }
+}
+
+.empty-spots-purchased {
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+  margin-top: 6%;
+  color: $primaryDark;
+}
+
+.imgEmptyList {
+  width: 28%;
+  margin-bottom: 30px;
+}
+
+.buttonYourRafflesSpots {
+  width: 90% !important;
+  box-sizing: border-box;
 }
 
 .titleRafflePointsModal {
   font-weight: 500;
   padding: 1vw;
+
   font-size: 1vw;
+  display: flex;
+  justify-content: center;
+  color: $primaryDark;
+
+  div {
+    width: 100%;
+    margin-right: 5%;
+  }
 
   span {
     font-weight: 700;
+    margin-right: 1%;
+  }
+}
+
+.titleRafflePointsModalsecond {
+  margin-top: -1vw;
+}
+
+.buttonGoToTheRaffle {
+  width: 90%;
+  margin-bottom: 15px;
+  /* margin-bottom: 1vw; */
+  margin-left: auto;
+  padding: 0.2vw 1vw;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.winnerspotsvg {
+  width: 12%;
+}
+
+.adBannerContainer {
+  margin: auto;
+  background-color: #f5f5ff;
+  /* margin-top: 7vw; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+
+  h3 {
+    color: #d9d9f0;
+    font-family: 'MonumentExtended';
+    font-size: 2vw;
+    margin: 3vw;
+  }
+}
+
+.minipoolScreen {
+  .sliderContainer {
+    .swiper-slide {
+      margin-right: 1%;
+    }
+  }
+}
+
+#CoinGraphLineClosed {
+  position: absolute;
+  margin-left: 25%;
+  margin-top: 7%;
+}
+
+#CoinGraphLineClosed2 {
+  position: absolute;
+  left: 15vw;
+  margin-top: 25%;
+  width: 15%;
+}
+/* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */
+/* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */
+/* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */
+/* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */
+/* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */ /* MEDIA QUERY */
+
+@media screen and (min-width: 1700px) {
+  .graphContainer {
+    min-height: 38vh;
+
+    .Money5 {
+      position: absolute;
+      left: 8%;
+      animation: float2 6s ease-in-out infinite;
+      top: 71%;
+      height: 26%;
+      z-index: 0;
+    }
+
+    .dateToExpire {
+      bottom: 10%;
+    }
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .TicketDetailsScreen .RaffleSpots h4 {
+    font-size: 1rem;
+  }
+
+  .TicketDetailsScreen .minipoolScreen {
+    .rowTitle {
+      h4 {
+        width: 100%;
+        text-align: center;
+      }
+    }
+    h2 {
+      font-size: 2rem;
+      width: 100%;
+      text-align: center;
+    }
+    h4 {
+      font-size: 1.4rem;
+      width: 80%;
+      text-align: start;
+      /* padding-bottom: 10%; */
+    }
+  }
+
+  .TicketDetailsScreen .minipoolScreen .TicketDetailsScreen .graphContainer .Money5 {
+    display: none;
+  }
+  .adBannerContainer {
+    width: 90%;
+    height: 8vh;
+    margin-top: 20px;
+    h3 {
+      font-size: 3vw;
+    }
+  }
+
+  .graphContainer {
+    min-height: 38vh;
+
+    .Money5 {
+      position: absolute;
+      right: 20%;
+      animation: float2 6s ease-in-out infinite;
+      top: 71%;
+      height: 26%;
+      z-index: 0;
+    }
+
+    .dateToExpire {
+      bottom: 10%;
+      h4 {
+        padding-top: 5%;
+        color: $primaryDark !important;
+      }
+    }
+  }
+  .TicketDetailsScreen {
+    .graphContainer {
+      .containerTable.Closed {
+        .MuchasMonedas {
+          right: 0%;
+          top: 40%;
+          width: 60%;
+        }
+        .MonedaSola {
+          position: absolute;
+          top: 41%;
+          right: 30%;
+          width: 30%;
+        }
+      }
+      h2 {
+        font-size: 1.5rem !important;
+      }
+      h5 {
+        span {
+          font-size: 1.2rem !important;
+        }
+      }
+    }
+    .header {
+      margin-top: 3vh;
+      .top {
+        width: 80%;
+        margin: auto;
+        display: flex;
+        align-items: start;
+        flex-direction: row;
+        justify-content: start;
+        flex-wrap: wrap;
+
+        .left {
+          width: 100%;
+          margin-bottom: 4vw;
+          margin-top: 3vw;
+          h3 {
+            font-size: 5vw;
+          }
+
+          h4 {
+            font-size: 4vw;
+          }
+        }
+        .center {
+          width: 50%;
+          margin-bottom: 3vw;
+          margin-top: 2vw;
+          h3 {
+            font-size: 5vw;
+            text-align: left;
+          }
+
+          h4 {
+            text-align: left;
+            font-size: 4vw;
+          }
+        }
+        .right {
+          width: 50%;
+          margin-top: 2.3%;
+          text-align: right;
+          display: flex;
+
+          .buttonHeader {
+            padding: 1vw 4vw;
+            position: absolute;
+            top: 80%;
+            left: 5%;
+            width: 35%;
+          }
+
+          .statusContainer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: start;
+
+            h3 {
+              font-size: 5vw;
+
+              .circleTitle {
+                width: 2vw;
+                height: 2vw;
+                border-radius: 1vw;
+                margin-right: 1vw;
+              }
+            }
+
+            h4 {
+              font-size: 4vw;
+            }
+          }
+        }
+      }
+      .bottom {
+        display: flex;
+        width: 80%;
+        margin: auto;
+        flex-direction: column;
+        align-items: start;
+
+        .left {
+          width: 100%;
+
+          h3 {
+            flex-direction: column;
+            align-items: start;
+            margin-top: 4vw;
+
+            div {
+              align-items: center;
+              display: flex;
+              margin-bottom: 2vw;
+              width: 100%;
+              span {
+                font-size: 5vw;
+              }
+
+              img {
+                width: 6%;
+              }
+            }
+            span {
+              font-size: 4vw;
+            }
+          }
+        }
+
+        .right {
+          margin-top: 4vw;
+
+          .buttonSeeYourSpots {
+            padding: 1vw 4vw;
+            position: absolute;
+            top: 80%;
+            right: 5%;
+          }
+        }
+      }
+    }
+
+    .graphContainer {
+      min-height: 94vh;
+      padding-top: 10vh;
+      .dateToExpire {
+        position: initial;
+
+        h4 {
+          color: black;
+          font-size: 3vw;
+          margin-top: 3vw;
+          img {
+            display: none;
+          }
+        }
+      }
+
+      .containerWinnerAlert {
+        background: #e9e9f9;
+        border-radius: 50px;
+
+        padding: 3% 10%;
+        position: absolute;
+        top: -5%;
+        left: 15%;
+        font-size: 0.8rem;
+        width: 50%;
+        font-family: Raleway;
+      }
+
+      .containerWinnerAlert.ConnectWallet {
+        font-size: 1rem;
+        width: 70%;
+      }
+      .containerWinnerAlert.Winner {
+        padding: 1% 10%;
+        left: 15%;
+      }
+
+      .Money5 {
+        left: 55%;
+        top: 80vw;
+        height: 20vh;
+      }
+
+      .graphFather {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+
+        .container-left {
+          width: 90%;
+          margin: auto;
+          padding-top: 10%;
+          .graph {
+            width: 100%;
+
+            .graphComponent {
+              .indicators {
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+
+                .left {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  padding: 0 3vw;
+                  width: 89%;
+                  margin-top: 4vw;
+
+                  h2 {
+                    font-size: 4.2vw;
+                  }
+
+                  h5 {
+                    font-size: 4vw;
+                  }
+                }
+                .right {
+                  width: 93%;
+                  margin: auto;
+                  margin-top: 3vw;
+                  font-size: 1.5rem;
+
+                  div {
+                    font-size: 61%;
+                    padding: 11% 0;
+                  }
+
+                  .active {
+                    padding: 15% 0;
+                  }
+                }
+              }
+
+              .bizcharts {
+                div {
+                  width: 100%;
+                }
+              }
+
+              .containerLabels {
+                display: none;
+              }
+            }
+
+            .graphComponent .dividor {
+              height: 15vh;
+            }
+
+            .graphComponent .graphLoader {
+              top: 15vh;
+            }
+          }
+        }
+      }
+
+      .containerTable {
+        width: 90%;
+        margin: auto;
+        margin-bottom: 0%;
+        .itemTable {
+          padding-bottom: 2vw;
+          h4 {
+            font-size: 4vw;
+            margin-bottom: 1.4vw;
+          }
+        }
+      }
+
+      .containerTable.Closed {
+        width: 90vw;
+        margin-top: 5vw;
+
+        margin-left: 5%;
+        .itemTable {
+          padding-bottom: 2vw;
+          h4 {
+            font-size: 4vw;
+            margin-bottom: 1.4vw;
+          }
+        }
+      }
+    }
+
+    .RaffleSpots {
+      display: none;
+      width: 80%;
+      margin: auto;
+
+      > h2 {
+        font-size: 7vw;
+        margin-left: 0;
+        margin-top: 2vw;
+      }
+
+      > h4 {
+        font-size: 3vw;
+        margin-bottom: 6vw;
+        margin-top: 3vw;
+      }
+
+      .table {
+        margin-top: 4vw;
+
+        .headerTable {
+          grid-template-columns: 21% 35% auto;
+
+          .left {
+            font-size: 2vw;
+          }
+          .center {
+            font-size: 2vw;
+          }
+          .right {
+            font-size: 2vw;
+            text-align: center;
+            margin-right: 0;
+          }
+        }
+
+        .row {
+          grid-template-columns: 21% 35% auto;
+          margin-bottom: 2vw;
+          padding-bottom: 2vw;
+
+          .left {
+            h4 {
+              font-size: 3vw;
+              padding: 2vw;
+              border-radius: 12px;
+            }
+          }
+
+          .center {
+            h4 {
+              font-size: 3vw;
+            }
+          }
+
+          .right {
+            padding: 0 11%;
+            .button {
+              padding: 1vw 5vw;
+              border-radius: 5px;
+              height: 3vw;
+
+              span {
+                font-size: 2vw;
+              }
+            }
+
+            .square {
+              height: 5vw;
+              width: 5vw;
+            }
+          }
+        }
+      }
+    }
+    .minipoolScreen {
+      width: 100%;
+      margin: auto;
+      margin-top: 6vw;
+      .containerMiniPoolText {
+        width: 80%;
+      }
+      > h2 {
+        font-size: 7vw;
+        margin-left: 0;
+        margin-top: 2vw;
+        text-align: center;
+      }
+
+      .rowTitle {
+        > h4 {
+          font-size: 3vw;
+          text-align: center;
+
+          margin-bottom: 6vw;
+          margin-top: 3vw;
+        }
+        .containerbuttonSlider {
+          display: none;
+        }
+      }
+
+      .sliderContainer {
+        width: 100%;
+        overflow: hidden;
+        .swiper-slide {
+          font-size: 1rem;
+          margin-right: 5%;
+        }
+      }
+
+      .containerCard {
+        h4 {
+          font-size: 0.9rem;
+        }
+
+        h3 {
+          font-size: 3vw;
+        }
+
+        h5 {
+          position: absolute;
+          font-size: 1.9vw;
+          top: 51%;
+          text-align: center;
+          color: white;
+          margin: auto;
+          font-weight: 500;
+          width: 84%;
+          left: 0;
+          right: 0;
+        }
+
+        .containerButtonBuyTicket {
+          top: 40%;
+          position: absolute;
+          width: 100%;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          left: 0;
+          flex-direction: column;
+          margin-top: 25%;
+          flex-direction: column-reverse;
+        }
+
+        .buttonImgContainer {
+          width: 50%;
+          height: 1.9vh;
+          border-radius: 8px;
+          margin-top: 7%;
+          span {
+            font-size: 60%;
+          }
+        }
+      }
+    }
+  }
+
+  .titleRafflePointsModal {
+    font-weight: 500;
+    padding: 5vw 0vw;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    color: $primaryDark;
+
+    div {
+      width: 100%;
+    }
+
+    span {
+      font-weight: 700;
+      margin-right: 1%;
+    }
+  }
+
+  .imgEmptyList {
+    width: 58%;
+    margin-bottom: 30px;
+  }
+  .containerGraphLines {
+    .containerSectionGraph {
+      h2 {
+        margin-left: 12%;
+      }
+      h5 {
+        margin-left: 12%;
+        padding-right: 5%;
+      }
+    }
+  }
+
+  #CoinGraphLineClosed {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px) and (min-width: 750px) {
+  .TicketDetailsScreen .header .top .right .buttonHeader {
+    padding: 1vw 4vw;
+    position: absolute;
+    top: 35vh;
+    left: 5%;
+    width: 35%;
+  }
+
+  .TicketDetailsScreen .header .bottom .right .buttonSeeYourSpots {
+    padding: 1vw 4vw;
+    position: absolute;
+    top: 95vh;
+    right: 5%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .adBannerContainer {
+    width: 90%;
+    height: 8vh;
+    margin-top: 20px;
+    h3 {
+      font-size: 3vw;
+    }
+  }
+
+  .graphContainer {
+    min-height: 38vh;
+
+    .Money5 {
+      position: absolute;
+      right: 20%;
+      animation: float2 6s ease-in-out infinite;
+      top: 71%;
+      height: 26%;
+      z-index: 0;
+    }
+
+    .dateToExpire {
+      bottom: 10%;
+    }
+  }
+  .TicketDetailsScreen {
+    .graphContainer {
+      .containerTable.Closed {
+        .MuchasMonedas {
+          right: 0%;
+          top: 37%;
+          width: 60%;
+        }
+      }
+      .MonedaSola {
+        position: absolute;
+        top: 40%;
+        right: 0;
+      }
+      h2 {
+        font-size: 1rem !important;
+      }
+      h5 {
+        span {
+          font-size: 1rem !important;
+          margin-right: 5%;
+        }
+      }
+    }
+    .raffling {
+      margin-top: 3vh !important;
+      .top {
+        width: 80%;
+        margin: auto;
+        display: flex !important;
+        align-items: start;
+        flex-direction: row;
+        justify-content: start;
+        flex-wrap: wrap;
+        .left {
+          width: 100% !important;
+          margin-bottom: 4vw !important;
+          margin-top: 3vw !important;
+          h3 {
+            font-size: 5vw !important;
+          }
+          h4 {
+            font-size: 4vw !important;
+          }
+        }
+        .center {
+          h3 {
+            text-align: left !important;
+            font-size: 5vw !important;
+          }
+
+          h4 {
+            text-align: left !important;
+            font-size: 4vw !important;
+          }
+        }
+        .right {
+          .statusContainer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: right;
+
+            h3 {
+              font-size: 5vw !important;
+
+              .circleTitle {
+                width: 2vw !important;
+                height: 2vw !important;
+                border-radius: 1vw !important;
+                margin-right: 1vw !important;
+              }
+            }
+
+            h4 {
+              font-size: 4vw !important;
+            }
+          }
+        }
+      }
+      .bottom {
+        display: flex !important;
+        width: 80% !important;
+        margin: auto !important;
+        flex-direction: column !important;
+        align-items: start !important;
+
+        .left {
+          width: 100% !important;
+
+          h3 {
+            flex-direction: column !important;
+            align-items: start !important;
+            margin-top: 4vw !important;
+
+            div {
+              align-items: center !important;
+              display: flex !important;
+              margin-bottom: 2vw !important;
+              width: 100% !important;
+              span {
+                font-size: 5vw !important;
+              }
+
+              img {
+                width: 6% !important;
+              }
+            }
+            span {
+              font-size: 4vw !important;
+            }
+          }
+        }
+      }
+      .graphFather {
+        .Raffling {
+          width: 90%;
+          margin: auto auto 0%;
+          padding: 30px;
+          box-sizing: border-box;
+        }
+      }
+    }
+    .header {
+      margin-top: 3vh;
+      .top {
+        width: 80%;
+        margin: auto;
+        display: flex;
+        align-items: start;
+        flex-direction: row;
+        justify-content: start;
+        flex-wrap: wrap;
+
+        .left {
+          width: 100%;
+          margin-bottom: 4vw;
+          margin-top: 3vw;
+          h3 {
+            font-size: 5vw;
+          }
+
+          h4 {
+            font-size: 4vw;
+          }
+        }
+        .center {
+          width: 50%;
+          margin-bottom: 3vw;
+          margin-top: 2vw;
+          h3 {
+            font-size: 5vw;
+            text-align: left;
+          }
+
+          h4 {
+            text-align: left;
+            font-size: 4vw;
+          }
+        }
+        .right {
+          margin-top: 2.3%;
+          display: flex;
+          width: 50%;
+          text-align: right;
+          .buttonHeader {
+            padding: 1vw 4vw;
+            position: absolute;
+            top: 80vh;
+            left: 5%;
+            width: 30vw;
+          }
+
+          .statusContainer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: right;
+
+            h3 {
+              font-size: 5vw;
+
+              .circleTitle {
+                width: 2vw;
+                height: 2vw;
+                border-radius: 1vw;
+                margin-right: 1vw;
+              }
+            }
+
+            h4 {
+              font-size: 4vw;
+            }
+          }
+        }
+      }
+      .bottom {
+        display: flex;
+        width: 80%;
+        margin: auto;
+        flex-direction: column;
+        align-items: start;
+
+        .left {
+          width: 100%;
+
+          h3 {
+            flex-direction: column;
+            align-items: start;
+            margin-top: 4vw;
+
+            div {
+              align-items: center;
+              display: flex;
+              margin-bottom: 2vw;
+              width: 100%;
+              span {
+                font-size: 5vw;
+              }
+
+              img {
+                width: 6%;
+              }
+            }
+            span {
+              font-size: 4vw;
+            }
+          }
+        }
+
+        .right {
+          margin-top: 4vw;
+
+          .buttonSeeYourSpots {
+            padding: 1vw 2vw;
+            position: absolute;
+            top: 80vh;
+            right: 5%;
+            width: 40vw;
+            span {
+              font-size: 0.7rem;
+            }
+          }
+        }
+      }
+    }
+
+    .graphContainer.raffling {
+      padding-top: 20px;
+    }
+
+    .graphContainer {
+      min-height: 90vh;
+
+      .dateToExpire {
+        position: initial;
+
+        h4 {
+          color: black;
+          font-size: 3vw;
+          margin-top: 3vw;
+          img {
+            display: none;
+          }
+        }
+      }
+
+      .containerWinnerAlert {
+        background: #e9e9f9;
+        border-radius: 50px;
+        color: #d0ded1;
+        padding: 10px 20px;
+        position: absolute;
+        top: -5%;
+        left: 50%;
+        font-size: 0.8rem;
+        width: 90%;
+        font-family: Raleway;
+        margin-left: -45%;
+        box-sizing: border-box;
+      }
+
+      .containerWinnerAlert.ConnectWallet {
+        font-size: 0.7rem;
+        width: 90%;
+        left: 50%;
+        box-sizing: border-box;
+        padding: 10px;
+        margin-left: -45%;
+      }
+      .containerWinnerAlert.Winner {
+        /* padding: 1% 10%;
+        left: 15%; */
+        padding: 10px;
+        left: 50%;
+        width: 90%;
+        margin-left: -45%;
+        box-sizing: border-box;
+      }
+
+      .Money5 {
+        left: 55%;
+        top: 80vw;
+        height: 20vh;
+      }
+
+      .graphFather {
+        .container-left {
+          width: 90%;
+          margin: auto;
+          padding-top: 10%;
+          .graph {
+            width: 100%;
+
+            .graphComponent {
+              .indicators {
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+
+                .left {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  padding: 0 3vw;
+                  width: 89%;
+                  margin-top: 4vw;
+
+                  h2 {
+                    font-size: 4.2vw;
+                  }
+
+                  h5 {
+                    font-size: 4vw;
+                  }
+                }
+                .right {
+                  width: 93%;
+                  margin: auto;
+                  margin-top: 3vw;
+                  font-size: 1.5rem;
+
+                  div {
+                    font-size: 61%;
+                    padding: 11% 0;
+                  }
+
+                  .active {
+                    padding: 15% 0;
+                  }
+                }
+              }
+
+              .bizcharts {
+                div {
+                  width: 100%;
+                }
+              }
+
+              .containerLabels {
+                display: none;
+              }
+            }
+
+            .graphComponent .dividor {
+              height: 15vh;
+            }
+
+            .graphComponent .graphLoader {
+              top: 15vh;
+            }
+          }
+        }
+      }
+
+      .containerTable {
+        width: 90%;
+        margin-top: 10vw;
+
+        margin-left: 5%;
+        .itemTable {
+          padding-bottom: 2vw;
+          h4 {
+            font-size: 4vw;
+            margin-bottom: 1.4vw;
+          }
+        }
+      }
+
+      .containerTable.Closed {
+        width: 90vw;
+        margin-top: 5vw;
+
+        margin-left: 5%;
+        .itemTable {
+          padding-bottom: 2vw;
+          h4 {
+            font-size: 4vw;
+            margin-bottom: 1.4vw;
+          }
+        }
+      }
+    }
+
+    .RaffleSpots {
+      display: none;
+      width: 80%;
+      margin: auto;
+
+      > h2 {
+        font-size: 7vw;
+        margin-left: 0;
+        margin-top: 2vw;
+      }
+
+      > h4 {
+        font-size: 3vw;
+        margin-bottom: 6vw;
+        margin-top: 3vw;
+      }
+
+      .table {
+        margin-top: 4vw;
+
+        .headerTable {
+          grid-template-columns: 21% 35% auto;
+
+          .left {
+            font-size: 2vw;
+          }
+          .center {
+            font-size: 2vw;
+          }
+          .right {
+            font-size: 2vw;
+            text-align: center;
+            margin-right: 0;
+          }
+        }
+
+        .row {
+          grid-template-columns: 21% 35% auto;
+          margin-bottom: 2vw;
+          padding-bottom: 2vw;
+
+          .left {
+            h4 {
+              font-size: 3vw;
+              padding: 2vw;
+              border-radius: 12px;
+            }
+          }
+
+          .center {
+            h4 {
+              font-size: 3vw;
+            }
+          }
+
+          .right {
+            padding: 0 11%;
+            .button {
+              padding: 1vw 5vw;
+              border-radius: 5px;
+              height: 3vw;
+
+              span {
+                font-size: 2vw;
+              }
+            }
+
+            .square {
+              height: 5vw;
+              width: 5vw;
+            }
+          }
+        }
+      }
+    }
+    .minipoolScreen {
+      width: 100%;
+      margin: auto;
+      margin-top: 6vw;
+      .containerMiniPoolText {
+        width: 80%;
+      }
+      > h2 {
+        font-size: 7vw;
+        margin-left: 0;
+        margin-top: 2vw;
+        text-align: center;
+      }
+
+      .rowTitle {
+        > h4 {
+          font-size: 3vw;
+          text-align: center;
+
+          margin-bottom: 6vw;
+          margin-top: 3vw;
+        }
+        .containerbuttonSlider {
+          display: none;
+        }
+      }
+
+      .sliderContainer {
+        width: 100%;
+        overflow: hidden;
+        .swiper-slide {
+          font-size: 1rem;
+        }
+      }
+
+      .containerCard {
+        h4 {
+          font-size: 0.9rem;
+        }
+
+        h3 {
+          font-size: 2rem;
+        }
+
+        h5 {
+          position: absolute;
+          font-size: 1rem;
+          top: 51%;
+          text-align: center;
+          color: white;
+          margin: auto;
+          font-weight: 500;
+          width: 84%;
+          left: 0;
+          right: 0;
+        }
+
+        .containerButtonBuyTicket {
+          top: 40%;
+          position: absolute;
+          width: 100%;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+
+          flex-direction: column-reverse;
+        }
+
+        .buttonImgContainer {
+          width: 50%;
+          height: 3vh;
+          margin-top: 7%;
+          border-radius: 25px;
+          span {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .titleRafflePointsModal {
+    font-weight: 500;
+    padding: 5vw 0vw;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    color: $primaryDark;
+
+    div {
+      width: 100%;
+    }
+
+    span {
+      font-weight: 700;
+      margin-right: 1%;
+    }
+  }
+
+  .imgEmptyList {
+    width: 58%;
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 500px) and (min-height: 700px) {
+  .TicketDetailsScreen {
+    .header {
+      .top {
+        .right {
+          .buttonHeader {
+            position: absolute;
+            top: 70vh;
+            left: 5%;
+            width: 35%;
+          }
+          .buttonHeader.full {
+            width: 80%;
+            margin: autobuttonHeader;
+          }
+        }
+      }
+    }
+  }
+
+  .TicketDetailsScreen .header .bottom .right .buttonSeeYourSpots {
+    width: 40%;
+    position: absolute;
+    top: 70vh;
+    right: 5%;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-width: 950px) {
+  .TicketDetailsScreen {
+    .header {
+      .bottom {
+        .right {
+          .buttonSeeYourSpots {
+            top: 195vh;
+          }
+        }
+      }
+      .top {
+        .right {
+          .buttonHeader {
+            top: 195vh;
+          }
+
+          .buttonHeader.full {
+            width: 80%;
+          }
+        }
+      }
+    }
+    .graphContainer {
+      padding-top: 35vh;
+    }
+    .minipoolScreen {
+      .rowTitle > h4 {
+        margin-bottom: 0vw;
+      }
+    }
   }
 }

@@ -1,0 +1,120 @@
+@import '../../assets/scss/variables.scss';
+
+.containerDropDownTokens {
+  z-index: 2;
+  height: auto;
+  position: absolute;
+
+  margin-top: 2%;
+  width: 90%;
+  text-align: start;
+  background: $primaryLight;
+  border-radius: 12px;
+  p {
+    color: #629a48;
+    padding: 3% 5%;
+    cursor: pointer;
+    border-radius: 12px;
+    text-align: left;
+    border-bottom: 1px solid #c1d4b8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:hover {
+      background-color: #bad3bc;
+    }
+  }
+
+  .withicon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img {
+      padding-left: 5%;
+    }
+  }
+
+  div {
+    cursor: pointer;
+  }
+}
+
+/*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */
+/*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */
+/*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */
+
+@media screen and (max-width: 950px) {
+  .containerLogoutWallet {
+    z-index: 2;
+    width: 85%;
+    height: auto;
+    background: #d0ded1;
+    border-radius: 12px;
+    position: absolute;
+    top: 26vh;
+    right: 6vw;
+    font-size: 1rem;
+
+    p {
+      padding: 6%;
+      width: 88%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    div {
+      cursor: pointer;
+    }
+
+    .withicon {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      img {
+        width: auto;
+        padding-left: 10%;
+      }
+    }
+  }
+}
+@media screen and (max-width: 500px) {
+  .containerLogoutWallet {
+    z-index: 2;
+    width: 85%;
+    height: auto;
+    background: #d0ded1;
+    border-radius: 12px;
+    position: absolute;
+    top: 26vh;
+    right: 6vw;
+    font-size: 1rem;
+    padding: 0% 0%;
+
+    p {
+      padding: 6%;
+      width: 88%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    div {
+      cursor: pointer;
+    }
+
+    .withicon {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      img {
+        width: auto;
+        padding-left: 10%;
+      }
+    }
+  }
+}
+
+@media screen and (orientation: landscape) and (max-width: 950px) {
+  .containerLogoutWallet {
+    top: 58vh;
+  }
+}

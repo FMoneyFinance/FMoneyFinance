@@ -1,4 +1,4 @@
-@import "../../assets/scss/variables.scss";
+@import '../../assets/scss/variables.scss';
 
 .containerNavBar {
   display: flex;
@@ -6,13 +6,31 @@
   align-items: center;
   padding: 2vw 3vw;
   height: 4vh;
+  .containerNavBarChild {
+    display: flex;
 
-  .containerSelecLanguageImage {
-    position: relative;
-    cursor: pointer;
-  }
-  > div {
     text-align: center;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .containerSelecLanguage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .containerSelecLanguageImg {
+    position: relative;
+  }
+
+  > div {
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .button-connect-wallet {
+    width: 484%;
   }
 
   .imageLogo {
@@ -20,12 +38,14 @@
   }
 
   .containerItems {
-    font-weight: 500;
-
+    display: flex;
     align-items: center;
-    * {
-      font-family: Raleway;
-      font-weight: 500;
+    a,
+    a:active,
+    a:hover,
+    a:focus {
+      text-decoration: none;
+      color: #000000;
     }
     > div {
       &:hover {
@@ -33,6 +53,7 @@
       }
       margin: 0 1vw;
       > h4 {
+        font-family: 'Raleway';
         font-weight: 500;
       }
     }
@@ -44,17 +65,20 @@
       overflow: hidden;
       position: relative;
       display: inline-block;
+      font-family: 'Raleway';
     }
 
     > h4::before,
     > h4::after {
-      content: "";
+      content: '';
       position: absolute;
       width: 100%;
       left: 0;
+      font-family: 'Raleway';
     }
 
     > h4::before {
+      font-family: 'Raleway';
       background-color: $primary;
       height: 2px;
       bottom: 0;
@@ -70,27 +94,24 @@
       transform-origin: 100% 50%;
       transform: translate3d(200%, 0, 0);
       transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+      font-family: 'Raleway';
     }
 
-    > h4:hover::before,
-    a {
+    > h4:hover::before {
       transform-origin: 0% 50%;
       transform: scaleX(1);
     }
 
-    > h4:hover::after,
-    a {
+    > h4:hover::after {
       transform: translate3d(0, 0, 0);
     }
 
-    > h4 span,
-    a {
-      font-weight: 500;
+    > h4 span {
+      font-family: 'Raleway';
       display: inline-block;
       padding-top: 0.5vw;
       padding-bottom: 0.5vw;
       transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
-      color: black;
     }
 
     > img {
@@ -126,33 +147,100 @@
   }
 }
 
-/*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */
-/*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */
-/*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */
-
-@media screen and (max-width: 920px) {
-  .containerNavBar.phones {
+@media screen and (max-width: 950px) {
+  .containerSelecLanguageImg {
     display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .containerNavBar {
+    width: 90%;
     justify-content: center;
-    width: 90vw;
-    padding-top: 7vw;
-    padding-bottom: 10%;
-    a {
+    height: 30%;
+    padding-bottom: 10vh;
+    .button-connect-wallet {
       width: 80%;
+      padding: 0;
+    }
+    .containerSelecLanguage {
+      height: auto;
+    }
+    .containerNavBarChild {
+      display: flex;
     }
     .containerItems {
       display: flex;
-      position: absolute;
-      width: auto;
+      width: 55%;
+      flex-direction: column;
 
-      top: 11%;
+      img {
+        width: 15%;
+      }
+      .button {
+        position: absolute;
+        top: 17vh;
+        left: 8vw;
+        padding: 1%;
+      }
     }
-    #ImgLangague {
-      width: 150%;
-      margin-top: 30%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .containerSelecLanguageImg {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .containerNavBar {
+    justify-content: center;
+    height: 30%;
+    width: 90%;
+    padding-bottom: 15%;
+    .button-connect-wallet {
+      width: 80%;
+      padding: 0;
     }
-    img {
-      z-index: 2;
+    .containerSelecLanguage {
+      height: auto;
     }
+    .containerNavBarChild {
+      display: flex;
+    }
+    .containerItems {
+      display: flex;
+      width: 55%;
+      flex-direction: column;
+
+      img {
+        width: 20%;
+      }
+      .button {
+        position: absolute;
+        top: 17vh;
+        left: 8vw;
+        padding: 1%;
+      }
+    }
+  }
+}
+
+@media screen and (orientation: landscape) and (max-width: 950px) {
+  .containerNavBar {
+    .containerItems {
+      .button {
+        top: 45vh;
+        left: 8vw;
+        padding: 1%;
+      }
+    }
+  }
+}
+
+@media screen and (orientation: landscape) and (max-width: 950px) {
+  .containerNavBar {
+    padding-bottom: 25vh;
   }
 }

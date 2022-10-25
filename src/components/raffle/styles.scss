@@ -1,11 +1,82 @@
-@import "../../assets/scss/variables.scss";
+@import '../../assets/scss/variables.scss';
 .containerRafflePoint {
-  background: #d7e5d1;
-  width: fit-content;
-  margin: auto;
+  /* width: 50%;
+  margin-bottom: 10%; */
   padding: 1vw;
   border-radius: 14px;
   font-weight: 600;
-  font-family: "MonumentExtended";
+  font-family: 'MonumentExtended';
+  background: #e9e9f9;
+  color: #c5c5c5;
+  margin: 4px;
+}
+
+.block-active-true {
   color: $primary;
+  background: #d7e5d1;
+}
+
+.block-winner-true {
+  color: white !important;
+  background: $orange !important;
+}
+
+.statusContainer {
+  text-align: right;
+  text-transform: capitalize;
+  h3 {
+    font-size: 151%;
+    text-align: end;
+    color: #3c6132;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  h4 {
+    font-weight: 500;
+    color: #629a48;
+    font-size: 80%;
+    margin-top: 0.3vw;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .block-winner-true {
+    color: white !important;
+    background: $orange !important;
+  }
+  .containerRafflePoint {
+    /* width: 50%; */
+    padding: 3vw;
+    border-radius: 14px;
+    font-weight: 600;
+    font-family: 'MonumentExtended';
+    background: #e9e9f9;
+    color: #c5c5c5;
+  }
+  .block-active-true {
+    color: #629a48;
+    background: #d7e5d1;
+  }
+  .modalBuyTicketsModal {
+    .container-row-select {
+      display: flex;
+      align-items: start;
+      flex-direction: column;
+      padding: 5% 5% 8% 5%;
+    }
+    .grid-points-buttons {
+      display: flex;
+      width: 100%;
+      align-items: center;
+
+      /* flex-direction: column; */
+      align-content: center;
+    }
+    .dataContainer {
+      padding: 1% 5% 20px 5%;
+      /* margin-bottom: 5vw; */
+    }
+  }
 }

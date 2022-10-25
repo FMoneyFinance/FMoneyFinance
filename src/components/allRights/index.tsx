@@ -1,21 +1,12 @@
-import React from "react";
-import "./styles.scss";
-import { useTranslation } from "react-i18next";
+import './styles.scss'
+import { useTranslation } from 'react-i18next'
 function AllRights() {
-  const { t } = useTranslation();
-
+  const { t } = useTranslation(['home'])
   return (
     <div className="containerAllRights">
-      <div className="links flex">
-        <span className="pointer">Community</span>
-        <span className="pointer">Whitepaper</span>
-        <span className="pointer">Contact us</span>
-      </div>
-      <div className="allRightsReserved">
-        <h2>FMoney | {t("allRightsReserved.text")} ©</h2>
-      </div>
+      <h2>Fmoney | {t('allRightsReserved.text')} ©</h2>
     </div>
-  );
+  )
 }
 
-export default AllRights;
+export default AllRights

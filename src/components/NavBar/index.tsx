@@ -1,106 +1,63 @@
-import React, { useState, useEffect, useRef } from "react";
-import Mainlogo from "../../assets/logos/main.svg";
-import Languague from "../../assets/icons/languague.svg";
-import "./styles.scss";
-import Button from "../Buttons";
-import Logo from "../logo";
-import ConnectWallet from "../Buttons/connectWallet/index";
-import { useTranslation } from "react-i18next";
-import DropDown from "../DropDown";
+import React, { useState, useEffect } from 'react'
+import Mainlogo from '../../assets/logos/main.svg'
+import Languague from '../../assets/icons/languague.svg'
+import './styles.scss'
+import Button from '../Buttons'
+import Logo from '../logo'
+import ConnectWallet from '../Buttons/connectWallet/index'
+import { useTranslation } from 'react-i18next'
+import DropDown from '../DropDown'
+import { isMobile } from 'react-device-detect'
 
-function NavBar() {
-  const { i18n, t } = useTranslation();
-  const [openDrop, setOpenDrop] = useState(false);
-  const [mobileWidth, setMobileWidth] = useState(window.screen.width > 950);
+function NavBar({ hideConnect, tikcketDetails }: any) {
+  const { t } = useTranslation(['home'])
+  const [openDrop, setOpenDrop] = useState(false)
+  const [mobileWidth, setMobileWidth] = useState(window.screen.width > 950)
   const openDropDown = () => {
-    setOpenDrop(!openDrop);
-  };
+    setOpenDrop(!openDrop)
+  }
 
-  const changeLanguageES = () => {
-    i18n.changeLanguage("es");
-    setOpenDrop(false);
-  };
-  const changeLanguageEN = () => {
-    i18n.changeLanguage("en");
-    setOpenDrop(false);
-  };
-
-  let menuRefDrop: any = useRef();
+  const Item = (props: any) => {
+    return (
+      <div>
+        <h4 className={'itemNavbar ' + props.text}>{props.text}</h4>
+      </div>
+    )
+  }
 
   useEffect(() => {
-    let handler = (event: any) => {
-      if (menuRefDrop.current && !menuRefDrop.current.contains(event?.target)) {
-        setOpenDrop(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-
+    handleResize()
+    window.addEventListener('resize', handleResize)
     return () => {
-      document.removeEventListener("mousedown", handler);
-    };
-  }, []);
-
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   const handleResize = () => {
     if (window.screen.width < 950) {
-      setMobileWidth(true);
+      setMobileWidth(true)
     } else {
-      setMobileWidth(false);
+      setMobileWidth(false)
     }
-  };
+  }
 
   return (
-    <div>
-      {/* FOR HORIZONTAL RESOLUTIONS */}
-      {window.screen.width > 950 ? (
-        <div className="containerNavBar landpages">
-          <div>
-            <Logo />
-          </div>
-          <div className="containerItems">
-            <div ref={menuRefDrop} className="containerSelecLanguage">
-              <div>
-                <div className="containerSelecLanguageImage">
-                  <img src={Languague} onClick={openDropDown} />
-                </div>
-                {openDrop && (
-                  <DropDown
-                    changeLanguageES={changeLanguageES}
-                    changeLanguageEN={changeLanguageEN}
-                    setOpenDrop={setOpenDrop}
-                  />
-                )}
-              </div>
+    <div className="containerNavBar">
+      <div className="containerNavBarChild">
+        <Logo />
+
+        <div className="containerItems">
+          <div className="containerSelecLanguage">
+            <div className="containerSelecLanguageImg" onClick={openDropDown}>
+              <img src={Languague} />
             </div>
+            <div>{openDrop && <DropDown setOpenDrop={setOpenDrop} />}</div>
           </div>
+          {!hideConnect && <ConnectWallet tikcketDetails={tikcketDetails} />}
         </div>
-      ) : (
-        <div className="containerNavBar phones">
-          <Logo />
-          <div ref={menuRefDrop}>
-            <img id="ImgLangague" src={Languague} onClick={openDropDown} />
-
-            {openDrop && (
-              <DropDown
-                changeLanguageES={changeLanguageES}
-                changeLanguageEN={changeLanguageEN}
-                setOpenDrop={setOpenDrop}
-              />
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* FOR PHONES RESOLUTIONS */}
+      </div>
     </div>
-  );
+  )
 }
 
-export default NavBar;
+export default NavBar

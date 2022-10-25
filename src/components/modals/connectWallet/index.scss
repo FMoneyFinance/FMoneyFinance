@@ -1,0 +1,253 @@
+@import "../../../assets/scss/variables.scss";
+
+.advicestep2 {
+  text-align: left;
+  font-weight: 500;
+  font-size: 1vw;
+  padding: 1vw;
+  color: $primary;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 20% auto;
+  align-items: center;
+  padding: 0.4vw 1vw;
+
+  .circle {
+    background: #9ca3af;
+    height: 3vw;
+    width: 3vw;
+    border-radius: 1.5vw;
+    line-height: 3vw;
+    color: white;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    color: grey;
+    align-items: start;
+
+    h3 {
+      color: grey;
+      font-size: 1vw;
+    }
+
+    h5 {
+      font-size: 0.9vw;
+      text-align: left;
+      color: grey;
+      font-weight: 500;
+    }
+  }
+}
+
+.item-success-true {
+  .circle {
+    background-color: $primary;
+  }
+}
+.item-error-true {
+  .circle {
+    background-color: rgb(255, 90, 90);
+  }
+}
+
+.rowRemember {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 70% auto;
+  justify-content: space-around;
+  /* margin-right: 1vw; */
+  margin-bottom: 30px;
+}
+
+.error-container {
+  color: rgb(255, 90, 90);
+  margin-bottom: 24%;
+  font-weight: 500;
+  text-align: left;
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
+.rememberme {
+  color: grey;
+  text-align: left;
+  padding: 1vw;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1vw;
+
+  img {
+    margin-left: 3%;
+  }
+}
+
+.helpRemember {
+  opacity: 0;
+  transition: all 0.3s;
+  background: $primaryLight;
+  position: absolute;
+  top: 33%;
+  width: 85%;
+  left: 4%;
+  padding: 3%;
+  border-radius: 10px;
+  color: $primaryDark;
+  font-weight: 500;
+  text-align: left;
+  transition: all 1s;
+}
+
+.helpRemember-true {
+  opacity: 1;
+}
+
+.classButtonConnectWalletModal {
+  width: 83% !important;
+}
+
+@media screen and (max-width: 920px) {
+  .error-container {
+    color: rgb(255, 90, 90);
+    margin-bottom: 24%;
+    font-weight: 500;
+    text-align: left;
+    padding-left: 4%;
+    padding-right: 4%;
+    font-size: 1rem;
+  }
+  .rowRemember {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 70% auto;
+    justify-content: space-around;
+    /* margin-right: 1vw; */
+    padding-bottom: 20px;
+  }
+
+  .advicestep2 {
+    display: flex;
+    font-size: 90%;
+    width: 90%;
+    margin: auto;
+    padding-bottom: 3%;
+  }
+
+  .item {
+    display: grid;
+    grid-template-columns: 25% auto;
+    align-items: center;
+    padding: 3vw 5vw;
+    .circle {
+      background: #9ca3af;
+      height: 10vw;
+      width: 10vw;
+      border-radius: 100%;
+      /* line-height: 3vw; */
+      color: white;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      justify-content: center;
+    }
+    .right {
+      h3 {
+        color: grey;
+        font-size: 3vw;
+      }
+      h5 {
+        font-size: 80%;
+        text-align: left;
+        color: grey;
+        font-weight: 500;
+      }
+    }
+  }
+  .rememberme {
+    font-size: 1rem;
+    padding-top: 3%;
+  }
+  .item.item-success-true {
+    .circle {
+      background-color: $primary;
+    }
+  }
+
+  .item.item-error-true {
+    .circle {
+      background-color: rgb(255, 90, 90);
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .error-container {
+    color: rgb(255, 90, 90);
+    margin-bottom: 24%;
+    font-weight: 500;
+    text-align: left;
+    padding-left: 4%;
+    padding-right: 4%;
+    font-size: 1rem;
+  }
+  .rowRemember {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 70% auto;
+    justify-content: space-around;
+    margin-right: 1vw;
+    padding: 15px 0px 20px;
+  }
+
+  .advicestep2 {
+    display: flex;
+    font-size: 90%;
+    width: 90%;
+    margin: auto;
+    padding: 3% 0%;
+  }
+  .item {
+    display: grid;
+    grid-template-columns: 25% auto;
+    align-items: center;
+    padding: 5vw 5vw;
+    .circle {
+      background: #9ca3af;
+      height: 10vw;
+      width: 10vw;
+      border-radius: 100%;
+      /* line-height: 3vw; */
+      color: white;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      justify-content: center;
+    }
+    .right {
+      h3 {
+        color: grey;
+        font-size: 3vw;
+      }
+      h5 {
+        font-size: 100%;
+        text-align: left;
+        color: grey;
+        font-weight: 500;
+      }
+    }
+  }
+  .rememberme {
+    font-size: 1rem;
+    padding-top: 3%;
+  }
+}
