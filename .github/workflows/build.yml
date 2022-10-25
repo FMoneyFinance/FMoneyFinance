@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Project build
-        uses: actions/checkout@master
+      - uses: actions/checkout@master
         run: |
           touch .env
           echo VITE_CHAIN_ID_METAMASK: ${{ secrets.VITE_CHAIN_ID_METAMASK }} >> .env
