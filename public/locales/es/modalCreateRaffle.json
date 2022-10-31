@@ -22,7 +22,7 @@
 
   "errors": {
     "selectedRaffleName": "Tienes que ingresar un nombre válido para la rifa",
-    "selectedDateOfDraw": "La fecha de la rifa debe estar a 1 o más días de la hora actual",
+    "selectedDateOfDraw": "La fecha de la rifa debe estar a 15 minutos o más de la hora actual",
     "selectedPriceOfTheRaffleTicket": "Establece el precio del boleto.",
     "selectedPriceOfTheRaffleTicketHasNumber": "Este dato tiene que ser un número.",
     "selectedPriceOfTheRaffleTicketPositiveNumber": "Este dato tiene que ser un número positivo.",

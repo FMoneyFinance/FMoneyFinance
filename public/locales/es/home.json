@@ -97,12 +97,18 @@
     "title": "SOCIOS",
     "description": "Estas son algunas de las compañías que confían en nosotros. Ven y únete a nuestra aventura."
   },
+  "buyButton": "Compra FMON",
   "modalWinnerRaffle": {
     "configModalSeeMyRaffles": {
       "title": "Tus posiciones en la rifa"
     },
+    "drawText": "Sorteo",
+    "titleWinner": "¡Felicitaciones, has ganado esta rifa!",
+    "titleLoser": "No fuiste el ganador esta vez. ¡Pero ve a comprar otro boleto para ser el ganador de la próxima rifa!",
+    "titleStillOpen": "Esta rifa sigue abierta. ¡Puedes comprar más boletos para asegurar tu victoria!",
     "titleRafflePointsModal": "Lugar ganador:",
-    "buttonText": "Ir a la rifa"
+    "buttonText": "Ir a la rifa",
+    "buttonDone": "Hecho"
   },
   "buttonConnectWallet": "Conectar billetera"
 }

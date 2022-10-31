@@ -34,7 +34,6 @@ function HomeScreen(props: any) {
         {!isImageLoaded && <SplashScreen />}
         <>
           <img src={background} className="landingScreenBackground" />
-
           <div className="landingScreen">
             <MainLayout>
               <WelcomeText />

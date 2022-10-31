@@ -15,7 +15,7 @@ import ModalConnectWallet from '../../modals/connectWallet'
 import { CheckMetamaskInstalled } from '../../../web3/functions/metamask'
 import { handleGetAvailableSpots } from '../../../web3/functions/ticket & spots'
 
-function BuyTicketButton({ className, raffleSelected, buttonProps }: any) {
+function BuyTicketButton({ style, className, raffleSelected, buttonProps }: any) {
   const { t } = useTranslation(['home'])
   const context: any = useContext(AppContext)
   const buyingTicket = useRef(false)
@@ -110,7 +110,7 @@ function BuyTicketButton({ className, raffleSelected, buttonProps }: any) {
 
   return (
     <>
-      <Button text={t('tickets.buyTicket')} onPress={handleClick} loading={loading} {...buttonProps} className={className} />
+      <Button text={t('tickets.buyTicket')} onPress={handleClick} loading={loading} {...buttonProps} className={className} applyStyle={style} />
     </>
   )
 }

@@ -96,12 +96,18 @@
     "title": "PARTNERS",
     "description": "Here are some of the companies that trust us. Come and join our adventure."
   },
+  "buyButton": "Buy FMON",
   "modalWinnerRaffle": {
     "configModalSeeMyRaffles": {
       "title": "Your raffle spots"
     },
+    "drawText": "Draw",
+    "titleWinner": "Congratulations, you have won this raffle!",
+    "titleLoser": "You were not the winner this time. But go to buy another ticket in order to be the winner of the next raffle!",
+    "titleStillOpen": "This raffle is still open. You can buy more tickets to ensure your victory!",
     "titleRafflePointsModal": "Winner spot:",
-    "buttonText": "Go to the raffle"
+    "buttonText": "Go to the raffle",
+    "buttonDone": "Done"
   },
   "buttonConnectWallet": "Connect wallet"
 }

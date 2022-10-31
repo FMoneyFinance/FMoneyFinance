@@ -27,7 +27,7 @@ function ModalCreateRaffle() {
   const [hourSelected, setHourSelected] = useState(hours[3])
   const [AMPMSelected, setAMPMSelected] = useState('AM')
   const [priceOfTicket, setPriceOfTicket] = useState('')
-  const [percentageOfPrizeOperator, setPercentageOfPrizeOperator] = useState('')
+  const [percentageOfPrizeOperator, setPercentageOfPrizeOperator] = useState('20')
   const [maxNumberOfPlayer, setMaxNumberOfPlayer] = useState('')
   const [error, setError] = useState({})
   const [errorDate, setErrorDate] = useState(false)
@@ -155,11 +155,12 @@ function ModalCreateRaffle() {
         </div>
         {errorList?.selectedDateOfDraw && <h5 className="error-input">{errorList?.selectedDateOfDraw}</h5>}
         <Title title={t('inputs.hourOfDraw')} />
-        <div className="gridInputs">
+        <div className="gridInputs50">
           <InputSelect
             config={{
               placeholder: hourSelected || '07',
-              options: AMPMSelected === 'AM' ? hours : hoursPM,
+              // options: AMPMSelected === 'AM' ? hours : hoursPM,
+              options: hours,
               value: hourSelected,
               onChange: (val: any) => setHourSelected(val)
             }}
@@ -172,14 +173,14 @@ function ModalCreateRaffle() {
               onChange: (val: any) => setMinuteSelected(val)
             }}
           />
-          <InputSelect
+          {/* <InputSelect
             config={{
               placeholder: AMPMSelected,
               value: AMPMSelected,
               options: AMPM,
               onChange: (val: any) => setAMPMSelected(val)
             }}
-          />
+          /> */}
         </div>
         <Title title={t('inputs.PriceTicket')} />
         <InputText
@@ -200,7 +201,7 @@ function ModalCreateRaffle() {
           }}
           value={maxNumberOfPlayer}
         />
-        <Title title={t('inputs.percentageOfPrice')} />
+        {/* <Title title={t('inputs.percentageOfPrice')} />
         <InputText
           config={{
             placeholder: '40',
@@ -209,7 +210,7 @@ function ModalCreateRaffle() {
           }}
           value={percentageOfPrizeOperator}
           controller={setPercentageOfPrizeOperator}
-        />
+        /> */}
         {generalError && <h5 className="error-input">{generalError}</h5>}
       </div>
     )

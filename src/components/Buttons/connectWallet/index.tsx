@@ -30,14 +30,17 @@ function ConnectWallet({ tikcketDetails }: any) {
     <>
       {context.state?.walletAddress?.length > 10 ? (
         <>
-          <h5 className={`walletAddressTxt ticketDetails-${tikcketDetails}`} onClick={openDropOptionsDown}>
+          <div className={`walletAddressTxt ticketDetails-${tikcketDetails}`} onClick={openDropOptionsDown}>
             {t('title')}
             <img src={walletSVG} />
-          </h5>
-          <div>{openDropOptions && <LogoutWallet setOpenDropOptions={setOpenDropOptions} />}</div>
+          </div>
+          {openDropOptions && <LogoutWallet setOpenDropOptions={setOpenDropOptions} />}
         </>
       ) : (
-        <Button text={t('buttonConnectWallet')} className="button-connect-wallet" onPress={handleClick} rounded={true} />
+        <>
+          {/* <Button text={t('buttonConnectWallet')} className="button-connect-wallet" onPress={handleClick} rounded={true} /> */}
+          <Button text={t('buttonConnectWallet')} onPress={handleClick} rounded={true} />
+        </>
       )}
     </>
   )

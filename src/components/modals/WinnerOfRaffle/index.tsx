@@ -29,7 +29,7 @@ function ModalWinnerRaffle({ raffleSelected, navigate }: { navigate: Function; r
   const [limit, setlimit] = useState(15)
 
   const configModalSeeMyRaffles = {
-    title: 'Your raffle spots',
+    title: t('modalWinnerRaffle.configModalSeeMyRaffles.title'),
     onPressButton: () => {
       context.changeContext({ showModal: null })
     },
@@ -72,7 +72,7 @@ function ModalWinnerRaffle({ raffleSelected, navigate }: { navigate: Function; r
       showModal={true}
       config={{
         ...configModalSeeMyRaffles,
-        buttonTxt: 'Done',
+        buttonTxt: `${t('modalWinnerRaffle.buttonDone')}`,
         width: isMobile && '90%',
         footer: () => (
           <>
@@ -96,11 +96,11 @@ function ModalWinnerRaffle({ raffleSelected, navigate }: { navigate: Function; r
         <>
           <div className="textWinnerModal">
             {raffleSelected?.userWinnerInRaffle && raffleSelected?.raffleStatus == 'closed' ? (
-              <h4 style={{ lineHeight: '150%', fontSize: '12px' }}>Congratulations, you have won this raffle!</h4>
+              <h4 style={{ lineHeight: '150%', fontSize: '12px' }}>{`${t('modalWinnerRaffle.titleWinner')}`}</h4>
             ) : !raffleSelected?.userWinnerInRaffle && raffleSelected?.raffleStatus == 'closed' ? (
-              <h4 style={{ lineHeight: '150%', fontSize: '12px' }}>You were not a winner this time. Good luck next time!</h4>
+              <h4 style={{ lineHeight: '150%', fontSize: '12px' }}>{`${t('modalWinnerRaffle.titleLoser')}`}</h4>
             ) : (
-              <h4 style={{ lineHeight: '150%', fontSize: '12px' }}>This raffle is still open. You can buy more tickets to ensure your victory!</h4>
+              <h4 style={{ lineHeight: '150%', fontSize: '12px' }}>{`${t('modalWinnerRaffle.titleStillOpen')}`}</h4>
             )}
           </div>
           <div className="ContainerAllSpots">
@@ -135,13 +135,13 @@ function ModalWinnerRaffle({ raffleSelected, navigate }: { navigate: Function; r
           </div>
           <h3 className="titleRafflePointsModal">
             <div>
-              <span>Draw{raffleSelected?.raffleStatus == 'closed' && 'n'}:</span> {timeStampToString(raffleSelected?.dateOfDraw! * 1000, 1)}
+              <span>{`${t('modalWinnerRaffle.drawText')}:`}</span> {timeStampToString(raffleSelected?.dateOfDraw! * 1000, 1)}
             </div>
           </h3>
           <h3 className="titleRafflePointsModal titleRafflePointsModalsecond">
             {raffleSelected?.raffleStatus == 'closed' && (
               <div>
-                <span>Winner spot: {raffleSelected?.raffleWinnerSpotPosition}</span>
+                <span>{`${t('modalWinnerRaffle.titleRafflePointsModal')} ${raffleSelected?.raffleWinnerSpotPosition}`}</span>
               </div>
             )}
           </h3>

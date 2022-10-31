@@ -2,17 +2,17 @@
 
 .containerLogoutWallet {
   z-index: 2;
-  height: auto;
   position: absolute;
-  right: 5vw;
-  top: 9vh;
-  width: 13%;
+  right: 5%;
+  top: 110%;
+  width: 100%;
   text-align: start;
-  background: $primaryLight;
+  background: #d0ded1;
   border-radius: 12px;
+  min-width: 250px;
   p {
     color: #629a48;
-    padding: 7% 5%;
+    padding: 20px;
     cursor: pointer;
     border-radius: 12px;
     text-align: left;
@@ -39,11 +39,17 @@
   }
 }
 
+@media screen and (max-width: 499px) {
+  .containerLogoutWallet {
+    right: 0px;
+  }
+}
+
 /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */
 /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */
 /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */ /*---- MEDIA QUERY---- */
 
-@media screen and (max-width: 950px) {
+/* @media screen and (max-width: 950px) {
   .containerLogoutWallet {
     z-index: 2;
     width: 85%;
@@ -51,7 +57,7 @@
     background: #d0ded1;
     border-radius: 12px;
     position: absolute;
-    top: 26vh;
+    top: 33vh;
     right: 6vw;
     font-size: 1rem;
 
@@ -85,7 +91,7 @@
     background: #d0ded1;
     border-radius: 12px;
     position: absolute;
-    top: 26vh;
+    top: 33vh;
     right: 6vw;
     font-size: 1rem;
     padding: 0% 0%;
@@ -117,4 +123,4 @@
   .containerLogoutWallet {
     top: 58vh;
   }
-}
+} */
