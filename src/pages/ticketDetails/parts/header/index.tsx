@@ -47,6 +47,14 @@ function HeaderTicketDetailsScreen({ handleSeeMyRaffleSpots, handleBuyTicket, ra
     })
   }
 
+  const RafflingButton = () => {
+    return (
+      <div className="containerRafflingAlert pointer" onClick={() => window.open(import.meta.env.VITE_CHAINLINK_ORACLE_LINK, '_blank')}>
+        <h3>See the draw process in the oracle pending transaction</h3>
+      </div>
+    )
+  }
+
   const WinnerAlert = () => {
     if (!context?.state?.walletAddress || (context?.state?.walletAddress && !utils.isAddress(context?.state?.walletAddress))) {
       return (
@@ -111,6 +119,7 @@ function HeaderTicketDetailsScreen({ handleSeeMyRaffleSpots, handleBuyTicket, ra
               <Button text={t('generalInfo.seeYourRaffleSpots')} rounded onPress={() => handleSeeMyRaffleSpots()} className="buttonSeeYourSpots" />
             </div>
           )}
+          {raffleSelected?.raffleStatus == 'raffling' && <RafflingButton />}
           {raffleSelected?.raffleStatus == 'closed' && <WinnerAlert />}
         </div>
         <div className="actionButtonsMobile">
@@ -120,6 +129,7 @@ function HeaderTicketDetailsScreen({ handleSeeMyRaffleSpots, handleBuyTicket, ra
               <Button text={t('generalInfo.seeYourRaffleSpots')} rounded onPress={() => handleSeeMyRaffleSpots()} className="buttonSeeYourSpots" />
             </div>
           )}
+          {raffleSelected?.raffleStatus == 'raffling' && <RafflingButton />}
           {raffleSelected?.raffleStatus == 'closed' && <WinnerAlert />}
         </div>
       </div>
