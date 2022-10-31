@@ -140,6 +140,19 @@
           font-family: Raleway;
         }
 
+        .containerRafflingAlert {
+          width: 100%;
+          background: #e7c126;
+          border-radius: 50px;
+          color: #fff;
+          padding: 15px 20px;
+          font-size: 13px;
+          text-align: center;
+          box-sizing: border-box;
+          margin-top: 10px;
+          font-family: Raleway;
+        }
+
         /* .containerWinnerAlert.ConnectWallet {
           background: #e9e9f9;
           border-radius: 50px;
@@ -2400,6 +2413,10 @@
           .containerWinnerAlert {
             display: none;
           }
+
+          .containerRafflingAlert {
+            display: none;
+          }
         }
 
         .actionButtonsMobile {
@@ -2447,6 +2464,19 @@
             font-family: Raleway;
           }
 
+          .containerRafflingAlert {
+            width: 100%;
+            background: #e7c126;
+            border-radius: 50px;
+            color: #fff;
+            padding: 15px 20px;
+            font-size: 13px;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: 10px;
+            font-family: Raleway;
+          }
+
           .containerWinnerAlert.Winner {
             background: #e7c126;
             border-radius: 50px;
@@ -2484,6 +2514,11 @@
           }
 
           .containerWinnerAlert {
+            border-radius: 50px;
+            font-size: 11px;
+          }
+
+          .containerRafflingAlert {
             border-radius: 50px;
             font-size: 11px;
           }
