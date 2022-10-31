@@ -2,7 +2,7 @@ import React from 'react'
 import BasicSpinner from '../elements/loader/basic'
 import './styles.scss'
 
-function Button({ text, className, onPress, secondary, loading, outlined, disabled, hidden, applyStyle }: any) {
+function Button({ style, text, className, onPress, secondary, loading, outlined, disabled, hidden, applyStyle }: any) {
   return (
     <div
       className={`button ${className} hidden-${hidden} secondary-button-${secondary} rounder-true button-loading-${loading} button-disabled-${disabled} button-outlined-${outlined}`}

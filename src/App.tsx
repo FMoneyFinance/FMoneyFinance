@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import './assets/scss/index.scss'
 import './assets/scss/variables.scss'
-import HomeScreen from './pages/home'
+import HomeScreen from './pages/Home'
 import AdminTools from './pages/adminTools'
 import UserHistory from './pages/userHistory'
 import ComingSoonScreen from './pages/coming-soon'

@@ -1,19 +1,19 @@
 .ContainerLogo {
   display: flex;
   align-items: center;
-  width: 25%;
+  /* width: 25%; */
+
   img {
-    width: 100%;
+    width: 95px;
   }
 
   span {
     font-weight: 500;
-    margin-left: -5%;
-    color: #3c6132;
-    font-size: 1.5vw;
-
+    /* margin-left: -5%; */
+    color: #629a48;
+    font-size: 30px;
     font-family: "MonumentExtended";
-    padding-bottom: 0.5vw;
+    /* padding-bottom: 0.5vw; */
   }
 }
 
@@ -21,38 +21,40 @@
   .ContainerLogo {
     display: flex;
 
-    margin-top: 5vw;
-    margin-bottom: 10%;
+    /* margin-top: 5vw;
+    margin-bottom: 10%; */
     img {
       padding-top: 0;
       width: 80%;
+      max-width: 95px;
     }
 
     span {
-      font-size: 5vw;
-      padding-left: 0;
-      padding-top: 1vw;
+      font-size: 30px;
+      /* padding-left: 0;
+      padding-top: 1vw; */
     }
   }
 }
 
 @media screen and (max-width: 520px) {
   .ContainerLogo {
-    width: 50%;
-    margin-left: 10vw;
+    /* width: 50%;
+    margin-left: 10vw; */
     display: flex;
     justify-content: center;
-    margin-top: 5vw;
-    margin-bottom: 10%;
+    /* margin-top: 5vw;
+    margin-bottom: 10%; */
     img {
       padding-top: 0;
       width: 80%;
+      max-width: 95px;
     }
 
     span {
-      font-size: 5vw;
-      padding-left: 0;
-      padding-top: 1vw;
+      font-size: 30px;
+      /* padding-left: 0;
+      padding-top: 1vw; */
     }
   }
 }

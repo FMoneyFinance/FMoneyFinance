@@ -15,12 +15,33 @@ import HeaderTicketDetailsScreen from './parts/header'
 import { getRaffleOfSocket } from '../../utils/raffles'
 import ModalBuyTicket from '../../components/modals/buyTicket'
 import ModalSeeMyRaffles from '../../components/modals/seeMyRaffles'
+import BannerAdMobile from '../../assets/animations/banner-ads/phone.gif'
+import BannerAd from '../../assets/animations/banner-ads/coming-soon-1366-px.gif'
 
 function BannerAdd() {
   const { t } = useTranslation(['ticket-details'])
+  const [mobileWidth, setMobileWidth] = useState(window.screen.width < 950)
+
+  useEffect(() => {
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  const handleResize = () => {
+    if (window.screen.width < 950) {
+      setMobileWidth(true)
+    } else {
+      setMobileWidth(false)
+    }
+  }
+
   return (
     <div className="maxWidth adBannerContainer">
-      <h3>{t('bannerAd')}</h3>
+      {/* <h3>{t('bannerAd')}</h3> */}
+      <img src={mobileWidth ? BannerAdMobile : BannerAd} alt="fmoney-banner-ad" style={{ width: '100%' }} />
     </div>
   )
 }
@@ -29,6 +50,21 @@ function TicketDetailsScreen() {
   const context: any = useContext(AppContext)
   const [raffleSelected, setRaffleSelected] = useState<any>({})
   const params = useParams()
+
+  useEffect(() => {
+    if (params?.raffleSmartContractAddress) {
+      const currentRafflesInfo = context?.state?.rafflesInfo
+      const currentRaffleSelected = currentRafflesInfo.filter((raffleInfo: any) => String(raffleInfo.raffleSmartContractAddress).toLowerCase() === String(params?.raffleSmartContractAddress).toLowerCase())[0]
+
+      setRaffleSelected(currentRaffleSelected)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (context?.state?.rafflesInfo && params?.raffleSmartContractAddress) {
+      setRaffleSelected(getRaffleOfSocket(context?.state?.rafflesInfo, params?.raffleSmartContractAddress || ''))
+    }
+  }, [params.raffleSmartContractAddress, context?.state?.rafflesInfo])
 
   const handleSeeMyRaffleSpots = () => {
     context.changeContext({
@@ -56,12 +92,6 @@ function TicketDetailsScreen() {
       )
     }
   }
-
-  useEffect(() => {
-    if (context?.state?.rafflesInfo && params?.raffleSmartContractAddress) {
-      setRaffleSelected(getRaffleOfSocket(context?.state?.rafflesInfo, params?.raffleSmartContractAddress || ''))
-    }
-  }, [params.raffleSmartContractAddress, context?.state?.rafflesInfo])
 
   return (
     <Suspense fallback={<SplashScreen />}>

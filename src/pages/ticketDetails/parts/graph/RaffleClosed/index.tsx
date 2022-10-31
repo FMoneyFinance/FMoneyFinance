@@ -1,27 +1,36 @@
-import React, { useState, useContext, useMemo, useEffect } from 'react'
 import { utils } from 'ethers'
-import Countdown from 'react-countdown'
 import JSConfetti from 'js-confetti'
+import Countdown from 'react-countdown'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import AppContext from '../../../../../context/AppContext'
-import { sameWalletAddress } from '../../../../../utils/validators'
-import clockSVG from '../../../../../assets/icons/clockRaffleClosed.svg'
+import React, { useState, useContext, useMemo, useEffect } from 'react'
+
 import Button from '../../../../../components/Buttons'
-import BuyTicketButton from '../../../../../components/Buttons/buyTicket'
+import AppContext from '../../../../../context/AppContext'
 import { getNextDraw } from '../../../../../utils/raffles'
 import { getTimeToDate } from '../../../../../utils/maths'
-import { useNavigate } from 'react-router-dom'
+import { sameWalletAddress } from '../../../../../utils/validators'
+import clockSVG from '../../../../../assets/icons/clockRaffleClosed.svg'
+import BuyTicketButton from '../../../../../components/Buttons/buyTicket'
 
 export default function RaffleClosed({ raffleSelected }: any) {
-  const context: any = useContext(AppContext)
   const navigate = useNavigate()
-  const { t } = useTranslation(['ticket-details'])
   const [copied, setCopied] = useState(false)
+  const context: any = useContext(AppContext)
+  const { t } = useTranslation(['ticket-details'])
   const [winner, setWinner] = useState(sameWalletAddress(context?.state?.walletAddress, raffleSelected?.raffleWinnerPlayer))
   const [nextDrawTimeStamp, setNextDraw] = useState(getNextDraw(context))
   const [minRaffle, setMinRaffle] = useState<any>([])
 
-  const confettiDisplay = () => {
+  const WinnerSpots = ({ num }: any) => {
+    return (
+      <div className="winnerSport">
+        <h3>{num}</h3>
+      </div>
+    )
+  }
+
+  /* const confettiDisplay = () => {
     if (winner) {
       const jsConfetti = new JSConfetti()
       jsConfetti.addConfetti()
@@ -33,15 +42,7 @@ export default function RaffleClosed({ raffleSelected }: any) {
   const handleClick = () => {
     context.changeContext({ showModalConnectWallet: true })
   }
-
-  const WinnerSpots = ({ num }: any) => {
-    return (
-      <div className="winnerSport">
-        <h3>{num}</h3>
-      </div>
-    )
-  }
-
+  
   const WinnerAlert = () => {
     if (!context?.state?.walletAddress || (context?.state?.walletAddress && !utils.isAddress(context?.state?.walletAddress))) {
       return (
@@ -66,7 +67,7 @@ export default function RaffleClosed({ raffleSelected }: any) {
         <h3>{t('winnerAlert.noWinner')}</h3>
       </div>
     )
-  }
+  } */
 
   const timeOut = setTimeout(() => {
     setCopied(false)
@@ -97,9 +98,7 @@ export default function RaffleClosed({ raffleSelected }: any) {
     return (
       <div className="containerCountdown">
         <ItemNextDraw number={days.toString() + 'd'} />
-
         <ItemNextDraw number={hours.toString() + 'h'} />
-
         <ItemNextDraw number={minutes.toString() + 'm'} />
       </div>
     )
@@ -107,7 +106,7 @@ export default function RaffleClosed({ raffleSelected }: any) {
 
   return (
     <div>
-      <WinnerAlert />
+      {/* <WinnerAlert /> */}
       <div className={'containerTable Closed'}>
         <div className="containerClosed">
           <div className="flex">
