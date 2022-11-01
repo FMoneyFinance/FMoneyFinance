@@ -118,12 +118,14 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
 
     const priceOfTheRaffleTicketInUSDC = raffleSelected?.priceOfTheRaffleTicketInUSDC
     console.log('priceOfTheRaffleTicketInUSDC', priceOfTheRaffleTicketInUSDC)
-    console.log('import.meta.env.VITE_USDC_CONTRACT_ADDRESS', import.meta.env.VITE_USDC_CONTRACT_ADDRESS)
+    const VITE_USDC_CONTRACT_ADDRESS = import.meta.env.VITE_USDC_CONTRACT_ADDRESS
+    console.log(VITE_USDC_CONTRACT_ADDRESS)
     const usdcContractInstance = new Contract(import.meta.env.VITE_USDC_CONTRACT_ADDRESS, erc20TokenContract.abi, provider)
     const usdcTokenDecimals = await usdcContractInstance.decimals()
     const usdcTokenDecimalsDivider = Number(`1e+${usdcTokenDecimals}`)
 
-    console.log('import.meta.env.VITE_UNISWAP_FACTORY', import.meta.env.VITE_UNISWAP_FACTORY)
+    const VITE_UNISWAP_FACTORY = import.meta.env.VITE_UNISWAP_FACTORY
+    console.log(VITE_UNISWAP_FACTORY)
     const factoryContractInstance = new Contract(import.meta.env.VITE_UNISWAP_FACTORY, factoryContract.abi, provider)
     const pairContractAddress = await factoryContractInstance.getPair(selectedTokenToBuyTickets.tokenSmartContract, import.meta.env.VITE_WETH_CONTRACT_ADDRESS)
 
@@ -136,14 +138,15 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
     console.log('pairToken0', pairToken0)
     const token0ContractInstance = new Contract(pairToken0, erc20TokenContract.abi, provider)
     const token0Decimals = await token0ContractInstance.decimals()
-    console.log('pairToken1-0', pairToken1)
+    console.log('pairToken1', pairToken1)
     const token1ContractInstance = new Contract(pairToken1, erc20TokenContract.abi, provider)
     const token1Decimals = await token1ContractInstance.decimals()
 
     const currentToken0PriceWithoutDecimals = (Number(`1e+${token0Decimals}`) * Number(currentTokensReserves[1])) / Number(currentTokensReserves[0]) // --> For 1 FMON is this ETH
     const currentToken1PriceWithoutDecimals = (Number(`1e+${token1Decimals}`) * Number(currentTokensReserves[0])) / Number(currentTokensReserves[1]) // --> For 1 ETH is this FMON
 
-    console.log('import.meta.env.VITE_ETH_USD_PRICE_FEED_ORACLE_ADDRESS', import.meta.env.VITE_ETH_USD_PRICE_FEED_ORACLE_ADDRESS)
+    const VITE_ETH_USD_PRICE_FEED_ORACLE_ADDRESS = import.meta.env.VITE_ETH_USD_PRICE_FEED_ORACLE_ADDRESS
+    console.log(VITE_ETH_USD_PRICE_FEED_ORACLE_ADDRESS)
     const priceFeed = new Contract(import.meta.env.VITE_ETH_USD_PRICE_FEED_ORACLE_ADDRESS, aggregatorV3Contract.abi, provider)
     const latestRoundData = await priceFeed.latestRoundData()
     const priceDecimals = await priceFeed.decimals()
