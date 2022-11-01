@@ -17,7 +17,7 @@
 
   "containerItemsBalance": {
     "ETH": "Saldo ETH:",
-    "USDC": "Saldo USDC:",
+    "USDC": "Saldo USDT:",
     "FMON": "Saldo FMON:"
   },
 
