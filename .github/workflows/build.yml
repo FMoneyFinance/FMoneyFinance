@@ -12,7 +12,7 @@ jobs:
       
       - uses: actions/checkout@master
       - name: create .env file
-      - run: |
+        run: |
           touch .env
           echo VITE_CHAIN_ID_METAMASK=${{ secrets.VITE_CHAIN_ID_METAMASK }} >> .env
           echo VITE_SECRET_KEY=${{ secrets.VITE_SECRET_KEY }} >> .env
