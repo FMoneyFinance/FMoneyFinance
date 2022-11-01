@@ -23,7 +23,7 @@ jobs:
           echo VITE_INFURA_API_KEY=${{ secrets.VITE_INFURA_API_KEY }} >> .env 
           echo VITE_route_to_animation_phone_and_coins=${{ secrets.VITE_route_to_animation_phone_and_coins }} >> .env
           echo VITE_URL_USERS_MNG_API=${{ secrets.VITE_URL_USERS_MNG_API }} >> .env
-          echo VITE_UNISWAP_FACTORY_ADDRESS=${{ secrets.VITE_UNISWAP_FACTORY_ADDRESS }} >> .env
+          echo VITE_UNISWAP_FACTORY=${{ secrets.VITE_UNISWAP_FACTORY }} >> .env
           echo VITE_URL_TICKETS_MNG_API=${{ secrets.VITE_URL_TICKETS_MNG_API }} >> .env
           echo VITE_FMONEY_RAFFLE_OWNER=${{ secrets.VITE_FMONEY_RAFFLE_OWNER }} >> .env
           echo VITE_MSG_TO_SIGN=${{ secrets.VITE_MSG_TO_SIGN }} >> .env
