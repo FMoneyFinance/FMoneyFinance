@@ -39,7 +39,7 @@ jobs:
           echo VITE_POLYGON_PREFIX=${{ secrets.VITE_POLYGON_PREFIX }} >> .env
           echo VITE_CHAIN_ID_LAYER_2_WALLETCONNECT=${{ secrets.VITE_CHAIN_ID_LAYER_2_WALLETCONNECT }} >> .env
           echo VITE_CHAIN_ID_LAYER_2_METAMASK=${{ secrets.VITE_CHAIN_ID_LAYER_2_METAMASK }} >> .env
-      - run: npm ci
+      - run: npm i
       - run: npm run build
 
       - name:  Upload in S3
