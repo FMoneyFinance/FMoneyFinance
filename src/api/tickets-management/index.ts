@@ -135,6 +135,31 @@ export const get_current_raffle_manager_smart_contract_address = async (context:
   return response
 }
 
+export const get_current_raffle_cashier_smart_contract_address = async (context: any) => {
+  const payload = {
+    defaultAccount: context.state?.walletAddress,
+    userAccountSignature: context.state?.userAccountSignature
+  }
+
+  const response = await Axios.post(import.meta.env.VITE_URL_TICKETS_MNG_API + 'get-current-raffle-cashier-smart-contract-address', {
+    data: encryptPayload({ ...payload, dataTimestamp: new Date().getTime() })
+  })
+
+  return response
+}
+
+export const get_if_user_is_admin = async (defaultAccount: string) => {
+  try {
+    const response = await Axios.post(import.meta.env.VITE_URL_TICKETS_MNG_API + 'get-if-user-is-admin', {
+      data: encryptPayload({ defaultAccount, dataTimestamp: new Date().getTime() })
+    })
+
+    return response
+  } catch (error) {
+    console.log('error', error)
+  }
+}
+
 export const update_manager_smart_contract_address = async (payload: object, context: any) => {
   payload = {
     ...payload,
@@ -143,6 +168,38 @@ export const update_manager_smart_contract_address = async (payload: object, con
   }
 
   const response = await Axios.post(import.meta.env.VITE_URL_TICKETS_MNG_API + 'update-manager-smart-contract-address', {
+    data: encryptPayload({ ...payload, dataTimestamp: new Date().getTime() })
+  })
+
+  return response
+}
+
+export const get_raffle_available_spots = async (payload: object, context: any) => {
+  payload = {
+    ...payload,
+    defaultAccount: context.state?.walletAddress,
+    userAccountSignature: context.state?.userAccountSignature
+  }
+
+  const response = await Axios.post(import.meta.env.VITE_URL_TICKETS_MNG_API + 'get-raffle-available-spots', {
+    data: encryptPayload({ ...payload, dataTimestamp: new Date().getTime() })
+  })
+
+  return response
+}
+
+export const register_tickets_bought = async (payload: object, context: any) => {
+  /* payload = {
+    ...payload,
+    defaultAccount: context.state?.walletAddress,
+    userAccountSignature: context.state?.userAccountSignature
+  } */
+
+  console.log({
+    data: encryptPayload({ ...payload, dataTimestamp: new Date().getTime() })
+  })
+
+  const response = await Axios.post(import.meta.env.VITE_URL_TICKETS_MNG_API + 'register-tickets-bought', {
     data: encryptPayload({ ...payload, dataTimestamp: new Date().getTime() })
   })
 

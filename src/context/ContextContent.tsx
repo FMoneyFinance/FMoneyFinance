@@ -53,15 +53,18 @@ function ContextContent({ children }: any) {
       handleAccountWalletChange(props, context)
     })
     WindowContext.ethereum?.on('chainChanged', (_chainId: any) => {
-      disconnectWallet(changeContext)
-      setTimeout(() => window.location.reload(), 500)
+      if (!context.state.isAdminUser) {
+        disconnectWallet(changeContext)
+        setTimeout(() => window.location.reload(), 500)
+      }
     })
 
     return () => {
       WindowContext.ethereum?.removeListener('accountsChanged', (props: any) => {
         handleAccountWalletChange(props, context)
       })
-      WindowContext.ethereum?.on('chainChanged', (_chainId: any) => window.location.reload())
+
+      if (!context.state.isAdminUser) WindowContext.ethereum?.on('chainChanged', (_chainId: any) => window.location.reload())
     }
   }, [])
 

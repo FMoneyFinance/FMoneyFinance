@@ -27,6 +27,7 @@ export const checkMetamaskConnection = async (changeContext: Function) => {
     }
   } else {
     const connectorInstance = getConnectorInstance()
+    console.log('connectorInstance', connectorInstance)
 
     if (connectorInstance && !connectorInstance.connected) {
       changeContext({ walletAddress: null, userAccountSignature: null })

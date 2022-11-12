@@ -22,7 +22,7 @@
 
   "errors": {
     "selectedRaffleName": "You have to insert a valid name of the raffle",
-    "selectedDateOfDraw": "The date of the draw has to be 15 minutes away from current time",
+    "selectedDateOfDraw": "The date of the draw has to be 30 minutes away from current time",
     "selectedPriceOfTheRaffleTicket": "Please set the price of the ticket.",
     "selectedPriceOfTheRaffleTicketHasNumber": "This data has to be a number.",
     "selectedPriceOfTheRaffleTicketPositiveNumber": "This data has to be a positive number.",
@@ -31,6 +31,8 @@
     "selectedMaxNumberOfPlayersPositiveNumber": "This data has to be a positive number.",
     "selectedPercentageOfPrizeToOperator": "Please select the percetange that is going to go to the operator.",
     "selectedPercentageOfPrizeToOperatorHasNumber": "This data has to be a number.",
+    "changeConnectorNetworkTesnet": "Please change your wallet connection to the LAYER 2 POLYGON MUMBAI network.",
+    "changeConnectorNetworkMainnet": "Please change your wallet connection to the LAYER 2 POLYGON MAINNET network.",
     "selectedPercentageOfPrizeToOperatorPositiveNumber": "This data has to be a number between 0 and 100."
   }
 }

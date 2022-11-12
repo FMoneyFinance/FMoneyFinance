@@ -28,6 +28,7 @@ function HeaderTicketDetailsScreen({ handleSeeMyRaffleSpots, handleBuyTicket, ra
   }, 15000)
 
   useEffect(() => {
+    console.log(raffleSelected?.raffleStatus === 'closed', String(context?.state?.walletAddress).toLocaleLowerCase() === String(raffleSelected?.raffleWinnerPlayer).toLocaleLowerCase())
     if (raffleSelected?.raffleStatus === 'closed' && String(context?.state?.walletAddress).toLocaleLowerCase() === String(raffleSelected?.raffleWinnerPlayer).toLocaleLowerCase()) {
       setWinner(true)
     } else {
@@ -106,7 +107,7 @@ function HeaderTicketDetailsScreen({ handleSeeMyRaffleSpots, handleBuyTicket, ra
           </div>
         </div>
         <div className="center">
-          <h3>${raffleSelected.currentPrizePot || 0} USDC</h3>
+          <h3>${raffleSelected.currentPrizePot || 0} USD</h3>
           <h4>{t('generalInfo.prizePot')}</h4>
         </div>
         <div className="right">

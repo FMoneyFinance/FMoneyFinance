@@ -80,7 +80,7 @@ export default function GraphLinesClosed({ raffleSelected }: any) {
                   <img src={Copy} className="pointer textEllipsis" />
                 </CopyToClipboard>
                 &nbsp; &nbsp;
-                <a href={`${import.meta.env.VITE_ETHERSCAN_PREFIX}${urlPrefix}${address}`} target="_blank" rel="noopener noreferrer">
+                <a href={`${urlPrefix}/${address}`} target="_blank" rel="noopener noreferrer">
                   <img src={Open} className="pointer textEllipsis" />
                 </a>
               </div>
@@ -96,9 +96,9 @@ export default function GraphLinesClosed({ raffleSelected }: any) {
       {isDesktop && <img src={Coin} alt="Coin" id="CoinGraphLineClosed" />}
       {winner && isDesktop && <img src={Coin2} alt="Coin" id="CoinGraphLineClosed2" />}
       <div className={winner ? 'containerGraphLines Closed Winner' : 'containerGraphLines Closed'}>
-        <Item urlPrefix="address/" applyStyle={{ boxSizing: 'border-box', paddingTop: '8%', position: 'relative' }} icon={!ThereAWallet(context) || (ThereAWallet(context) && !winner) ? userIconGray : userIcon} title={t('closedRaffle.raffleWinnerAddress')} address={raffleSelected?.raffleWinnerPlayer} />
-        <Item urlPrefix="tx/" icon={!ThereAWallet(context) || (ThereAWallet(context) && !winner) ? swipeIconGray : swipeIcon} title={t('closedRaffle.txHashPrize')} address={raffleSelected?.raffleTxHashOfSetWinner} />
-        <Item urlPrefix="tx/" icon={!ThereAWallet(context) || (ThereAWallet(context) && !winner) ? lampIconGray : lampIcon} title={t('closedRaffle.txHashDraw')} address={raffleSelected?.raffleTxHashOfDraw} />
+        <Item urlPrefix={`${import.meta.env.VITE_ETHERSCAN_PREFIX}address`} applyStyle={{ boxSizing: 'border-box', paddingTop: '8%', position: 'relative' }} icon={!ThereAWallet(context) || (ThereAWallet(context) && !winner) ? userIconGray : userIcon} title={t('closedRaffle.raffleWinnerAddress')} address={raffleSelected?.raffleWinnerPlayer} />
+        <Item urlPrefix={`${import.meta.env.VITE_ETHERSCAN_PREFIX}tx`} icon={!ThereAWallet(context) || (ThereAWallet(context) && !winner) ? swipeIconGray : swipeIcon} title={t('closedRaffle.txHashPrize')} address={raffleSelected?.raffleTxHashOfSetWinner} />
+        <Item urlPrefix={`${import.meta.env.VITE_POLYGON_PREFIX}tx`} icon={!ThereAWallet(context) || (ThereAWallet(context) && !winner) ? lampIconGray : lampIcon} title={t('closedRaffle.txHashDraw')} address={raffleSelected?.raffleTxHashOfDraw} />
         <div className="containerInfoWinner textEllipsis">
           <div>
             <h2>{t('closedRaffle.winnerSpotPosition')}</h2>

@@ -538,6 +538,7 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
     setDisableButton(true)
 
     const response: any = await has_to_approve_api(payload, context)
+    console.log('response has_to_approve_api', response)
 
     if (response.success && response.hasToApprove) {
       setIndex('Approve')
