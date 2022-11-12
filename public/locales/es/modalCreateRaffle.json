@@ -22,7 +22,7 @@
 
   "errors": {
     "selectedRaffleName": "Tienes que ingresar un nombre válido para la rifa",
-    "selectedDateOfDraw": "La fecha de la rifa debe estar a 15 minutos o más de la hora actual",
+    "selectedDateOfDraw": "La fecha de la rifa debe estar a 30 minutos o más de la hora actual",
     "selectedPriceOfTheRaffleTicket": "Establece el precio del boleto.",
     "selectedPriceOfTheRaffleTicketHasNumber": "Este dato tiene que ser un número.",
     "selectedPriceOfTheRaffleTicketPositiveNumber": "Este dato tiene que ser un número positivo.",
@@ -31,6 +31,8 @@
     "selectedMaxNumberOfPlayersPositiveNumber": "Este dato tiene que ser un número positivo.",
     "selectedPercentageOfPrizeToOperator": "Seleccione el porcentaje que se destinará al operador.",
     "selectedPercentageOfPrizeToOperatorHasNumber": "Este dato tiene que ser un número.",
+    "changeConnectorNetworkTesnet": "Por favor cambia la conexión de tu wallet a la red LAYER 2 POLYGON MUMBAI.",
+    "changeConnectorNetworkMainnet": "Por favor cambia la conexión de tu wallet a la red LAYER 2 POLYGON MAINNET.",
     "selectedPercentageOfPrizeToOperatorPositiveNumber": "Este dato debe ser un número entre 0 y 100."
   }
 }

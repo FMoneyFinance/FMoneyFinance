@@ -105,6 +105,7 @@ function ModalConnectWallet({ showModal, setShowModal }: any) {
 
     if (!connectorInstance.connected) {
       const walletConnectionResponse = await handleConnectWallet(connectorInstance)
+      console.log('walletConnectionResponse.payload.params[0].chainId', walletConnectionResponse.payload.params[0].chainId)
 
       if (connectorInstance.connected && String(walletConnectionResponse.payload.params[0].chainId) !== import.meta.env.VITE_CHAIN_ID_WALLETCONNECT) {
         handleKillSessionConnector()

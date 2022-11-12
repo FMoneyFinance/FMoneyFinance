@@ -41,9 +41,9 @@ export const handleApproveTransfer = async (selectedTokenToBuyTickets: string) =
     const provider = context.ethereum ? getProvider() : await getWalletConnectProvider()
     const userAccountSigner = provider.getSigner()
 
-    const currentManagerSmartContract: string = sessionStorage.getItem('currentManagerSmartContract') || ''
-    const raffleManagerInstance = new Contract(currentManagerSmartContract, fmoneyRaffleManagerContract.abi, userAccountSigner)
-    const raffleCashierContractAddress = await raffleManagerInstance.raffleCashier()
+    const raffleCashierContractAddress: string = sessionStorage.getItem('currentCashierSmartContract') || ''
+    /* const raffleManagerInstance = new Contract(currentManagerSmartContract, fmoneyRaffleManagerContract.abi, userAccountSigner)
+    const raffleCashierContractAddress = await raffleManagerInstance.raffleCashier() */
 
     const selectedTokenContractInstance = new Contract(selectedTokenToBuyTickets, erc20TokenContract.abi, userAccountSigner)
     const selectedTokenTotalSupply = await selectedTokenContractInstance.totalSupply()

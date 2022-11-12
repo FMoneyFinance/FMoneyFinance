@@ -14,7 +14,7 @@ import ContextContent from './context/ContextContent'
 import TicketDetailsScreen from './pages/ticketDetails'
 import { allowed_tokens_api } from './api/users-management'
 import AppContext, { checkMetamaskConnection, getInitialState } from './context/AppContext'
-import { get_current_raffles_list_api, get_current_raffle_manager_smart_contract_address } from './api/tickets-management'
+import { get_current_raffles_list_api, get_current_raffle_manager_smart_contract_address, get_current_raffle_cashier_smart_contract_address } from './api/tickets-management'
 import SplashScreen from './components/Splash'
 
 const io: any = socketIo
@@ -68,11 +68,17 @@ function App() {
     sessionStorage.setItem('currentManagerSmartContract', response.currentRaffleManagerSmartContractAddress)
   }
 
+  const handleGetCurrentCashierSmartContract = async () => {
+    const response: any = await get_current_raffle_cashier_smart_contract_address(context)
+    sessionStorage.setItem('currentCashierSmartContract', response.currentRaffleCashierSmartContractAddress)
+  }
+
   useEffect(() => {
     checkMetamaskConnection(changeContext)
     handleGetRafflesInfo()
     handleGetAllowedTokens()
     handleGetCurrentManagerSmartContract()
+    handleGetCurrentCashierSmartContract()
 
     socketConnection.on('manager-smart-contract-changed-response', (managerSmartContractAddress: any) => {
       console.log('manager-smart-contract-changed-response', managerSmartContractAddress)

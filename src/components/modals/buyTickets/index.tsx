@@ -136,7 +136,7 @@ function BuyTicketsModal({ error, setTextButton, raffleSelected, handleDisableBu
               </h3>
               <h6 className="strong" style={{ textAlign: 'right' }}>
                 <span>{valuesToPay ? valuesToPay.quantityExpressedInUSDCUnits : 0}</span>
-                USDT
+                USD
               </h6>
             </div>
           )}

@@ -1,12 +1,14 @@
 // import { useTranslation } from 'react-i18next'
 import { Contract, providers, utils } from 'ethers'
 
+import { CheckMetamaskInstalled } from '../metamask'
 import { getInLocalOrSession } from '../../../utils/storage'
 import { getTransactionConfirmedData } from '../transactions'
 import { getProvider, getWalletConnectProvider } from '../providers'
 import { create_raffle_api } from '../../../api/tickets-management'
 import erc20TokenContract from '../../contracts/interfaces/IERC20.json'
 import { getDefaultAccount, getWalletConnectDefaultAccount } from '../accounts/index'
+import { getConnectorInstance, handleKillSessionConnector } from '../../walletConnect'
 import fmoneyRaffleManagerContract from '../../contracts/interfaces/IFmoneyRaffleManager.json'
 import fmoneyRaffleOperatorContract from '../../contracts/interfaces/IFmoneyRaffleOperator.json'
 
@@ -79,7 +81,7 @@ export const CreateRaffleFunct = async ({ selectedRaffleName, selectedDateOfDraw
   const minsDifference = Math.round(((differenceBetweenDates % 86400000) % 3600000) / 60000)
   console.log('minsDifference', minsDifference)
 
-  if (daysDifference < 1 && minsDifference < 15) {
+  if (daysDifference < 1 && minsDifference < 30) {
     isFormValid = false
     errors.selectedDateOfDraw = translation('errors.selectedDateOfDraw')
   }
@@ -148,6 +150,24 @@ export const CreateRaffleFunct = async ({ selectedRaffleName, selectedDateOfDraw
     return { success: false, errors }
   }
 
+  if (!CheckMetamaskInstalled()) {
+    const connectorInstance = getConnectorInstance()
+    console.log(connectorInstance.connected)
+
+    if (connectorInstance.connected && String(connectorInstance.chainId) !== import.meta.env.VITE_CHAIN_ID_LAYER_2_WALLETCONNECT) {
+      handleKillSessionConnector()
+      // location.reload()
+      return { success: false, errors: { selectedMaxNumberOfPlayers: import.meta.env.VITE_CHAIN_ID_LAYER_2_WALLETCONNECT === '80001' ? translation('errors.changeConnectorNetworkTesnet') : translation('errors.changeConnectorNetworkMainnet') } }
+    }
+  } else {
+    const isConnected = context?.ethereum?.isConnected()
+    const chainId = await context?.ethereum?.request({ method: 'eth_chainId' })
+
+    if (isConnected && chainId !== import.meta.env.VITE_CHAIN_ID_LAYER_2_METAMASK) {
+      return { success: false, errors: { selectedMaxNumberOfPlayers: import.meta.env.VITE_CHAIN_ID_LAYER_2_WALLETCONNECT === '80001' ? translation('errors.changeConnectorNetworkTesnet') : translation('errors.changeConnectorNetworkMainnet') } }
+    }
+  }
+
   const provider = context.ethereum ? getProvider() : await getWalletConnectProvider()
   const defaultAccount = context.ethereum ? getDefaultAccount() : getWalletConnectDefaultAccount()
   let nonceOffset = 0
@@ -161,14 +181,14 @@ export const CreateRaffleFunct = async ({ selectedRaffleName, selectedDateOfDraw
   const fmoneyRaffleManagerContractInstance = new Contract(currentManagerSmartContract, fmoneyRaffleManagerContract.abi, userAccountSigner)
   const currentNumOfRaffles = await fmoneyRaffleManagerContractInstance.allRafflesLength()
 
-  const usdcContractInstance = new Contract(import.meta.env.VITE_USDC_CONTRACT_ADDRESS, erc20TokenContract.abi, provider)
+  // const usdcContractInstance = new Contract(import.meta.env.VITE_USDC_CONTRACT_ADDRESS, erc20TokenContract.abi, provider)
 
-  const usdcTokenDecimals = await usdcContractInstance.decimals()
-  const usdcTokenDecimalsDivider = Number(`1e+${usdcTokenDecimals}`)
+  // const usdcTokenDecimals = await usdcContractInstance.decimals()
+  // const usdcTokenDecimalsDivider = Number(`1e+${usdcTokenDecimals}`)
   let gasLimitEstimation = null
 
   try {
-    gasLimitEstimation = await fmoneyRaffleManagerContractInstance.estimateGas.createRaffle(
+    /* gasLimitEstimation = await fmoneyRaffleManagerContractInstance.estimateGas.createRaffle(
       import.meta.env.VITE_USDC_CONTRACT_ADDRESS,
       Math.round(new Date(selectedDateOfDraw).getTime() / 1000),
       // `FMoney Raffle No. ${Number(currentNumOfRaffles) + 1}`,
@@ -178,7 +198,9 @@ export const CreateRaffleFunct = async ({ selectedRaffleName, selectedDateOfDraw
       `FMON-V1-${Math.round(new Date(selectedDateOfDraw).getTime() / 1000)}`,
       selectedPercentageOfPrizeToOperator,
       selectedPriceOfTheRaffleTicket * usdcTokenDecimalsDivider
-    )
+    ) */
+
+    gasLimitEstimation = await fmoneyRaffleManagerContractInstance.estimateGas.createRaffle(Math.round(new Date(selectedDateOfDraw).getTime() / 1000), selectedRaffleName, 2, selectedMaxNumberOfPlayers, `FMON-V1-${Math.round(new Date(selectedDateOfDraw).getTime() / 1000)}`, selectedPercentageOfPrizeToOperator, selectedPriceOfTheRaffleTicket)
   } catch (error: any) {
     console.log('error', error)
     return { success: false, error }
@@ -191,7 +213,7 @@ export const CreateRaffleFunct = async ({ selectedRaffleName, selectedDateOfDraw
   let creationOfRaffleTx: any = {}
 
   try {
-    creationOfRaffleTx = await fmoneyRaffleManagerContractInstance.createRaffle(
+    /* creationOfRaffleTx = await fmoneyRaffleManagerContractInstance.createRaffle(
       import.meta.env.VITE_USDC_CONTRACT_ADDRESS,
       Math.round(new Date(selectedDateOfDraw).getTime() / 1000),
       // `FMoney Raffle No. ${Number(currentNumOfRaffles) + 1}`,
@@ -206,7 +228,13 @@ export const CreateRaffleFunct = async ({ selectedRaffleName, selectedDateOfDraw
         gasLimit: Number(gasLimitEstimation),
         gasPrice: gasPriceToPay
       }
-    )
+    ) */
+
+    creationOfRaffleTx = await fmoneyRaffleManagerContractInstance.createRaffle(Math.round(new Date(selectedDateOfDraw).getTime() / 1000), selectedRaffleName, 2, selectedMaxNumberOfPlayers, `FMON-V1-${Math.round(new Date(selectedDateOfDraw).getTime() / 1000)}`, selectedPercentageOfPrizeToOperator, selectedPriceOfTheRaffleTicket, {
+      nonce: currentNonce,
+      gasLimit: Number(gasLimitEstimation),
+      gasPrice: gasPriceToPay
+    })
   } catch (error: any) {
     return { success: false, error }
   }
@@ -236,15 +264,19 @@ export const CreateRaffleFunct = async ({ selectedRaffleName, selectedDateOfDraw
 }
 
 export const GetTimestampRaffle = async (selectedRaffe: string) => {
-  const provider = context.ethereum ? getProvider() : await getWalletConnectProvider()
+  /* const provider = context.ethereum ? getProvider() : await getWalletConnectProvider()
   const fmoneyRaffleOperatorContractInstance = new Contract(selectedRaffe, fmoneyRaffleOperatorContract.abi, provider)
-  const fmoneyRaffleDateTimestamp = await fmoneyRaffleOperatorContractInstance.dateOfDraw()
+  const fmoneyRaffleDateTimestamp = await fmoneyRaffleOperatorContractInstance.dateOfDraw() */
+
+  const currentStateInfo = JSON.parse(localStorage.getItem('state') || '{}')
+  const raffleSelectedInfo = currentStateInfo.rafflesInfo.filter((raffleInfo: any) => String(raffleInfo.raffleSmartContractAddress) === String(selectedRaffe))
+  const fmoneyRaffleDateTimestamp = raffleSelectedInfo.length > 0 ? raffleSelectedInfo[0].timestampDateOfDraw : 1668283200
 
   return Number(fmoneyRaffleDateTimestamp)
 }
 
 export const GetRaffleId = async (selectedRaffleToBuyTicket: string) => {
-  const provider = context.ethereum ? getProvider() : await getWalletConnectProvider()
+  /* const provider = context.ethereum ? getProvider() : await getWalletConnectProvider()
   const currentManagerSmartContract: string = sessionStorage.getItem('currentManagerSmartContract') || ''
   const fmoneyRaffleManagerContractInstance = new Contract(currentManagerSmartContract, fmoneyRaffleManagerContract.abi, provider)
   const currentRaffleId = await fmoneyRaffleManagerContractInstance.currentRaffleId()
@@ -256,7 +288,11 @@ export const GetRaffleId = async (selectedRaffleToBuyTicket: string) => {
     if (String(raffleContractAddress).toLowerCase() === String(selectedRaffleToBuyTicket).toLowerCase()) {
       fmoneyRaffleId = i
     }
-  }
+  } */
+
+  const currentStateInfo = JSON.parse(localStorage.getItem('state') || '{}')
+  const raffleSelectedInfo = currentStateInfo.rafflesInfo.filter((raffleInfo: any) => String(raffleInfo.raffleSmartContractAddress) === String(selectedRaffleToBuyTicket))
+  const fmoneyRaffleId = raffleSelectedInfo.length > 0 ? raffleSelectedInfo[0].raffleId : '0'
 
   return fmoneyRaffleId
 }

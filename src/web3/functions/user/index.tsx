@@ -1,6 +1,7 @@
 import { Contract } from 'ethers'
 
 import { getProvider, getWalletConnectProvider } from '../providers'
+import { get_if_user_is_admin } from '../../../api/tickets-management'
 import { user_authentication_api } from '../../../api/users-management'
 import { getDefaultAccount, getWalletConnectDefaultAccount } from '../accounts'
 import fmoneyRaffleManagerContract from '../../contracts/interfaces/IFmoneyRaffleManager.json'
@@ -42,10 +43,12 @@ export const checkIsUser = async (context: any) => {
   const currentManagerSmartContract: string = sessionStorage.getItem('currentManagerSmartContract') || ''
   // const raffleManagerInstance = new Contract(import.meta.env.VITE_FMONEY_RAFFLE_MANAGER_GOERLI, fmoneyRaffleManagerContract.abi, provider)
   const raffleManagerInstance = new Contract(currentManagerSmartContract, fmoneyRaffleManagerContract.abi, provider)
-  const userIsAdmin = await raffleManagerInstance.getIfUserIsAdmin(defaultAccount)
+  // const userIsAdmin = await raffleManagerInstance.getIfUserIsAdmin(defaultAccount)
+
+  const response: any = await get_if_user_is_admin(defaultAccount)
 
   // if (String(defaultAccount).toLowerCase() == String(import.meta.env.VITE_FMONEY_RAFFLE_OWNER).toLowerCase()) {
-  if (userIsAdmin) {
+  if (response.userIsAdmin) {
     return true
   } else {
     return false
@@ -57,11 +60,18 @@ export const checkIfWalletConnectUserIsAdmin = async (context: any) => {
   const walletConnectProvider = await getWalletConnectProvider()
   const currentManagerSmartContract: string = sessionStorage.getItem('currentManagerSmartContract') || ''
   const raffleManagerInstance = new Contract(currentManagerSmartContract, fmoneyRaffleManagerContract.abi, walletConnectProvider)
-  const userIsAdmin = await raffleManagerInstance.getIfUserIsAdmin(defaultAccount)
+  const response: any = await get_if_user_is_admin(defaultAccount)
+
+  if (response.userIsAdmin) {
+    return true
+  } else {
+    return false
+  }
+  /* const userIsAdmin = await raffleManagerInstance.getIfUserIsAdmin(defaultAccount)
 
   if (userIsAdmin) {
     return true
   } else {
     return false
-  }
+  } */
 }
