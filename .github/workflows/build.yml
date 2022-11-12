@@ -36,6 +36,7 @@ jobs:
           echo VITE_FMONEY_LOTTERY_TICKETS_ADDRESS=${{ secrets.VITE_FMONEY_LOTTERY_TICKETS_ADDRESS }} >> .env 
           echo VITE_URL_GENERATE_TICKETS_API=${{ secrets.VITE_URL_GENERATE_TICKETS_API }} >> .env
           echo VITE_CHAINLINK_ORACLE_LINK=${{ secrets.VITE_CHAINLINK_ORACLE_LINK }} >> .env
+          echo VITE_POLYGON_PREFIX=${{ secrets.VITE_POLYGON_PREFIX }} >> .env
       - run: npm ci
       - run: npm run build
 
