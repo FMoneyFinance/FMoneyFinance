@@ -322,11 +322,11 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
   }
 
   const handleOnClick = () => {
-    if (textButton == 'Approve') {
+    if (textButton == t('buttonStateTexts.approve')) {
       handleApprove()
-    } else if (textButton == 'Send') {
+    } else if (textButton == t('buttonStateTexts.send')) {
       onSuccessClick()
-    } else if (textButton == 'Done') {
+    } else if (textButton == t('buttonStateTexts.done')) {
       if (onCloseModal) onCloseModal()
       context.changeContext({ showModal: null })
     } else {
@@ -430,7 +430,9 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
 
     setLoading(true)
 
+    console.log('send_ticket_to_email_api', payload)
     const response: any = await send_ticket_to_email_api(payload, context)
+    console.log('send_ticket_to_email_api', response)
 
     if (response.success) {
       setLoading(false)
