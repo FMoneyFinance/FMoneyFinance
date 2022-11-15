@@ -9,7 +9,7 @@ function LoaderCountdown() {
   const [loadingCountInterval, setLoadingCountInterval] = useState<any>()
 
   useEffect(() => {
-    let loadingCount = 90
+    let loadingCount = 180
     const loadingCountIntervalId = setInterval(() => {
       setLoadingCountGlobal(loadingCount--)
     }, 1000)
