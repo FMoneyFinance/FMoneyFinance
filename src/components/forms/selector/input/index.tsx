@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
+
 import './styles.scss'
 import ChevronDown from '../../../../assets/icons/chevron-down.svg'
 
 function InputSelect({ config }: any) {
+  const dropDownRef: any = useRef()
   const [openOptions, setOpenOptiosn] = useState(false)
 
-  const handleClick = (option: any) => {
-    config.onChange(option)
-  }
-  let dropDownRef: any = useRef()
   useEffect(() => {
     let handler = (event: any) => {
       if (dropDownRef.current && !dropDownRef.current.contains(event?.target)) {
@@ -21,6 +19,10 @@ function InputSelect({ config }: any) {
       document.removeEventListener('mousedown', handler)
     }
   }, [])
+
+  const handleClick = (option: any) => {
+    config.onChange(option)
+  }
 
   const Menu = () => {
     const Item = ({ option }: any) => {

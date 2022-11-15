@@ -88,7 +88,7 @@ function RaffleSpots({ params, handleBuyTicket, raffleSelected }: any) {
       console.log('entro a cambiar tickets info hash', 'selectedRaffleSmartContract', selectedRaffleSmartContract)
       sessionStorage.setItem(`currentRafflesTicketsInfoHash-${selectedRaffleSmartContract}`, rafflesTicketsInfoHashUpdated)
 
-      const provider = contextWin.ethereum ? getProvider() : await getWalletConnectProvider()
+      /* const provider = contextWin.ethereum ? getProvider() : await getWalletConnectProvider()
       const fmoneyRaffleOperatorContractInstance = new Contract(selectedRaffleSmartContract, fmoneyRaffleOperatorContract.abi, provider)
       const maxNumberOfPlayers = await fmoneyRaffleOperatorContractInstance.maxNumberOfPlayers()
       const raffleTicketOwners = await fmoneyRaffleOperatorContractInstance.getRaffleTicketOwners()
@@ -96,7 +96,16 @@ function RaffleSpots({ params, handleBuyTicket, raffleSelected }: any) {
       const ticketOwnersAddresses = raffleTicketOwners[0]
 
       const ticketsCurrentFullInfo = { maxNumberOfPlayers: Number(maxNumberOfPlayers), rafflePlayerNumbers, ticketOwnersAddresses }
-      handleUpdateSpotsInfo(ticketsCurrentFullInfo)
+      handleUpdateSpotsInfo(ticketsCurrentFullInfo) */
+      setLoading(true)
+      const { success, spots: spotList, message }: any = await handleGetAvailableSpots(raffleSelected.raffleSmartContractAddress)
+
+      if (success) {
+        setSpots(spotList)
+        setLoading(false)
+      }
+
+      setLoading(false)
     }
   }
 

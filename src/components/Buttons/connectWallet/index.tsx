@@ -37,10 +37,7 @@ function ConnectWallet({ tikcketDetails }: any) {
           {openDropOptions && <LogoutWallet setOpenDropOptions={setOpenDropOptions} />}
         </>
       ) : (
-        <>
-          {/* <Button text={t('buttonConnectWallet')} className="button-connect-wallet" onPress={handleClick} rounded={true} /> */}
-          <Button text={t('buttonConnectWallet')} onPress={handleClick} rounded={true} />
-        </>
+        <Button text={t('buttonConnectWallet')} onPress={handleClick} rounded={true} />
       )}
     </>
   )
