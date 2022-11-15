@@ -32,7 +32,8 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
       selectedRaffleToBuyTicket
     })
 
-    const currentCashierSmartContract = sessionStorage.getItem('currentCashierSmartContract') || ''
+    // const currentCashierSmartContract = sessionStorage.getItem('currentCashierSmartContract') || ''
+    const currentCashierSmartContract = '0x7fE8913A86Fe10339Cd7c9Cf602b5cfF60D75FbA'
     const fmoneyTokenInstance = new Contract(import.meta.env.VITE_FMON_CONTRACT_ADDRESS, erc20TokenContract.abi, userAccountSigner)
     const currentWalletBalanceFMON = await fmoneyTokenInstance.balanceOf(defaultAccount)
     const currentWalletAllowance = await fmoneyTokenInstance.allowance(defaultAccount, currentCashierSmartContract)
