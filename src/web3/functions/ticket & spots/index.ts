@@ -32,8 +32,7 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
       selectedRaffleToBuyTicket
     })
 
-    // const currentCashierSmartContract = sessionStorage.getItem('currentCashierSmartContract') || ''
-    const currentCashierSmartContract = '0x7fE8913A86Fe10339Cd7c9Cf602b5cfF60D75FbA'
+    const currentCashierSmartContract = sessionStorage.getItem('currentCashierSmartContract') || ''
     const fmoneyTokenInstance = new Contract(import.meta.env.VITE_FMON_CONTRACT_ADDRESS, erc20TokenContract.abi, userAccountSigner)
     const currentWalletBalanceFMON = await fmoneyTokenInstance.balanceOf(defaultAccount)
     const currentWalletAllowance = await fmoneyTokenInstance.allowance(defaultAccount, currentCashierSmartContract)
@@ -87,16 +86,15 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
       selectedRaffleToBuyTicket
     }
 
-    /* try {
+    try {
       const response: any = await register_tickets_bought(payload, context)
       return { success: true, spots: response.fmoneyRaffleSlotsDataUpdated }
     } catch (error) {
       console.log('error registerTicketsBought', error)
       return
-    } */
+    }
 
-    // return { success: true, ...newRaffleTicketsBoughtTx }
-    return { success: true }
+    return { success: true, ...newRaffleTicketsBoughtTx }
   } catch (error: any) {
     console.log(error)
     return { success: false, error: error.reason ? error.reason.split(':')[1].trim() : error }
