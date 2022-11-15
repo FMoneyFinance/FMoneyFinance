@@ -83,8 +83,19 @@ function ModalSeeMyRaffles({ raffleSelected }: { raffleSelected: raffleInterface
     const fmoneyRaffleOperatorContractInstance = new Contract(raffleSelected?.raffleSmartContractAddress, fmoneyRaffleOperatorContract.abi, provider)
 
     for (let i = 0; i < spotsOfUser.length; i++) {
-      const ownerOfTicket = await fmoneyRaffleOperatorContractInstance.ownerOf(spotsOfUser[i])
+      /* const ownerOfTicket = await fmoneyRaffleOperatorContractInstance.ownerOf(spotsOfUser[i])
       const tokenURIOfTicket = await fmoneyRaffleOperatorContractInstance.tokenURI(spotsOfUser[i])
+
+      if (String(ownerOfTicket).toLowerCase() !== String(context.state?.walletAddress).toLowerCase()) {
+        ownerOfAllTickets = false
+        break
+      } else {
+        tokenURIOfTickets.push(tokenURIOfTicket)
+      } */
+
+      const playerNumbersData = await fmoneyRaffleOperatorContractInstance.playerNumbers(spotsOfUser[i])
+      const ownerOfTicket = playerNumbersData[0]
+      const tokenURIOfTicket = playerNumbersData[2]
 
       if (String(ownerOfTicket).toLowerCase() !== String(context.state?.walletAddress).toLowerCase()) {
         ownerOfAllTickets = false
