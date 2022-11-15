@@ -86,15 +86,16 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
       selectedRaffleToBuyTicket
     }
 
-    try {
+    /* try {
       const response: any = await register_tickets_bought(payload, context)
       return { success: true, spots: response.fmoneyRaffleSlotsDataUpdated }
     } catch (error) {
       console.log('error registerTicketsBought', error)
       return
-    }
+    } */
 
-    return { success: true, ...newRaffleTicketsBoughtTx }
+    // return { success: true, ...newRaffleTicketsBoughtTx }
+    return { success: true }
   } catch (error: any) {
     console.log(error)
     return { success: false, error: error.reason ? error.reason.split(':')[1].trim() : error }
