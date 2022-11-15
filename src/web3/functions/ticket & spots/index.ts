@@ -63,13 +63,13 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
       gasLimit: Number(gasLimitEstimation),
       gasPrice: gasPriceToPay
     }) */
-    const newRaffleTicketsBoughtTx = await fmoneyRaffleCashierContractInstance.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets, {
+    /* const newRaffleTicketsBoughtTx = await fmoneyRaffleCashierContractInstance.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets, {
       nonce: currentNonce,
       gasLimit: Number(gasLimitEstimation),
       gasPrice: gasPriceToPay
     })
     const transactionReceipt: any = await getTransactionConfirmedData(newRaffleTicketsBoughtTx.hash, 1, provider)
-    console.log('transactionReceipt', transactionReceipt)
+    console.log('transactionReceipt', transactionReceipt) */
 
     /* if (transactionReceipt.logs.length === 0) {
       return { success: false, error: 'Your raffle spots was already sold' }
@@ -77,7 +77,7 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
 
     return { success: true, ...newRaffleTicketsBoughtTx } */
 
-    const payload: object = {
+    /* const payload: object = {
       defaultAccount,
       currentPriceOfTokenToUseWithoutDecimals: Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)),
       selectedRaffleSlots,
@@ -86,15 +86,15 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
       selectedRaffleToBuyTicket
     }
 
-    /* try {
+    try {
       const response: any = await register_tickets_bought(payload, context)
       return { success: true, spots: response.fmoneyRaffleSlotsDataUpdated }
     } catch (error) {
       console.log('error registerTicketsBought', error)
       return
-    } */
+    }
 
-    // return { success: true, ...newRaffleTicketsBoughtTx }
+    return { success: true, ...newRaffleTicketsBoughtTx } */
     return { success: true }
   } catch (error: any) {
     console.log(error)
