@@ -1,7 +1,7 @@
 import React, { Suspense, useContext, useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { Contract } from 'ethers'
+import { Contract, providers } from 'ethers'
 import axios from 'axios'
 
 import Button from '../../Buttons'
@@ -64,10 +64,10 @@ function ModalSeeMyRaffles({ raffleSelected }: { raffleSelected: raffleInterface
     setLoading(true)
     const { success, spots: spotList }: any = await handleGetAvailableSpots(raffleSelected?.raffleSmartContractAddress)
 
-    setLoading(false)
     if (success) {
       await context.changeContext({ spotList: [...spotList] })
       setAvailabeSpots(spotList)
+      setLoading(false)
 
       return spotList
     }
@@ -80,37 +80,15 @@ function ModalSeeMyRaffles({ raffleSelected }: { raffleSelected: raffleInterface
     const ticketMetadataRegisteredJsons = []
     const ticketMetadataRegisteredIpfsHashes = []
     const provider = contextWin.ethereum ? getProvider() : await getWalletConnectProvider()
-    const fmoneyRaffleOperatorContractInstance = new Contract(raffleSelected?.raffleSmartContractAddress, fmoneyRaffleOperatorContract.abi, provider)
+    const networkProviderLayer2 = new providers.InfuraProvider(import.meta.env.VITE_CHAIN_NAME_LAYER_2, import.meta.env.VITE_INFURA_API_KEY)
+    const fmoneyRaffleOperatorContractInstance = new Contract(raffleSelected?.raffleSmartContractAddress, fmoneyRaffleOperatorContract.abi, networkProviderLayer2)
+    const maxNumberOfPlayers = await fmoneyRaffleOperatorContractInstance.maxNumberOfPlayers()
 
-    for (let i = 0; i < spotsOfUser.length; i++) {
-      /* const ownerOfTicket = await fmoneyRaffleOperatorContractInstance.ownerOf(spotsOfUser[i])
-      const tokenURIOfTicket = await fmoneyRaffleOperatorContractInstance.tokenURI(spotsOfUser[i])
+    for (let i = 1; i <= Number(maxNumberOfPlayers); i++) {
+      const playerNumbersData = await fmoneyRaffleOperatorContractInstance.playerNumbers(i)
 
-      if (String(ownerOfTicket).toLowerCase() !== String(context.state?.walletAddress).toLowerCase()) {
-        ownerOfAllTickets = false
-        break
-      } else {
-        tokenURIOfTickets.push(tokenURIOfTicket)
-      } */
-
-      const playerNumbersData = await fmoneyRaffleOperatorContractInstance.playerNumbers()
-      const ownerOfTicket: any[] = []
-      const tokenURIOfTicket: any[] = []
-
-      playerNumbersData.map((playerData: String, index: any) => {
-        // ownerOfTicket.push(playerData[0])
-        if (String(playerData[0]).toLowerCase() !== String(context.state?.walletAddress).toLowerCase()) {
-          ownerOfAllTickets = false
-        }
-
-        tokenURIOfTicket.push(playerData[2])
-      })
-
-      if (String(ownerOfTicket).toLowerCase() !== String(context.state?.walletAddress).toLowerCase()) {
-        ownerOfAllTickets = false
-        break
-      } else {
-        tokenURIOfTickets.push(String(tokenURIOfTicket))
+      if (String(playerNumbersData[0]).toLowerCase() === String(context.state?.walletAddress).toLowerCase()) {
+        tokenURIOfTickets.push(playerNumbersData[2])
       }
     }
 
@@ -121,15 +99,21 @@ function ModalSeeMyRaffles({ raffleSelected }: { raffleSelected: raffleInterface
     }
 
     for (let i = 0; i < tokenURIOfTickets.length; i++) {
-      const ticketTokenURIJson = await axios.get(tokenURIOfTickets[i])
-      ticketMetadataRegisteredJsons.push(ticketTokenURIJson.data)
-      ticketMetadataRegisteredIpfsHashes.push(tokenURIOfTickets[i].split('/')[4])
+      try {
+        const ticketTokenURIJson = await axios.get(tokenURIOfTickets[i], { timeout: 5000 })
+        ticketMetadataRegisteredJsons.push(ticketTokenURIJson.data)
+        ticketMetadataRegisteredIpfsHashes.push(tokenURIOfTickets[i].split('/')[4])
+      } catch (error) {
+        console.log('Error downloading data')
+      }
     }
 
     const payload: object = {
       ticketMetadataRegisteredJsons,
       ticketMetadataRegisteredIpfsHashes
     }
+
+    console.log('payload', payload)
 
     const response: any = await download_tickets(payload, context)
     setLoading(false)
