@@ -366,7 +366,7 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
       fmoneyRaffleDateTimestamp: await GetTimestampRaffle(raffleSelected?.raffleSmartContractAddress)
     }
 
-    const responseGenerateLinks: any = await generate_links_api(payloadGenerateLinks, context)
+    /* const responseGenerateLinks: any = await generate_links_api(payloadGenerateLinks, context)
 
     if (responseGenerateLinks?.ticketMetadataRegisteredIpfsHashes?.length === positionToBuy?.length) {
       setResponseGenerateLinks(responseGenerateLinks)
@@ -386,7 +386,8 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
       return null
     }
 
-    const response: any = await handleBuyTicket(raffleSelected?.raffleSmartContractAddress, valuesToPay, filterPositionToBuy(), filterResponseGenerateLinks(), selectedTokenToBuyTickets.tokenSmartContract)
+    const response: any = await handleBuyTicket(raffleSelected?.raffleSmartContractAddress, valuesToPay, filterPositionToBuy(), filterResponseGenerateLinks(), selectedTokenToBuyTickets.tokenSmartContract) */
+    const response: any = await handleBuyTicket(raffleSelected?.raffleSmartContractAddress, valuesToPay, [1], ["XXX"], selectedTokenToBuyTickets.tokenSmartContract)
 
     if (response.success) {
       context.emitEvent('update-raffles-spots', 'getraffleSpots')
