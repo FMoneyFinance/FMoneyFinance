@@ -94,6 +94,7 @@ function RaffleSpots({ params, handleBuyTicket, raffleSelected }: any) {
       const raffleTicketOwners = await fmoneyRaffleOperatorContractInstance.getRaffleTicketOwners()
       const rafflePlayerNumbers = raffleTicketOwners[1].map((numberData: any) => Number(numberData))
       const ticketOwnersAddresses = raffleTicketOwners[0]
+
       const ticketsCurrentFullInfo = { maxNumberOfPlayers: Number(maxNumberOfPlayers), rafflePlayerNumbers, ticketOwnersAddresses }
       handleUpdateSpotsInfo(ticketsCurrentFullInfo)
     }
@@ -108,8 +109,12 @@ function RaffleSpots({ params, handleBuyTicket, raffleSelected }: any) {
 
     for (let i = 1; i <= maxNumberOfPlayers; i++) {
       if (rafflePlayerNumbers.includes(i)) {
-        raffleSpotsDataUpdated.push({ position: i, owner: ticketOwnersAddresses[ticketOwnersAddressesCounter] })
-        ticketOwnersAddressesCounter++
+        const ticketOwnerSpot = rafflePlayerNumbers.map((playerNumber: any, index: any) => {
+          if (playerNumber === i) return index
+        })
+
+        raffleSpotsDataUpdated.push({ position: i, owner: ticketOwnersAddresses[ticketOwnerSpot] })
+        /* ticketOwnersAddressesCounter++ */
       } else {
         raffleSpotsDataUpdated.push({ position: i, owner: '' })
       }

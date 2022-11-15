@@ -93,15 +93,24 @@ function ModalSeeMyRaffles({ raffleSelected }: { raffleSelected: raffleInterface
         tokenURIOfTickets.push(tokenURIOfTicket)
       } */
 
-      const playerNumbersData = await fmoneyRaffleOperatorContractInstance.playerNumbers(spotsOfUser[i])
-      const ownerOfTicket = playerNumbersData[0]
-      const tokenURIOfTicket = playerNumbersData[2]
+      const playerNumbersData = await fmoneyRaffleOperatorContractInstance.playerNumbers()
+      const ownerOfTicket: any[] = []
+      const tokenURIOfTicket: any[] = []
+
+      playerNumbersData.map((playerData: String, index: any) => {
+        // ownerOfTicket.push(playerData[0])
+        if (String(playerData[0]).toLowerCase() !== String(context.state?.walletAddress).toLowerCase()) {
+          ownerOfAllTickets = false
+        }
+
+        tokenURIOfTicket.push(playerData[2])
+      })
 
       if (String(ownerOfTicket).toLowerCase() !== String(context.state?.walletAddress).toLowerCase()) {
         ownerOfAllTickets = false
         break
       } else {
-        tokenURIOfTickets.push(tokenURIOfTicket)
+        tokenURIOfTickets.push(String(tokenURIOfTicket))
       }
     }
 

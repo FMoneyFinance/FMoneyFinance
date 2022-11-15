@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 function LoaderCountdown() {
   const { t } = useTranslation(['modalBuyTicket'])
   const [showCountdown, setShowCountdown] = useState(true)
-  const [loadingCountGlobal, setLoadingCountGlobal] = useState(90)
+  const [loadingCountGlobal, setLoadingCountGlobal] = useState(180)
   const [showTimeoutWarning, setShowTimeoutWarning] = useState(false)
   const [loadingCountInterval, setLoadingCountInterval] = useState<any>()
 
