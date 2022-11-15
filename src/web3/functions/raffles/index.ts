@@ -267,6 +267,7 @@ export const GetTimestampRaffle = async (selectedRaffe: string) => {
   /* const provider = context.ethereum ? getProvider() : await getWalletConnectProvider()
   const fmoneyRaffleOperatorContractInstance = new Contract(selectedRaffe, fmoneyRaffleOperatorContract.abi, provider)
   const fmoneyRaffleDateTimestamp = await fmoneyRaffleOperatorContractInstance.dateOfDraw() */
+  console.log('localStorage GetTimestampRaffle', localStorage, localStorage.getItem('state'))
 
   const currentStateInfo = JSON.parse(localStorage.getItem('state') || '{}')
   const raffleSelectedInfo = currentStateInfo.rafflesInfo.filter((raffleInfo: any) => String(raffleInfo.raffleSmartContractAddress) === String(selectedRaffe))
@@ -289,6 +290,8 @@ export const GetRaffleId = async (selectedRaffleToBuyTicket: string) => {
       fmoneyRaffleId = i
     }
   } */
+
+  console.log('localStorage GetRaffleId', localStorage, localStorage.getItem('state'))
 
   const currentStateInfo = JSON.parse(localStorage.getItem('state') || '{}')
   const raffleSelectedInfo = currentStateInfo.rafflesInfo.filter((raffleInfo: any) => String(raffleInfo.raffleSmartContractAddress) === String(selectedRaffleToBuyTicket))
