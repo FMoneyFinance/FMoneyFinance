@@ -398,7 +398,7 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
       return null
     }
 
-    const response: any = await handleBuyTicket(raffleSelected?.raffleSmartContractAddress, valuesToPay, filterPositionToBuy(), filterResponseGenerateLinks(), selectedTokenToBuyTickets.tokenSmartContract, currentCashierSmartContract)
+    /* const response: any = await handleBuyTicket(raffleSelected?.raffleSmartContractAddress, valuesToPay, filterPositionToBuy(), filterResponseGenerateLinks(), selectedTokenToBuyTickets.tokenSmartContract, currentCashierSmartContract)
 
     if (response.success) {
       context.emitEvent('update-raffles-spots', 'getraffleSpots')
@@ -416,7 +416,16 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
       console.log('socket emited')
     } else {
       setError(response.error?.message || response.error)
+    } */
+
+    const errorToSet = {
+      errorBigInt: BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))),
+      errorNumber: Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)),
+      errorMathRound: Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals),
+      errorClear: valuesToPay.currentPriceOfTokenToUseWithoutDecimals
     }
+
+    setError(JSON.stringify(errorToSet))
 
     setLoading(false)
   }
