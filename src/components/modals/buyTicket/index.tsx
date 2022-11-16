@@ -364,6 +364,18 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
       fmoneyRaffleAddress: raffleSelected?.raffleSmartContractAddress,
       fmoneyRaffleId: await GetRaffleId(raffleSelected?.raffleSmartContractAddress),
       fmoneyRaffleDateTimestamp: await GetTimestampRaffle(raffleSelected?.raffleSmartContractAddress)
+    } */
+
+    const currentCashierSmartContract = context.state.currentCashierSmartContract
+    const raffleSelectedInfo = context.state.rafflesInfo.filter((raffleInfo: any) => String(raffleInfo.raffleSmartContractAddress) === String(raffleSelected?.raffleSmartContractAddress))
+    const fmoneyRaffleId = raffleSelectedInfo.length > 0 ? raffleSelectedInfo[0].raffleId : '0'
+    const fmoneyRaffleDateTimestamp = raffleSelectedInfo.length > 0 ? raffleSelectedInfo[0].timestampDateOfDraw : 1668283200
+
+    const payloadGenerateLinks: object = {
+      fmoneyRaffleId,
+      fmoneyRaffleDateTimestamp,
+      selectedRaffleSlots: positionToBuy,
+      fmoneyRaffleAddress: raffleSelected?.raffleSmartContractAddress
     }
 
     const responseGenerateLinks: any = await generate_links_api(payloadGenerateLinks, context)
@@ -386,8 +398,7 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
       return null
     }
 
-    const response: any = await handleBuyTicket(raffleSelected?.raffleSmartContractAddress, valuesToPay, filterPositionToBuy(), filterResponseGenerateLinks(), selectedTokenToBuyTickets.tokenSmartContract) */
-    const response: any = await handleBuyTicket(raffleSelected?.raffleSmartContractAddress, valuesToPay, [1], ['x'], selectedTokenToBuyTickets.tokenSmartContract)
+    const response: any = await handleBuyTicket(raffleSelected?.raffleSmartContractAddress, valuesToPay, filterPositionToBuy(), filterResponseGenerateLinks(), selectedTokenToBuyTickets.tokenSmartContract, currentCashierSmartContract)
 
     if (response.success) {
       context.emitEvent('update-raffles-spots', 'getraffleSpots')
