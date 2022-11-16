@@ -61,16 +61,31 @@ function App() {
   const handleGetAllowedTokens = async () => {
     const response: any = await allowed_tokens_api()
     sessionStorage.setItem('allowedTokensToTrade', JSON.stringify(response.currentAllowedTokens))
+
+    setContext((currentContext: any) => {
+      const contextUpdated = { ...currentContext, allowedTokensToTrade: response.currentAllowedTokens }
+      return contextUpdated
+    })
   }
 
   const handleGetCurrentManagerSmartContract = async () => {
     const response: any = await get_current_raffle_manager_smart_contract_address(context)
     sessionStorage.setItem('currentManagerSmartContract', response.currentRaffleManagerSmartContractAddress)
+
+    setContext((currentContext: any) => {
+      const contextUpdated = { ...currentContext, currentManagerSmartContract: response.currentRaffleManagerSmartContractAddress }
+      return contextUpdated
+    })
   }
 
   const handleGetCurrentCashierSmartContract = async () => {
     const response: any = await get_current_raffle_cashier_smart_contract_address(context)
     sessionStorage.setItem('currentCashierSmartContract', response.currentRaffleCashierSmartContractAddress)
+
+    setContext((currentContext: any) => {
+      const contextUpdated = { ...currentContext, currentCashierSmartContract: response.currentRaffleCashierSmartContractAddress }
+      return contextUpdated
+    })
   }
 
   useEffect(() => {

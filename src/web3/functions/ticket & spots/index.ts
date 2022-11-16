@@ -11,7 +11,7 @@ import fmoneyRaffleOperatorContract from '../../contracts/interfaces/IFmoneyRaff
 import { get_raffle_available_spots, register_tickets_bought } from '../../../api/tickets-management'
 const context: any = window
 
-export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPay: any, selectedRaffleSlots: any, ticketMetadataRegisteredIpfsHashes: any, tokenToUseToBuyTickets: any) => {
+export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPay: any, selectedRaffleSlots: any, ticketMetadataRegisteredIpfsHashes: any, tokenToUseToBuyTickets: any, currentCashierSmartContract: any) => {
   try {
     const provider = context.ethereum ? getProvider() : await getWalletConnectProvider()
     const userAccountSigner = provider.getSigner()
@@ -32,18 +32,20 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
       selectedRaffleToBuyTicket
     })
 
-    // const currentCashierSmartContract = sessionStorage.getItem('currentCashierSmartContract') || ''
-    const currentCashierSmartContract = '0x7fE8913A86Fe10339Cd7c9Cf602b5cfF60D75FbA'
     const fmoneyTokenInstance = new Contract(import.meta.env.VITE_FMON_CONTRACT_ADDRESS, erc20TokenContract.abi, userAccountSigner)
     const currentWalletBalanceFMON = await fmoneyTokenInstance.balanceOf(defaultAccount)
     const currentWalletAllowance = await fmoneyTokenInstance.allowance(defaultAccount, currentCashierSmartContract)
+
+    if (Number(currentWalletBalanceFMON) < Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))) {
+      return { success: false, error: 'You do not have balance to make this transaction' }
+    }
 
     console.log('currentWalletBalanceFMON', currentWalletBalanceFMON)
     console.log('currentWalletAllowance', Number(currentWalletAllowance))
     console.log('currentPriceOfTokenToUseWithoutDecimals', Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)))
 
     const fmoneyRaffleCashierContractInstance = new Contract(currentCashierSmartContract, fmoneyRaffleCashierContract.abi, userAccountSigner)
-    // const gasLimitEstimation = await fmoneyRaffleCashierContractInstance.estimateGas.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets)
+    const gasLimitEstimation = await fmoneyRaffleCashierContractInstance.estimateGas.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets)
 
     /* const gasLimitEstimation = await fmoneyRaffleOperatorContractInstance.estimateGas.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), selectedRaffleSlots, ticketsURI, tokenToUseToBuyTickets) */
 
@@ -66,7 +68,7 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
     }) */
     const newRaffleTicketsBoughtTx = await fmoneyRaffleCashierContractInstance.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets, {
       nonce: currentNonce,
-      // gasLimit: Number(gasLimitEstimation),
+      gasLimit: Number(gasLimitEstimation),
       gasPrice: gasPriceToPay
     })
     const transactionReceipt: any = await getTransactionConfirmedData(newRaffleTicketsBoughtTx.hash, 1, provider)
