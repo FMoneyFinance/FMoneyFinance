@@ -403,7 +403,6 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
       errorNumber: Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)),
       errorMathRound: Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals),
       errorClear: valuesToPay.currentPriceOfTokenToUseWithoutDecimals,
-      isNaNErrorBigInt: isNaN(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)))),
       isNaNErrorNumber: isNaN(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))),
       isNaNErrorMathRound: isNaN(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)),
       isNaNErrorClear: isNaN(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)
