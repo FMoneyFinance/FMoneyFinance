@@ -263,20 +263,21 @@ export const CreateRaffleFunct = async ({ selectedRaffleName, selectedDateOfDraw
   return response
 }
 
-export const GetTimestampRaffle = async (selectedRaffe: string) => {
+export const GetTimestampRaffle = async (selectedRaffe: string, contextParam: any) => {
   /* const provider = context.ethereum ? getProvider() : await getWalletConnectProvider()
   const fmoneyRaffleOperatorContractInstance = new Contract(selectedRaffe, fmoneyRaffleOperatorContract.abi, provider)
   const fmoneyRaffleDateTimestamp = await fmoneyRaffleOperatorContractInstance.dateOfDraw() */
-  console.log('localStorage GetTimestampRaffle', localStorage, localStorage.getItem('state'), context)
+  console.log('localStorage GetTimestampRaffle', localStorage, localStorage.getItem('state'), contextParam)
 
-  const currentStateInfo = JSON.parse(localStorage.getItem('state') || '{}')
+  // const currentStateInfo = JSON.parse(localStorage.getItem('state') || '{}')
+  const currentStateInfo = context.state
   const raffleSelectedInfo = currentStateInfo.rafflesInfo.filter((raffleInfo: any) => String(raffleInfo.raffleSmartContractAddress) === String(selectedRaffe))
   const fmoneyRaffleDateTimestamp = raffleSelectedInfo.length > 0 ? raffleSelectedInfo[0].timestampDateOfDraw : 1668283200
 
   return Number(fmoneyRaffleDateTimestamp)
 }
 
-export const GetRaffleId = async (selectedRaffleToBuyTicket: string) => {
+export const GetRaffleId = async (selectedRaffleToBuyTicket: string, contextParam: any) => {
   /* const provider = context.ethereum ? getProvider() : await getWalletConnectProvider()
   const currentManagerSmartContract: string = sessionStorage.getItem('currentManagerSmartContract') || ''
   const fmoneyRaffleManagerContractInstance = new Contract(currentManagerSmartContract, fmoneyRaffleManagerContract.abi, provider)
@@ -291,9 +292,10 @@ export const GetRaffleId = async (selectedRaffleToBuyTicket: string) => {
     }
   } */
 
-  console.log('localStorage GetRaffleId', localStorage, localStorage.getItem('state'), context)
+  console.log('localStorage GetRaffleId', localStorage, localStorage.getItem('state'), contextParam)
 
-  const currentStateInfo = JSON.parse(localStorage.getItem('state') || '{}')
+  // const currentStateInfo = JSON.parse(localStorage.getItem('state') || '{}')
+  const currentStateInfo = context.state
   const raffleSelectedInfo = currentStateInfo.rafflesInfo.filter((raffleInfo: any) => String(raffleInfo.raffleSmartContractAddress) === String(selectedRaffleToBuyTicket))
   const fmoneyRaffleId = raffleSelectedInfo.length > 0 ? raffleSelectedInfo[0].raffleId : '0'
 
