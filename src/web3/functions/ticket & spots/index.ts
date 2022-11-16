@@ -32,9 +32,10 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
       selectedRaffleToBuyTicket
     })
 
-    const fmoneyTokenInstance = new Contract(import.meta.env.VITE_FMON_CONTRACT_ADDRESS, erc20TokenContract.abi, userAccountSigner)
-    const currentWalletBalanceFMON = await fmoneyTokenInstance.balanceOf(defaultAccount)
-    const currentWalletAllowance = await fmoneyTokenInstance.allowance(defaultAccount, currentCashierSmartContract)
+    // const tokenToUseToBuyTicketsInstance = new Contract(import.meta.env.VITE_FMON_CONTRACT_ADDRESS, erc20TokenContract.abi, userAccountSigner)
+    const tokenToUseToBuyTicketsInstance = new Contract(tokenToUseToBuyTickets, erc20TokenContract.abi, userAccountSigner)
+    const currentWalletBalanceFMON = await tokenToUseToBuyTicketsInstance.balanceOf(defaultAccount)
+    const currentWalletAllowance = await tokenToUseToBuyTicketsInstance.allowance(defaultAccount, currentCashierSmartContract)
 
     /* if (Number(currentWalletBalanceFMON) < Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))) {
       return { success: false, error: 'You do not have balance to make this transaction' }
