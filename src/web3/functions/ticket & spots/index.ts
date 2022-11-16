@@ -56,9 +56,6 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
 
     console.log('userAccountSigner', userAccountSigner.address)
     console.log('defaultAccount', defaultAccount)
-    console.log('gasPriceToPay', gasPriceToPay, Number(gasPriceToPay))
-    console.log('currentFeeData.gasPrice', currentFeeData.gasPrice, Number(currentFeeData.gasPrice))
-    console.log('maxPriorityFeePerGas', maxPriorityFeePerGas, Number(maxPriorityFeePerGas))
 
     let nonceOffset = 0
     const baseNonce = await provider.getTransactionCount(defaultAccount, 'latest')
@@ -69,11 +66,7 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
       gasLimit: Number(gasLimitEstimation),
       gasPrice: gasPriceToPay
     }) */
-    const newRaffleTicketsBoughtTx = await fmoneyRaffleCashierContractInstance.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets, {
-      nonce: currentNonce,
-      gasLimit: Number(gasLimitEstimation),
-      gasPrice: gasPriceToPay
-    })
+    const newRaffleTicketsBoughtTx = await fmoneyRaffleCashierContractInstance.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets)
     const transactionReceipt: any = await getTransactionConfirmedData(newRaffleTicketsBoughtTx.hash, 1, provider)
     console.log('transactionReceipt', transactionReceipt)
 
