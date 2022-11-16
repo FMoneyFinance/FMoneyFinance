@@ -45,7 +45,7 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
     console.log('currentPriceOfTokenToUseWithoutDecimals', Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)))
 
     const fmoneyRaffleCashierContractInstance = new Contract(currentCashierSmartContract, fmoneyRaffleCashierContract.abi, userAccountSigner)
-    const gasLimitEstimation = await fmoneyRaffleCashierContractInstance.estimateGas.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets)
+    const gasLimitEstimation = await fmoneyRaffleCashierContractInstance.estimateGas.buyTicketsToPlay(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)), tokenToUseToBuyTickets)
 
     /* const gasLimitEstimation = await fmoneyRaffleOperatorContractInstance.estimateGas.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), selectedRaffleSlots, ticketsURI, tokenToUseToBuyTickets) */
 
