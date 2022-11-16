@@ -36,9 +36,9 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
     const currentWalletBalanceFMON = await fmoneyTokenInstance.balanceOf(defaultAccount)
     const currentWalletAllowance = await fmoneyTokenInstance.allowance(defaultAccount, currentCashierSmartContract)
 
-    if (Number(currentWalletBalanceFMON) < Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))) {
+    /* if (Number(currentWalletBalanceFMON) < Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))) {
       return { success: false, error: 'You do not have balance to make this transaction' }
-    }
+    } */
 
     console.log('currentWalletBalanceFMON', currentWalletBalanceFMON)
     console.log('currentWalletAllowance', Number(currentWalletAllowance))
