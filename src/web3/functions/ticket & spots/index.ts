@@ -66,7 +66,7 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
       gasLimit: Number(gasLimitEstimation),
       gasPrice: gasPriceToPay
     }) */
-    const newRaffleTicketsBoughtTx = await fmoneyRaffleCashierContractInstance.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets, {
+    const newRaffleTicketsBoughtTx = await fmoneyRaffleCashierContractInstance.buyTicketsToPlay(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)), tokenToUseToBuyTickets, {
       nonce: currentNonce,
       gasLimit: Number(gasLimitEstimation),
       gasPrice: gasPriceToPay
