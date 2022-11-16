@@ -425,8 +425,7 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
       errorClear: valuesToPay.currentPriceOfTokenToUseWithoutDecimals
     }
 
-    setError(JSON.stringify(errorToSet))
-
+    console.log('errorToSet', errorToSet)
     setLoading(false)
   }
 
