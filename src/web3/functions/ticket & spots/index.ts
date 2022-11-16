@@ -43,7 +43,7 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
     console.log('currentPriceOfTokenToUseWithoutDecimals', Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)))
 
     const fmoneyRaffleCashierContractInstance = new Contract(currentCashierSmartContract, fmoneyRaffleCashierContract.abi, userAccountSigner)
-    const gasLimitEstimation = await fmoneyRaffleCashierContractInstance.estimateGas.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets)
+    // const gasLimitEstimation = await fmoneyRaffleCashierContractInstance.estimateGas.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets)
 
     /* const gasLimitEstimation = await fmoneyRaffleOperatorContractInstance.estimateGas.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), selectedRaffleSlots, ticketsURI, tokenToUseToBuyTickets) */
 
@@ -66,7 +66,7 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
     }) */
     const newRaffleTicketsBoughtTx = await fmoneyRaffleCashierContractInstance.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets, {
       nonce: currentNonce,
-      gasLimit: Number(gasLimitEstimation),
+      // gasLimit: Number(gasLimitEstimation),
       gasPrice: gasPriceToPay
     })
     const transactionReceipt: any = await getTransactionConfirmedData(newRaffleTicketsBoughtTx.hash, 1, provider)
