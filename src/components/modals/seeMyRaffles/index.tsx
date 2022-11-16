@@ -31,6 +31,7 @@ function ModalSeeMyRaffles({ raffleSelected }: { raffleSelected: raffleInterface
   const [spots, setspots] = useState([])
   const [loading, setLoading] = useState(true)
   const [availabeSpots, setAvailabeSpots] = useState([])
+  const [downloadLinkText, setDownloadLinkText] = useState('')
   const [spotsToShowInPage, setSpotsToShowInPage] = useState([])
   const [spotsOfUser, setSpotsOfUser] = useState<Array<spotInterface>>([])
 
@@ -117,6 +118,10 @@ function ModalSeeMyRaffles({ raffleSelected }: { raffleSelected: raffleInterface
 
     const response: any = await download_tickets(payload, context)
     setLoading(false)
+    setDownloadLinkText(response.location)
+    setTimeout(() => {
+      setDownloadLinkText('')
+    }, 15000)
     window.open(response.location, '_blank')
   }
 
@@ -221,6 +226,11 @@ function ModalSeeMyRaffles({ raffleSelected }: { raffleSelected: raffleInterface
               </div>
             </div>
           </div>
+          {downloadLinkText && (
+            <div className="titleRafflePointsModal" style={{ marginBottom: '10px' }}>
+              <a href={`${downloadLinkText}`} target="_blank">{`${downloadLinkText}`}</a>
+            </div>
+          )}
           <h3 className="titleRafflePointsModal">
             <span>{`${t('draw')}`}</span> {timeStampToString(raffleSelected?.timestampDateOfDraw * 1000, 1)}
           </h3>

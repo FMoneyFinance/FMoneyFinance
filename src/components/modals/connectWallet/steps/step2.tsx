@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import React, { useState, useEffect, useContext } from 'react'
+
 import SwitchComponent from '../../../forms/switch'
-import Help from '../../../../assets/icons/question.svg'
+import LoaderComponent from '../../../elements/loader'
 import Check from '../../../../assets/icons/check.svg'
 import Error from '../../../../assets/icons/error.svg'
-import { useContext } from 'react'
 import AppContext from '../../../../context/AppContext'
-import LoaderComponent from '../../../elements/loader'
+import Help from '../../../../assets/icons/question.svg'
 import { getConnectorInstance } from '../../../../web3/walletConnect'
 import { handleAccountWalletChangeWalletConnect } from '../../../../web3/functions/accounts'
 import { handleConnectMetaMask, handleConnectWalletConnect, CheckMetamaskInstalled } from '../../../../web3/functions/metamask'
-import { useTranslation } from 'react-i18next'
+
 const timeout = (millis: number) => new Promise((resolve) => setTimeout(resolve, millis))
 
 function Step2ConnectWallet(props: any) {

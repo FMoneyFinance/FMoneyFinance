@@ -11,8 +11,8 @@ import AppContext from '../../../context/AppContext'
 import QRCodeModal from '@walletconnect/qrcode-modal'
 import Metamask from '../../../assets/icons/metamask.svg'
 import WalletConnectLogo from '../../../assets/icons/walletConnect.svg'
-import { handleConnectMetaMask, CheckMetamaskInstalled } from '../../../web3/functions/metamask'
 import { getConnectorInstance, handleConnectWallet, handleKillSessionConnector } from '../../../web3/walletConnect'
+import { handleConnectMetaMask, handleConnectWalletConnect, CheckMetamaskInstalled } from '../../../web3/functions/metamask'
 
 function ModalConnectWallet({ showModal, setShowModal }: any) {
   const [index, setIndex] = useState(0)
@@ -40,7 +40,6 @@ function ModalConnectWallet({ showModal, setShowModal }: any) {
 
     if (!CheckMetamaskInstalled()) {
       const connectorInstance = getConnectorInstance()
-      console.log(connectorInstance.connected)
 
       if (connectorInstance.connected && String(connectorInstance.chainId) !== import.meta.env.VITE_CHAIN_ID_WALLETCONNECT) {
         handleKillSessionConnector()
@@ -81,15 +80,33 @@ function ModalConnectWallet({ showModal, setShowModal }: any) {
     }
   }
 
-  const handleClick = () => {
-    switch (index) {
+  const handleClick = async () => {
+    const connectResponse: any = await handleConnectMetaMask(context)
+    const { userAccountSignature, ...userData } = connectResponse
+
+    const stateOfContext = {
+      ...userData,
+      showModalConnectWallet: false
+    }
+
+    context.changeContext(
+      {
+        ...stateOfContext,
+        userAccountSignature
+      },
+      true
+    )
+
+    sessionStorage.setItem('state', JSON.stringify({ userAccountSignature }))
+
+    /* switch (index) {
       case 0:
         setIndex(1)
         setButtonTxt(t('buttonSend'))
         break
       default:
         break
-    }
+    } */
   }
 
   const [functionModal, setFunctionModal] = useState({
@@ -100,12 +117,9 @@ function ModalConnectWallet({ showModal, setShowModal }: any) {
 
   const handleWalletConnectConnection = async () => {
     const connectorInstance = getConnectorInstance()
-    console.log(connectorInstance)
-    console.log(connectorInstance.connected)
 
     if (!connectorInstance.connected) {
       const walletConnectionResponse = await handleConnectWallet(connectorInstance)
-      console.log('walletConnectionResponse.payload.params[0].chainId', walletConnectionResponse.payload.params[0].chainId)
 
       if (connectorInstance.connected && String(walletConnectionResponse.payload.params[0].chainId) !== import.meta.env.VITE_CHAIN_ID_WALLETCONNECT) {
         handleKillSessionConnector()
@@ -144,6 +158,7 @@ function ModalConnectWallet({ showModal, setShowModal }: any) {
           >
             <img src={WalletConnectLogo} id="imgWalletConnect" />
             <h5>WalletConnect</h5>
+            <div style={{ marginTop: '15px', fontSize: '14px', color: '#ddd' }}>Click the logo to connect</div>
             {errorWalletConnect && (
               <h4 style={{ textAlign: 'center', marginTop: '20px' }} className="error-container">
                 {t('requestCancelled')}
@@ -164,6 +179,7 @@ function ModalConnectWallet({ showModal, setShowModal }: any) {
         <div className="walletContainer pointer" onClick={allowWalletConnection ? handleClick : handleChangeChainId}>
           <img src={Metamask} />
           <h5>Metamask</h5>
+          <div style={{ marginTop: '15px', fontSize: '14px', color: '#ddd' }}>Click the logo to connect</div>
           {showWarning && (
             <h4 style={{ textAlign: 'center', marginTop: '20px' }} className="error-container">
               {t('warningNotAllowed')}

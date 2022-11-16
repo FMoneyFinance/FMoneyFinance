@@ -1,6 +1,7 @@
 {
   "title": "Conectar billetera",
   "buttonSend": "Enviar solicitud",
+  "warningToConnect": "Haz click en el logo",
   "buttonLearnHowConnect": "Aprende a conectarte",
   "haventGot": "¿Aún no tienes una billetera?",
   "requestCancelled": "La petición fue cancelada.",
