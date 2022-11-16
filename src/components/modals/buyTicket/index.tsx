@@ -362,8 +362,8 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
     const payloadGenerateLinks: object = {
       selectedRaffleSlots: positionToBuy,
       fmoneyRaffleAddress: raffleSelected?.raffleSmartContractAddress,
-      fmoneyRaffleId: await GetRaffleId(raffleSelected?.raffleSmartContractAddress),
-      fmoneyRaffleDateTimestamp: await GetTimestampRaffle(raffleSelected?.raffleSmartContractAddress)
+      fmoneyRaffleId: await GetRaffleId(raffleSelected?.raffleSmartContractAddress, context),
+      fmoneyRaffleDateTimestamp: await GetTimestampRaffle(raffleSelected?.raffleSmartContractAddress, context)
     }
 
     const responseGenerateLinks: any = await generate_links_api(payloadGenerateLinks, context)
