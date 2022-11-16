@@ -1,6 +1,7 @@
 {
   "title": "Connect wallet",
   "buttonSend": "Send request",
+  "warningToConnect": "Click the logo to connect",
   "buttonLearnHowConnect": "Learn how to connect",
   "haventGot": "Haven’t got a crypto wallet yet?",
   "requestCancelled": "The request was cancelled",
