@@ -398,18 +398,6 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
       return null
     }
 
-    const errorToSet = {
-      errorBigInt: BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))),
-      errorNumber: Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)),
-      errorMathRound: Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals),
-      errorClear: valuesToPay.currentPriceOfTokenToUseWithoutDecimals,
-      isNaNErrorNumber: isNaN(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))),
-      isNaNErrorMathRound: isNaN(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)),
-      isNaNErrorClear: isNaN(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)
-    }
-
-    console.log('errorToSet', errorToSet)
-
     const response: any = await handleBuyTicket(raffleSelected?.raffleSmartContractAddress, valuesToPay, filterPositionToBuy(), filterResponseGenerateLinks(), selectedTokenToBuyTickets.tokenSmartContract, currentCashierSmartContract)
 
     if (response.success) {
