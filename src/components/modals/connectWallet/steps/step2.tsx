@@ -29,6 +29,10 @@ function Step2ConnectWallet(props: any) {
   }, [])
 
   useEffect(() => {
+    console.log('currentContext', context)
+  }, [context])
+
+  useEffect(() => {
     props.changeFunctionButton(onSubmit)
   }, [rememberSwitch])
 
@@ -57,7 +61,7 @@ function Step2ConnectWallet(props: any) {
       })
 
       if (firstResponse?.error != true) {
-        lastResponse = await handleConnectMetaMask(context)
+        // lastResponse = await handleConnectMetaMask(context)
         setLoading({
           lastLoading: false,
           lastSuccess: lastResponse.error != true,
@@ -67,7 +71,8 @@ function Step2ConnectWallet(props: any) {
         })
       }
 
-      if (firstResponse.error || lastResponse.error) {
+      // if (firstResponse.error || lastResponse.error) {
+      if (firstResponse.error) {
         setLoading((prevVal: any) => {
           return {
             ...prevVal,
@@ -100,90 +105,49 @@ function Step2ConnectWallet(props: any) {
             },
             true
           )
-
-          sessionStorage.setItem('state', JSON.stringify({ userAccountSignature }))
         }
       }
     } else {
       const connectorInstance = getConnectorInstance()
       const firstResponse: any = await handleConnectWalletConnect(context, connectorInstance)
+      const currentContextState = context.state
+      const currentWalletConnectState: string = localStorage.getItem('walletconnect') || '{"walletAddress":""}'
+      const currentWalletConnectSelectedWallet = JSON.parse(currentWalletConnectState).accounts[0]
 
-      setLoading({
-        lastLoading: true,
-        firstLoading: false,
-        firstSuccess: firstResponse.error != true,
-        firstError: firstResponse.error
+      context.changeContext({
+        ...currentContextState,
+        showModalConnectWallet: false,
+        isAdminUser: firstResponse.isAdminUser,
+        walletAddress: currentWalletConnectSelectedWallet,
+        userAccountSignature: firstResponse.userAccountSignature
       })
 
-      if (firstResponse?.error != true) {
-        await timeout(2000)
+      connectorInstance.on('session_update', async (error: any, payload: any) => {
+        console.log('connector.on("session_update")')
 
-        setLoading({
-          lastLoading: false,
-          lastSuccess: true,
-          firstSuccess: true,
-          firstError: false,
-          lastError: false
-        }) // Esto mientras encontramos mejor forma de solucionarlo
-      }
-
-      if (firstResponse.error || lastResponse.error) {
-        setLoading((prevVal: any) => {
-          return {
-            ...prevVal,
-            lastLoading: false,
-            firstLoading: false
-          }
-        })
-        props.setButtonTxt('Try again')
-
-        setError(firstResponse.msg || lastResponse.msg)
-      } else {
-        const { userAccountSignature, ...userData } = firstResponse
-
-        if (rememberSwitch) {
-          context.changeContext({
-            ...firstResponse,
-            showModalConnectWallet: false
-          })
-        } else {
-          stateOfContext = {
-            ...userData,
-            showModalConnectWallet: false
-          }
-
-          context.changeContext(stateOfContext)
-          context.changeContext(
-            {
-              ...stateOfContext,
-              userAccountSignature
-            },
-            true
-          )
-
-          sessionStorage.setItem('state', JSON.stringify({ userAccountSignature }))
+        if (error) {
+          throw error
         }
 
-        connectorInstance.on('session_update', async (error: any, payload: any) => {
-          console.log('connector.on("session_update")')
+        const newWalletToSet = payload.params[0].accounts[0]
+        await timeout(500)
+        const currentWalletConnectState: string = localStorage.getItem('walletconnect') || '{"walletAddress":""}'
+        const currentWalletConnectSelectedWallet = JSON.parse(currentWalletConnectState).accounts[0]
+        const currentLocalSelectedWallet = context.state.walletAddress
 
-          if (error) {
-            throw error
-          }
+        if (String(currentLocalSelectedWallet).toLowerCase() === 'null') {
+          const currentContextState = context.state
+          context.changeContext({
+            ...currentContextState,
+            walletAddress: JSON.parse(currentWalletConnectState).walletAddress
+          })
+        }
 
-          const newWalletToSet = payload.params[0].accounts[0]
-          await timeout(500)
-          const currentWalletConnectState: string = localStorage.getItem('walletconnect') || '{"walletAddress":""}'
-          const currentWalletConnectSelectedWallet = JSON.parse(currentWalletConnectState).accounts[0]
-          const currentLocalState: string = localStorage.getItem('state') || '{"walletAddress":""}'
-          const currentLocalSelectedWallet = JSON.parse(currentLocalState).walletAddress
-
-          if (String(currentLocalSelectedWallet).toLowerCase() === 'null' || String(currentWalletConnectSelectedWallet).toLowerCase() !== String(currentLocalSelectedWallet).toLowerCase()) {
-            handleAccountWalletChangeWalletConnect(currentWalletConnectSelectedWallet, context)
-            location.reload()
-          }
-        })
-      }
+        if (String(currentLocalSelectedWallet).toLowerCase() !== 'null' && String(currentWalletConnectSelectedWallet).toLowerCase() !== String(currentLocalSelectedWallet).toLowerCase()) {
+          handleAccountWalletChangeWalletConnect(currentWalletConnectSelectedWallet, context)
+          location.reload()
+        }
+      })
     }
   }
 
@@ -220,7 +184,7 @@ function Step2ConnectWallet(props: any) {
     <>
       <h4 className="advicestep2">{t('step2.advicestep2')}</h4>
       <Item title={t('step2.items.VerifyOwnership.title')} number="1" success={loadingVar.firstSuccess} error={loadingVar.firstError} loading={loading.firstLoading} text={t('step2.items.VerifyOwnership.text')} />
-      <Item title={t('step2.items.EnableTrading.title')} error={loadingVar.lastError} loading={loadingVar.lastLoading} success={loadingVar.lastSuccess} number="2" text={t('step2.items.EnableTrading.text')} />
+      {/* <Item title={t('step2.items.EnableTrading.title')} error={loadingVar.lastError} loading={loadingVar.lastLoading} success={loadingVar.lastSuccess} number="2" text={t('step2.items.EnableTrading.text')} /> */}
       <div className="rowRemember">
         <h4 className="rememberme pointer">
           {t('step2.rememberMe.title')}

@@ -41,7 +41,7 @@ function HomeScreen(props: any) {
               <div className="outBackground">
                 <TableWelcome />
                 <ThreeSimpleSteps />
-                <PartnersPart />
+                {/* <PartnersPart /> */}
                 <AllRights />
               </div>
             </MainLayout>
