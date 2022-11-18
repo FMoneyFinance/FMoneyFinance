@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isMobile } from 'react-device-detect'
 import socketIo from 'socket.io-client'
-import { Contract } from 'ethers'
+import { Contract, utils } from 'ethers'
 
 import './styles.scss'
 import Logo from '../../logo'
@@ -17,23 +17,28 @@ import LoaderCountdown from './parts/LoaderCountdown'
 import BasicSpinner from '../../elements/loader/basic'
 import LogoLoader from '../../../assets/logos/main.webp'
 import { getDecimalsOfUSDC } from '../../../web3/functions/utils'
-import pairContract from '../../../web3/contracts/interfaces/IPair.json'
+import { getConnectorInstance } from '../../../web3/walletConnect'
 import { handleBuyTicket } from '../../../web3/functions/ticket & spots'
+import pairContract from '../../../web3/contracts/interfaces/IPair.json'
 import { CheckMetamaskInstalled } from '../../../web3/functions/metamask'
 import { handleApproveTransfer } from '../../../web3/functions/transactions'
 import factoryContract from '../../../web3/contracts/interfaces/IFactory.json'
 import erc20TokenContract from '../../../web3/contracts/interfaces/IERC20.json'
 import { GetRaffleId, GetTimestampRaffle } from '../../../web3/functions/raffles'
+import { getTransactionConfirmedData } from '../../../web3/functions/transactions'
 import aggregatorV3Contract from '../../../web3/contracts/interfaces/aggregatorV3.json'
 import { generate_links_api, has_to_approve_api } from '../../../api/tickets-management'
 import { getProvider, getWalletConnectProvider } from '../../../web3/functions/providers'
 import ticketanddivider from '../../../assets/ilustrations/landingpage/ticketanddivider.svg'
 import { send_ticket_to_email_api, download_tickets } from '../../../api/tickets-management/index'
 import fmoneyRaffleManagerContract from '../../../web3/contracts/interfaces/IFmoneyRaffleManager.json'
+import fmoneyRaffleCashierContract from '../../../web3/contracts/interfaces/IFmoneyRaffleCashier.json'
+import { getDefaultAccount, getWalletConnectDefaultAccount } from '../../../web3/functions/accounts/index'
 
 const io: any = socketIo
 
 function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots, raffleSelected }: any) {
+  const WindowContext: any = window
   const [email, setEmail] = useState('')
   const [check, setCheck] = useState(false)
   const context: any = useContext(AppContext)
@@ -50,6 +55,8 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
   const [approvingToken, setApprovingToken] = useState(false)
   const [loadingApprove, setLoadingApprove] = useState(false)
   const [allSpotsHook, setAllSpotsHook] = useState<number[]>([])
+  const [ticketsRegistered, setTicketsRegistered] = useState(false)
+  const [valueSentToCashier, setValueSentToCashier] = useState(false)
   const [errorSelectedToken, setErrorSelectedToken] = useState(false)
   const [responseBuyTicket, setResponseBuyTicket] = useState<any | any>({})
   const [socketConnectionInstance, setSocketConnectionInstance] = useState<any>()
@@ -87,6 +94,24 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
   useEffect(() => {
     setSelectedRaffleSmartContract(raffleSelected?.raffleSmartContractAddress)
   }, [raffleSelected?.raffleSmartContractAddress])
+
+  useEffect(() => {
+    if (ticketsRegistered === true && valueSentToCashier === true) {
+      context.emitEvent('update-raffles-spots', 'getraffleSpots')
+      context.changeContext({
+        loadUserHistory: true
+      })
+
+      console.log('context changed')
+      setTextButton(t('buttonStateTexts.done'))
+      setSuccess(true)
+
+      if (getraffleSpots) getraffleSpots()
+
+      context.socketConnection.emit('graph-price-changed', raffleSelected?.raffleSmartContractAddress)
+      console.log('socket emited')
+    }
+  }, [ticketsRegistered, valueSentToCashier])
 
   useEffect(() => {
     if (dataLoaded) {
@@ -353,20 +378,131 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
   }
 
   const handleBuyTickets = async () => {
-    const empty: any = ''
-    setError(empty)
+    setError('')
     setSuccessMsg('')
     setLoading(true)
-    const usdcTokenDecimalsDivider: any = await getDecimalsOfUSDC()
-
-    /* const payloadGenerateLinks: object = {
-      selectedRaffleSlots: positionToBuy,
-      fmoneyRaffleAddress: raffleSelected?.raffleSmartContractAddress,
-      fmoneyRaffleId: await GetRaffleId(raffleSelected?.raffleSmartContractAddress),
-      fmoneyRaffleDateTimestamp: await GetTimestampRaffle(raffleSelected?.raffleSmartContractAddress)
-    } */
-
+    const tokenToUseToBuyTickets = selectedTokenToBuyTickets.tokenSmartContract
     const currentCashierSmartContract = context.state.currentCashierSmartContract
+
+    if (WindowContext.ethereum) {
+      let gasLimitEstimation = null
+      const provider = getProvider()
+      const defaultAccount = getDefaultAccount()
+      const userAccountSigner = provider.getSigner()
+
+      const fmoneyRaffleCashierContractInstance = new Contract(currentCashierSmartContract, fmoneyRaffleCashierContract.abi, userAccountSigner)
+      const tokenToUseToBuyTicketsInstance = new Contract(tokenToUseToBuyTickets, erc20TokenContract.abi, userAccountSigner)
+      const currentWalletBalanceOfToken = await tokenToUseToBuyTicketsInstance.balanceOf(defaultAccount)
+      const currentWalletAllowance = await tokenToUseToBuyTicketsInstance.allowance(defaultAccount, currentCashierSmartContract)
+
+      if (Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)) === 0) {
+        setLoading(false)
+        setError('Please wait until the value is calculated.')
+        return
+      }
+
+      if (Number(currentWalletBalanceOfToken) < Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))) {
+        setLoading(false)
+        setError('You do not have balance to make this transaction.')
+        return
+      }
+
+      try {
+        gasLimitEstimation = await fmoneyRaffleCashierContractInstance.estimateGas.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets)
+      } catch (error) {
+        console.log('error estimate gas', error)
+        setLoading(false)
+        setError('The transaction may fail. Please review the data and try again. (Did you selected your tickets?)')
+        return
+      }
+
+      let nonceOffset = 0
+      const baseNonce = await provider.getTransactionCount(defaultAccount, 'latest')
+      const currentNonce = baseNonce + nonceOffset++
+
+      const feeNumber = 2 // Este o más al ser prioridad alta
+      const currentFeeData = await provider.getFeeData()
+      const maxPriorityFeePerGas = feeNumber * Number('1e+9')
+      const gasPriceToPay = Number(currentFeeData.gasPrice) + Number(maxPriorityFeePerGas)
+
+      const raffleTicketsBoughtTx = await fmoneyRaffleCashierContractInstance.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets, {
+        nonce: currentNonce,
+        gasLimit: Number(gasLimitEstimation),
+        gasPrice: gasPriceToPay
+      })
+
+      setResponseBuyTicket({ hash: raffleTicketsBoughtTx.hash })
+      handleRegisterTicketsBought()
+
+      const transactionReceipt: any = await getTransactionConfirmedData(raffleTicketsBoughtTx.hash, 1, provider)
+      console.log('transactionReceipt', transactionReceipt)
+      setValueSentToCashier(true)
+    } else {
+      let transactionResult = ''
+      const provider = await getWalletConnectProvider()
+      const userAccountSigner = provider.getSigner()
+      const connectorInstance = getConnectorInstance()
+      const defaultAccount = getWalletConnectDefaultAccount()
+
+      const fmoneyRaffleCashierContractInstance = new Contract(currentCashierSmartContract, fmoneyRaffleCashierContract.abi, userAccountSigner)
+      /* const tokenToUseToBuyTicketsInstance = new Contract(tokenToUseToBuyTickets, erc20TokenContract.abi, userAccountSigner)
+      const currentWalletBalanceOfToken = await tokenToUseToBuyTicketsInstance.balanceOf(defaultAccount)
+      const currentWalletAllowance = await tokenToUseToBuyTicketsInstance.allowance(defaultAccount, currentCashierSmartContract)
+
+      if (Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)) === 0) {
+        setLoading(false)
+        setError('Please wait until the value is calculated.')
+        return
+      }
+
+      if (Number(currentWalletBalanceOfToken) < Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))) {
+        setLoading(false)
+        setError('You do not have balance to make this transaction.')
+        return
+      } */
+
+      try {
+        await fmoneyRaffleCashierContractInstance.estimateGas.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets)
+      } catch (error) {
+        console.log('error estimate gas', error)
+        setLoading(false)
+        setError('The transaction may fail. Please review the data and try again. (Did you selected your tickets?)')
+        return
+      }
+
+      let nonceOffset = 0
+      const baseNonce = await provider.getTransactionCount(defaultAccount, 'latest')
+      const currentNonce = baseNonce + nonceOffset++
+
+      const ifaceRaffleCashier = new utils.Interface(fmoneyRaffleCashierContract.abi)
+      const buyFunctionDataEncoded = ifaceRaffleCashier.encodeFunctionData('buyTicketsToPlay', [BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets])
+
+      const buyTicketsToPlayRawTx = {
+        from: defaultAccount,
+        to: currentCashierSmartContract,
+        data: buyFunctionDataEncoded,
+        nonce: currentNonce
+      }
+
+      try {
+        transactionResult = await connectorInstance.sendTransaction(buyTicketsToPlayRawTx)
+        setResponseBuyTicket({ hash: transactionResult })
+      } catch (error) {
+        console.log('error send transaction', error)
+        setLoading(false)
+        setError('Transaction rejected by user.')
+        return
+      }
+
+      handleRegisterTicketsBought()
+
+      const transactionReceipt: any = await getTransactionConfirmedData(transactionResult, 1, provider)
+      console.log('transactionReceipt', transactionReceipt)
+      setValueSentToCashier(true)
+    }
+  }
+
+  const handleRegisterTicketsBought = async () => {
     const raffleSelectedInfo = context.state.rafflesInfo.filter((raffleInfo: any) => String(raffleInfo.raffleSmartContractAddress) === String(raffleSelected?.raffleSmartContractAddress))
     const fmoneyRaffleId = raffleSelectedInfo.length > 0 ? raffleSelectedInfo[0].raffleId : '0'
     const fmoneyRaffleDateTimestamp = raffleSelectedInfo.length > 0 ? raffleSelectedInfo[0].timestampDateOfDraw : 1668283200
@@ -384,41 +520,9 @@ function ModalBuyTicket({ listSpotsToBuy, allSpots, onCloseModal, getraffleSpots
       setResponseGenerateLinks(responseGenerateLinks)
     }
 
-    const filterPositionToBuy = () => {
-      if (positionToBuy.length === responseGenerateLinks?.ticketMetadataRegisteredIpfsHashes?.length) {
-        return positionToBuy?.filter((e: any) => e)
-      }
-      return null
-    }
+    setTicketsRegistered(true)
 
-    const filterResponseGenerateLinks = () => {
-      if (positionToBuy.length === responseGenerateLinks?.ticketMetadataRegisteredIpfsHashes?.length) {
-        return responseGenerateLinks?.ticketMetadataRegisteredIpfsHashes
-      }
-      return null
-    }
-
-    const response: any = await handleBuyTicket(raffleSelected?.raffleSmartContractAddress, valuesToPay, filterPositionToBuy(), filterResponseGenerateLinks(), selectedTokenToBuyTickets.tokenSmartContract, currentCashierSmartContract)
-
-    if (response.success) {
-      context.emitEvent('update-raffles-spots', 'getraffleSpots')
-      context.changeContext({
-        loadUserHistory: true
-      })
-
-      console.log('context changed')
-      setResponseBuyTicket(response)
-      setTextButton(t('buttonStateTexts.done'))
-      setSuccess(true)
-      if (getraffleSpots) getraffleSpots()
-
-      context.socketConnection.emit('graph-price-changed', raffleSelected?.raffleSmartContractAddress)
-      console.log('socket emited')
-    } else {
-      setError(response.error?.message || response.error)
-    }
-
-    setLoading(false)
+    console.log('responseGenerateLinks', responseGenerateLinks)
   }
 
   const handleOpenModalEmail = async () => {

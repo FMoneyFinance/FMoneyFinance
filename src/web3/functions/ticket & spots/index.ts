@@ -1,4 +1,4 @@
-import { Contract } from 'ethers'
+import { Contract, utils } from 'ethers'
 import { getConnectorInstance } from '../../walletConnect'
 import { getInLocalOrSession } from '../../../utils/storage'
 import { getTransactionConfirmedData } from '../transactions'
@@ -15,6 +15,7 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
   try {
     const provider = context.ethereum ? getProvider() : await getWalletConnectProvider()
     const userAccountSigner = provider.getSigner()
+    const connectorInstance = context.ethereum ? null : getConnectorInstance()
     const defaultAccount = context.ethereum ? getDefaultAccount() : getWalletConnectDefaultAccount()
     // const tokenToUseToBuyTickets = import.meta.env.VITE_USDC_CONTRACT_ADDRESS // ATTN
     // const fmoneyRaffleOperatorContractInstance = new Contract(selectedRaffleToBuyTicket, fmoneyRaffleOperatorContract.abi, userAccountSigner)
@@ -34,19 +35,22 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
 
     // const tokenToUseToBuyTicketsInstance = new Contract(import.meta.env.VITE_FMON_CONTRACT_ADDRESS, erc20TokenContract.abi, userAccountSigner)
     const tokenToUseToBuyTicketsInstance = new Contract(tokenToUseToBuyTickets, erc20TokenContract.abi, userAccountSigner)
-    const currentWalletBalanceFMON = await tokenToUseToBuyTicketsInstance.balanceOf(defaultAccount)
+    const currentWalletBalanceOfToken = await tokenToUseToBuyTicketsInstance.balanceOf(defaultAccount)
     const currentWalletAllowance = await tokenToUseToBuyTicketsInstance.allowance(defaultAccount, currentCashierSmartContract)
 
-    /* if (Number(currentWalletBalanceFMON) < Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))) {
+    if (Number(currentWalletBalanceOfToken) < Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))) {
       return { success: false, error: 'You do not have balance to make this transaction' }
-    } */
+    }
 
-    console.log('currentWalletBalanceFMON', currentWalletBalanceFMON)
+    console.log('currentWalletBalanceOfToken', currentWalletBalanceOfToken)
     console.log('currentWalletAllowance', Number(currentWalletAllowance))
     console.log('currentPriceOfTokenToUseWithoutDecimals', Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals)))
 
     const fmoneyRaffleCashierContractInstance = new Contract(currentCashierSmartContract, fmoneyRaffleCashierContract.abi, userAccountSigner)
     const gasLimitEstimation = await fmoneyRaffleCashierContractInstance.estimateGas.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets)
+
+    const ifaceRaffleCashier = new utils.Interface(fmoneyRaffleCashierContract.abi)
+    const buyFunctionDataEncoded = ifaceRaffleCashier.encodeFunctionData('buyTicketsToPlay', [BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets])
 
     /* const gasLimitEstimation = await fmoneyRaffleOperatorContractInstance.estimateGas.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), selectedRaffleSlots, ticketsURI, tokenToUseToBuyTickets) */
 
@@ -59,17 +63,38 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
     console.log('defaultAccount', defaultAccount)
 
     let nonceOffset = 0
+    let buyTicketsTransactionHash = ''
     const baseNonce = await provider.getTransactionCount(defaultAccount, 'latest')
     const currentNonce = baseNonce + nonceOffset++
+
+    if (connectorInstance) {
+      const buyTicketsToPlayRawTx = {
+        from: defaultAccount,
+        to: currentCashierSmartContract,
+        data: buyFunctionDataEncoded,
+        nonce: currentNonce
+      }
+
+      const transactionResult = await connectorInstance.sendTransaction(buyTicketsToPlayRawTx)
+      const transactionReceipt: any = await getTransactionConfirmedData(transactionResult, 1, provider)
+      buyTicketsTransactionHash = transactionResult
+    } else {
+      const newRaffleTicketsBoughtTx = await fmoneyRaffleCashierContractInstance.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets, {
+        nonce: currentNonce,
+        gasLimit: Number(gasLimitEstimation),
+        gasPrice: gasPriceToPay
+      })
+      console.log('newRaffleTicketsBoughtTx.hash', newRaffleTicketsBoughtTx.hash)
+      const transactionReceipt: any = await getTransactionConfirmedData(newRaffleTicketsBoughtTx.hash, 1, provider)
+      buyTicketsTransactionHash = newRaffleTicketsBoughtTx.hash
+      console.log('transactionReceipt', transactionReceipt)
+    }
 
     /* const newRaffleTicketsBoughtTx = await fmoneyRaffleOperatorContractInstance.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), selectedRaffleSlots, ticketsURI, tokenToUseToBuyTickets, {
       nonce: currentNonce,
       gasLimit: Number(gasLimitEstimation),
       gasPrice: gasPriceToPay
     }) */
-    const newRaffleTicketsBoughtTx = await fmoneyRaffleCashierContractInstance.buyTicketsToPlay(BigInt(Number(Math.round(valuesToPay.currentPriceOfTokenToUseWithoutDecimals))), tokenToUseToBuyTickets)
-    const transactionReceipt: any = await getTransactionConfirmedData(newRaffleTicketsBoughtTx.hash, 1, provider)
-    console.log('transactionReceipt', transactionReceipt)
 
     /* if (transactionReceipt.logs.length === 0) {
       return { success: false, error: 'Your raffle spots was already sold' }
@@ -94,7 +119,8 @@ export const handleBuyTicket = async (selectedRaffleToBuyTicket: any, valuesToPa
       return
     }
 
-    return { success: true, ...newRaffleTicketsBoughtTx }
+    /* return { success: true, ...newRaffleTicketsBoughtTx } */
+    return { success: true, hash: buyTicketsTransactionHash }
   } catch (error: any) {
     console.log(error)
     return { success: false, error: error.reason ? error.reason.split(':')[1].trim() : error }

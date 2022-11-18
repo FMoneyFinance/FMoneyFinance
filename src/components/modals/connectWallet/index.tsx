@@ -158,7 +158,7 @@ function ModalConnectWallet({ showModal, setShowModal }: any) {
           >
             <img src={WalletConnectLogo} id="imgWalletConnect" />
             <h5>WalletConnect</h5>
-            <div style={{ marginTop: '15px', fontSize: '14px', color: '#ddd' }}>Click the logo to connect</div>
+            <div style={{ marginTop: '15px', fontSize: '14px', color: '#ddd' }}>{`${t('warningToConnect')}`}</div>
             {errorWalletConnect && (
               <h4 style={{ textAlign: 'center', marginTop: '20px' }} className="error-container">
                 {t('requestCancelled')}
@@ -179,7 +179,7 @@ function ModalConnectWallet({ showModal, setShowModal }: any) {
         <div className="walletContainer pointer" onClick={allowWalletConnection ? handleClick : handleChangeChainId}>
           <img src={Metamask} />
           <h5>Metamask</h5>
-          <div style={{ marginTop: '15px', fontSize: '14px', color: '#ddd' }}>Click the logo to connect</div>
+          <div style={{ marginTop: '15px', fontSize: '14px', color: '#ddd' }}>{`${t('warningToConnect')}`}</div>
           {showWarning && (
             <h4 style={{ textAlign: 'center', marginTop: '20px' }} className="error-container">
               {t('warningNotAllowed')}
